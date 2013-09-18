@@ -1,4 +1,18 @@
 OSUPortal::Application.routes.draw do
+  # get "site_skel/home"
+  match '/home', to: 'site_skel#home'
+
+  # get "site_skel/product"
+  match '/product', to: 'site_skel#product'
+  
+  # get "site_skel/about"
+  match '/about', to: 'site_skel#about'
+
+  # get "site_skel/contact"
+  match '/contact', to: 'site_skel#contact'
+
+  match '/', to: 'site_skel#home'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +62,7 @@ OSUPortal::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'site_skel#home'
 
   # See how all your routes lay out with "rake routes"
 

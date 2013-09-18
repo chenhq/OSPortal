@@ -1,0 +1,20 @@
+.navbar.navbar-inverse.navbar-fixed-top
+	.navbar-inner
+		.container
+			%a.brand{:href => "index.html"} 胜世云平台
+			%a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			.collapse.nav-collapse
+				%ul.nav.pull-right
+					%li
+						= link_to "首页", root_path
+					%li
+						= link_to "产品介绍", product_path
+					%li
+						= link_to "关于我们", about_path
+					%li
+						= link_to "联系我们", contact_path
+/ end navbar
+

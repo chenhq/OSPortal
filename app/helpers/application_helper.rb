@@ -1,2 +1,14 @@
+# -*- coding: utf-8 -*-
 module ApplicationHelper
+
+  def full_title(page_title)
+    base_title = '胜世云-专业云计算服务提供商'
+    if page_title
+      "#{base_title} | #{page_title}"
+    else
+      base_title
+    end
+
+  end
+
 end

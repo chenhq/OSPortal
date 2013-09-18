@@ -1,0 +1,51 @@
+- provide(:title, '首页')
+
+%section
+	.container
+		.row
+			.span4
+				%h1 产品介绍
+				%p 胜世云计算为广大互联网企业提供了一个可以运行应用程序的基础架构平台，客户企业通过该平台，显著的降低了IT成本投入、加快了业务扩展速度，并且获得了可支撑海量访问的专业架构能力。
+				.c-cta
+					.btn-group
+						%a.btn.btn-info.btn-large{:href => ""} 登 录
+						%a.btn.btn-large{:href => ""} 试 用
+				%p
+					%a{:href => ""} 了解更多产品信息... &raquo;
+			.span8
+				= link_to image_tag("summer_cloud.jpg", alt: "Cloud Summary"), '#'
+		%hr/
+	/ end container
+.container
+	/ COMPANY INFO
+	%section
+		%h3 胜世云计算
+		.row
+			.span8
+				%p 胜世云计算是一家致力于为中国互联网企业客户提供最为专业的基础云计算资源、管理和服务的高科技公司，公司专注于IAAS（基础架构云计算）的产品研发与运营服务。公司是上海云计算基地重点企业。
+				%p 我们的目标是打造一个国内最为专业的基础云计算服务平台，通过云计算服务为企业最大化的创造价值，使得中小企业、创业团队都能够获取与腾讯、阿里、盛大等大型互联网公司一样的IT基础架构能力，最大程度的降低企业发展所需的IT基础架构技术、成本门槛。
+				%p 我们的团队汇集了来自腾讯、盛大云等国内云计算专业公司的顶尖技术人才，我们具有丰富的云计算研发和运营经验，我们深刻了解用户需求，具有非常强烈的用户服务意识。
+			.span4
+				%p.well.well-large.lead 做最专业的基础云服务，为客户提升核心业务家价值，降低总体拥有成本
+	%hr/
+	/ TESTIMONIALS
+	%h3 客户感言
+	#testimonials.carousel.slide
+		%ol.carousel-indicators
+			%li.active{"data-slide-to" => "0", "data-target" => "#testimonials"}
+			%li{"data-slide-to" => "1", "data-target" => "#testimonials"}
+			%li{"data-slide-to" => "2", "data-target" => "#testimonials"}
+		.carousel-inner
+			.item.active
+				%blockquote
+					%p 基础架构搭建的工作，如果让我们自己去实现，那从选择硬件和机房到安装配置软件，至少需要招聘2个专业人员，花1个月时间搞定，而借助基础云计算服务，现在只需要几个小时的时间。 
+					%small 买车网CTO——张鸣一
+			.item
+				%blockquote
+					%p 作为初创团队中的一员，最好都是多面手，即要会开发，又要懂运维，可这样的人很难找。UCloud不仅帮助我们解决基础架构的问题，还解决了大部分的运维问题，我们只用专注于产品开发，节约了人力成本和时间。
+					%small 多元教育联合创始人——伯齐
+			.item
+				%blockquote
+					%p 当我们需要在半夜对服务器进行升级的时候，技术支持在线给予帮助，这种24小时的客服精神值得我们学习。
+					%small 极致一维CTO——阿渡
+	/ end carousel
