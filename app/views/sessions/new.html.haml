@@ -1,0 +1,35 @@
+= provide(:title, "登录")
+.row
+	.span6
+		%img.img-rounded{:alt => "云计算优点", :src => "http://lorempixel.com/200/200/"}
+	.span6.offset6
+		= form_for(:session, url: sessions_path, html: {class: "form-horizontal pull-right" }) do |f|
+			.modal-heading
+				%h3 登录
+			.modal-body
+				.control-group
+					= f.label "邮箱：", class: "control-label"
+					.controls
+						= f.text_field :email, :placeholder => "email"
+				.control-group
+					= f.label "密码：", class: "control-label"
+					.controls
+						= f.password_field :password, :placeholder => "password"
+				.control-group
+					%label.control-label{:for => "verification_code"}
+						%i{:style => "color:#D14;font-style:normal;"}> *
+						验证码 :
+					.controls
+						%input#verification_code{:class => "{required:true, messages:{required:'请填写验证码'}}", :name => "verification_code", :style => "width:50px;", :tabindex => "1", :type => "text"}/
+						%img.verification-code{:src => "/account/cas/verification_code"}/
+						%a.verification-code{:href => "#"} 换一张
+					.controls
+						%span
+							= link_to "立即注册!", signup_path
+						%span
+							= link_to "忘记密码？", "#"
+				.modal-footer
+					= f.submit "登录", class: "btn btn-primary"
+		
+
+

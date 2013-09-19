@@ -1,0 +1,38 @@
+.row
+	.span3
+		ssss
+	.span6
+		.container
+			%table.table.table-bordered.table-condensed
+				%caption 主机列表
+				%thead
+					%tr
+						%th 业务组名称
+						%th 主机名称
+						%th 内网IP
+						%th 外网IP
+						%th 弹性IP
+						%th 状态
+						%th 镜像名称
+						%th 有效期
+						%th 备注 
+				%tbody
+					%tr
+						%td 1
+						%td Adi
+						%td Purdila
+					%tr
+						%td 2
+						%td John
+						%td Smith
+					%tr
+						%td 1
+						%td Adi
+						%td Purdila
+					%tr
+						%td 1
+						%td Adi
+						%td Purdila
+		
+.span6	
+	= @os.servers
