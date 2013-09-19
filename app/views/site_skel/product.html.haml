@@ -1,3 +1,72 @@
 - provide(:title, '产品介绍')
-%h1 SiteSkel#product
-%p Find me in app/views/site_skel/product.html.haml
+
+.container
+	/ PAGE HEADER
+	%section
+		%ul.breadcrumb
+			%li
+				%a{:href => "index.html"} Home
+				%span.divider /
+			%li.active Products
+		.page-header
+			%h1
+				Products.
+				%small We build amazing stuff.
+	/ PAGE CONTENT
+	%section
+		.row.c-product-showcase
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-1.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-2.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-3.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right
+		.row.c-product-showcase
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-1.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-2.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right
+			.span4
+				%a{:href => "product-single.html"}
+					%img.img-polaroid{:alt => "Demo", :src => "img/custom/demo-3.jpg"}/
+				%h4
+					%a{:href => "product-single.html"} Product Name
+				%p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				%a.btn{:href => "product-single.html"}
+					Learn More
+					%span.icon-chevron-right

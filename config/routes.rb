@@ -1,14 +1,22 @@
 OSUPortal::Application.routes.draw do
-  # get "site_skel/home"
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+ 
+  # get "users/new"
+  match '/signup', to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
+  get "site_skel/home"
   match '/home', to: 'site_skel#home'
 
-  # get "site_skel/product"
+  get "site_skel/product"
   match '/product', to: 'site_skel#product'
   
-  # get "site_skel/about"
+  get "site_skel/about"
   match '/about', to: 'site_skel#about'
 
-  # get "site_skel/contact"
+  get "site_skel/contact"
   match '/contact', to: 'site_skel#contact'
 
   match '/', to: 'site_skel#home'
