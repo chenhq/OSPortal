@@ -1,6 +1,6 @@
 OSUPortal::Application.routes.draw do
   # get "hosts/new"
-  resource :hosts
+  resources :hosts
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
  

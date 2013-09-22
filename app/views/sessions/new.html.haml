@@ -1,35 +1,57 @@
 = provide(:title, "登录")
-.row
-	.span6
-		%img.img-rounded{:alt => "云计算优点", :src => "http://lorempixel.com/200/200/"}
-	.span6.offset6
-		= form_for(:session, url: sessions_path, html: {class: "form-horizontal pull-right" }) do |f|
-			.modal-heading
-				%h3 登录
-			.modal-body
-				.control-group
-					= f.label "邮箱：", class: "control-label"
-					.controls
-						= f.text_field :email, :placeholder => "email"
-				.control-group
-					= f.label "密码：", class: "control-label"
-					.controls
-						= f.password_field :password, :placeholder => "password"
-				.control-group
-					%label.control-label{:for => "verification_code"}
-						%i{:style => "color:#D14;font-style:normal;"}> *
-						验证码 :
-					.controls
-						%input#verification_code{:class => "{required:true, messages:{required:'请填写验证码'}}", :name => "verification_code", :style => "width:50px;", :tabindex => "1", :type => "text"}/
-						%img.verification-code{:src => "/account/cas/verification_code"}/
-						%a.verification-code{:href => "#"} 换一张
-					.controls
-						%span
-							= link_to "立即注册!", signup_path
-						%span
-							= link_to "忘记密码？", "#"
-				.modal-footer
-					= f.submit "登录", class: "btn btn-primary"
-		
-
-
+.container
+	.row
+		.span6
+			= form_for(:session, url: sessions_path, html: {class: "form-horizontal pull-right" }) do |f|
+				.panel
+					.panel-heading
+						%h3 登录
+					.panel-body
+						.control-group
+							= f.label "邮箱：", class: "control-label"
+							.controls
+								= f.text_field :email, :placeholder => "email"
+						.control-group
+							= f.label "密码：", class: "control-label"
+							.controls
+								= f.password_field :password, :placeholder => "password"
+						.control-group
+							%label.control-label
+								%i
+								验证码 :
+							.controls
+								%input#verification_code{:class => "{required:true, messages:{required:'请填写验证码'}}", :name => "verification_code", :style => "width:50px;", :tabindex => "1", :type => "text"}/
+								%img
+								= link_to "换一张", "#"
+							.controls
+								%span
+									= link_to "立即注册!", signup_path
+								%span
+									= link_to "忘记密码？", "#"
+						.panel-footer.center
+							= f.submit "登录", class: "btn btn-primary"
+		.span6
+			%img.img-rounded{:alt => "云计算优点", :src => "http://lorempixel.com/500/280"}
+ 						
+.container
+	#product-carousel.carousel.slide
+		%ol.carousel-indicators
+			%li{"data-slide-to" => "0", "data-target" => "#product-carousel"}
+			%li{"data-slide-to" => "1", "data-target" => "#product-carousel"}
+			%li.active{"data-slide-to" => "2", "data-target" => "#product-carousel"}
+		.carousel-inner
+			.item
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption				
+					%p The image description.
+			.item
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption
+					%p The image description 2.
+			.item.active
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption
+					%p The image description 3.
+		%a.carousel-control.left{"data-slide" => "prev", :href => "#product-carousel"} ‹
+		%a.carousel-control.right{"data-slide" => "next", :href => "#product-carousel"} ›
+			

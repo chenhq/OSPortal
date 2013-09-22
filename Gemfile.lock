@@ -132,7 +132,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bcrypt-ruby
-  bootstrap-sass (= 2.3.2.0)
+  bootstrap-sass
   coffee-rails (~> 3.2.1)
   haml-rails (>= 0.3.4)
   jquery-rails

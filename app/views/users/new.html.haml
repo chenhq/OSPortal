@@ -1,16 +1,54 @@
 = provide(:title, "注册")
-%h1 新用户注册
 .row
-  .span6.offset3
-    = form_for(@user) do |f|
-      = render 'shared/error_messages'
-      = f.label :name
-      = f.text_field :name
-      = f.label :email
-      = f.text_field :email
-      = f.label :password
-      = f.password_field :password
-      = f.label :password_confirmation, "Confirmation"
-      = f.password_field :password_confirmation
-      = f.submit "Create my account", class: "btn btn-large btn-primary"
+	.span6
+		= form_for(@user, html: {class: "form-horizontal" }) do |f|
+			.panel
+				.panel-heading
+					%h3 注册
+				.panel-body
+					.control-group
+						= render 'shared/error_messages'
+						= f.label "用户名：", class: "control-label"
+						.controls
+							= f.text_field :name, placeholder: "Username"
+					.control-group
+						= f.label "邮箱：", class: "control-label"
+						.controls
+							= f.text_field :email, placeholder: "Email"
+					.control-group
+						= f.label "密码：", class: "control-label"
+						.controls
+							= f.password_field :password, placeholder: "Password"
+					.control-group
+						= f.label "确认密码：", class: "control-label"
+						.controls
+							= f.password_field :password_confirmation, placeholder: "Confirmation"
+				.panel-footer
+					= f.submit "注册账户", class: "btn btn-primary"
+	.span6
+		%img.img-rounded{:alt => "云计算优点", :src => "http://lorempixel.com/500/300"}		
 
+
+.container
+	#product-carousel.carousel.slide
+		%ol.carousel-indicators
+			%li{"data-slide-to" => "0", "data-target" => "#product-carousel"}
+			%li{"data-slide-to" => "1", "data-target" => "#product-carousel"}
+			%li.active{"data-slide-to" => "2", "data-target" => "#product-carousel"}
+		.carousel-inner
+			.item
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption				
+					%p The image description.
+			.item
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption
+					%p The image description 2.
+			.item.active
+				%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+				.carousel-caption
+					%p The image description 3.
+		%a.carousel-control.left{"data-slide" => "prev", :href => "#product-carousel"} ‹
+		%a.carousel-control.right{"data-slide" => "next", :href => "#product-carousel"} ›
+			
+			

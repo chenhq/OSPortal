@@ -1,0 +1,24 @@
+= form_for(@server, html: {class: "form-horizontal" }) do |f|
+	.panel
+		.panel-heading
+			%h3 主机信息
+		.panel-body
+			= render 'shared/error_messages'
+			.control-group.hiden
+				= f.label "id：", class: "control-label"
+				.controls
+					= f.text_field :name, class: "uneditable-input"
+			.control-group
+				= f.label "id：", class: "control-label"
+				.controls
+					= f.text_field :email, placeholder: "Email"
+			.control-group
+				= f.label "密码：", class: "control-label"
+				.controls
+					= f.password_field :password, placeholder: "Password"
+			.control-group
+				= f.label "确认密码：", class: "control-label"
+				.controls
+					= f.password_field :password_confirmation, placeholder: "Confirmation"
+		.panel-footer
+			= f.submit "注册账户", class: "btn btn-primary"

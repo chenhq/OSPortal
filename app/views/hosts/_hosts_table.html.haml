@@ -1,0 +1,31 @@
+-# - form_tag ... do
+%table.table.table-bordered.table-condensed
+	%caption 主机列表
+	%thead
+		%tr
+			%th
+			%th 业务组名称
+			%th 主机名称
+			%th 内网IP
+			%th 外网IP
+			%th 弹性IP
+			%th 状态
+			-# %th 镜像名称
+			%th 创建日期
+			%th 备注 
+	%tbody
+		- @servers.each do | servername, serverinfo |
+			%tr
+				%td= check_box_tag "server_ids[]", serverinfo[:id]
+				%td= link_to servername, controller: "hosts", action: "show", id: serverinfo[:id]
+				%td= serverinfo[:"OS-EXT-SRV-ATTR:host"]
+				%td= extract_ips(serverinfo[:addresses][:private])
+				%td= extract_ips(serverinfo[:addresses][:public])
+				%td
+				%td= serverinfo[:status] 
+				-# %td
+				%td= serverinfo[:created]
+				%td 
+				%td 
+= submit_tag "Edit Checked"
+= link_to "New Product", "#"
