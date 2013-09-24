@@ -1,0 +1,122 @@
+.tabbable
+	%ul.nav.nav-tabs
+		%li.active
+			%span.host_popovers{:data => { :content => "即主机的硬件配置，如CPU数量、内存和硬盘的大小等。请根据您的实际需求进行选择。", :"original-title" => "什么是机型？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				%h4
+					= '选择机型<i class="icon-question-sign"></i>'.html_safe
+
+%form.form-horizontal
+	.control-group
+		%label.control-label CPU :
+		.controls.push-left
+			%ul#vm_cpu_btn_list
+				%li.btn.mach-btn.btn-bord
+					1核
+				%li.btn.mach-btn
+					2核
+				%li.btn.mach-btn
+					4核
+				%li.btn.mach-btn
+					8核
+				%li.btn.mach-btn
+					16核
+				%li.btn.mach-btn
+					32核
+
+	.control-group
+		%label.control-label 内存:
+		.controls
+			%ul#vm_mem_list
+				%li.btn.mach-btn.btn-bord{:style => ""}
+					2G
+				%li.btn.mach-btn{:style => ""}
+					3G
+				%li.btn.mach-btn{:style => ""}
+					4G
+				%li.btn.mach-btn{:style => ""}
+					6G
+				%li.btn.mach-btn{:style => ""}
+					8G
+				%li.btn.mach-btn{:style => ""}
+					12G
+				%li.btn.mach-btn{:style => ""}
+					16G
+				%li.btn.mach-btn{:style => ""}
+					24G
+				%li.btn.mach-btn{:style => ""}
+					32G
+				%li.btn.mach-btn{:style => ""}
+					64G
+
+
+	.control-group
+		%label.control-label.p_l 系统盘 :
+		.controls
+			%ul{:style => "padding:5px 0px 0px 5px;"}
+				%li
+					赠送系统盘Linux(20G),Windows(40G)
+
+	.control-group
+		%label.control-label.p_l 数据盘 :
+		.controls
+			.input-append
+				%input#diskspace.span1{:type => "text"}/
+				%span.add-on G
+			#diskspace_slider.span4
+				:javascript
+					$("#diskspace_slider").slider();
+
+				:javascript
+					$(function() {
+					$( "#diskspace_slider" ).slider({
+					value:50,
+					min: 5,
+					max: 1000,
+					step: 5,
+					slide: function( event, ui ) {
+					$( "#diskspace" ).val(ui.value);
+					}
+					});
+					$( "#diskspace" ).val($( "#diskspace_slider" ).slider( "value" ) );
+					});
+
+	.control-group
+		%label.control-label.p_l 高性能磁盘 :
+		.controls
+			%label.checkbox
+				%input{ :name => "high_performance_disk", :type => "checkbox"}
+					使用
+
+	.control-group
+		%label.control-label 带宽(每台) :
+		.controls
+			%ul#bandwidth_list
+				%li.btn.mach-btn
+					电信
+				%li.btn.mach-btn
+					联通
+				%li.btn.mach-btn
+					双线
+
+			.input-append
+				%input#bandwidth.span1{:type => "text"}/
+				%span.add-on M
+			#bandwidth_slider.span4
+				:javascript
+					$("#bandwidth_slider").slider();
+
+				:javascript
+					$(function() {
+					$( "#bandwidth_slider" ).slider({
+					value:50,
+					min: 5,
+					max: 1000,
+					step: 5,
+					slide: function( event, ui ) {
+					$( "#bandwidth" ).val(ui.value);
+					}
+					});
+					$( "#bandwidth" ).val($( "#bandwidth_slider" ).slider( "value" ) );
+					});
+
+

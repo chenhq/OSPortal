@@ -40,3 +40,18 @@ body {
   @include box_sizing;
 }
 
+
+.modal-body {
+  max-height: 1200px;
+	overflow-y: auto;
+		max-width: 12000px;
+			overflow-x: auto;
+}
+
+#flavor_select {
+	padding-top: 3em;
+}
+
+.ptop {
+	padding-top: 10em;
+}

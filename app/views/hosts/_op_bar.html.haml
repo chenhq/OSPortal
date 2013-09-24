@@ -1,8 +1,8 @@
-.btn-toolbar{:style => "float:left;width:98% "}
+.btn-toolbar
 	.btn-group{:style => "float:left;"}
-		%a.btn.instance-control-btn{:href => "/uhost/run", :refresh => "container-fluid"}
-			%i.icon-plus>
-			创建主机
+		= link_to '<i class="icon-plus"></i>创建主机'.html_safe, 
+		          :new_host, class: "btn", 
+							:data => {:toggle=>"modal"}
 	.btn-group{:style => "float:left;"}
 		%button.btn.instance-control-btn{:action => "repay", :disabled => "disabled", :href => "#"}
 			%i.icon-shopping-cart>
@@ -51,10 +51,5 @@
 		%a.btn.refresh{:href => ""}
 			%i.icon-refresh>
 			刷新
-	-# .btn-group.filter{:style => "float:right;"}
-	-# 	%form.backgrid-filter.form-search
-	-# 		.input-prepend.input-append
-	-# 			/ span class="add-on"><i class="icon-search"></i></span
-	-# 			%input{:name => "q", :type => "text"}/
-	-# 			%span.add-on
-	-# 				%i.icon-search
+
+

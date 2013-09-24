@@ -1,0 +1,32 @@
+.tabbable
+	%ul.nav.nav-tabs
+		%li
+			%h4 购买方式 :
+		%li.active
+			%a{"data-toggle" => "tab", :href => "#charge_type_set", :pane_id => "__charge_type_set"} 包年包月
+	.tab-content
+		#__charge_type_set.tab-pane.active
+			%ul.pull-left.m0.mt10
+				%select{:name => "charge_type", :style => "width:80px;"}
+					%option{:value => "3"} 按年
+					%option{:selected => "", :value => "2"} 按月
+				%select.input-small.m0{:name => "quantity"}
+					%option{:value => "1"} 1年
+					%option{:value => "2"} 2年
+					%option{:value => "3"} 3年
+					%option{:value => "4"} 4年
+					%option{:value => "5"} 5年
+					%option{:value => "6"} 6年
+					%option{:value => "7"} 7年
+					%option{:value => "8"} 8年
+					%option{:value => "9"} 9年
+				购买10个月可享受一年服务。
+		#__charge_type_try.tab-pane.uvmtype-body
+			%ul.pull-left.m0.mt10
+				%input{:checked => "", :disabled => "", :name => "charge_type", :type => "checkbox", :value => "5"}/
+				%span.pt5 试用（3天）
+				%p.help-block 试用期满，该试用主机将被系统自动停止，并将在停止后48小时内被系统自动进行资源回收，届时数据将全部被删除无法恢复。
+		#__charge_type_hour.tab-pane.uvmtype-body
+			%ul.pull-left.m0.mt10{:id => ""}
+				请联系我们开通此权限！QQ :
+				%a{:href => "http://b.qq.com/webc.htm?new=0&amp;sid=4000188113&amp;eid=218808P8z8p8x8Q808Q8Q&amp;o=www.ucloud.cn&amp;q=7&amp;ref='+document.location, '_blank', 'height=544, width=644,toolbar=no,scrollbars=no,menubar=no,status=no", :target => "_blank"} 4000188113

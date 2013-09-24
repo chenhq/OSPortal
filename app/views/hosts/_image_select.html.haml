@@ -1,0 +1,88 @@
+.tabbable
+	%ul.nav.nav-tabs
+		%li.active
+			%span.host_popovers{:data => { :content => "基础镜像即为主机上安装的操作系统。您也可以自定义用户镜像，用户定义镜像可以包含操作系统与用户自己安装的软件(如Nginx)，从而可以用于后续快速部署。", :"original-title" => "什么是镜像？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				%h4
+					= '选择镜像<i class="icon-question-sign"></i>'.html_safe
+		%li.active{"data-dismiss" => "Debian"}
+			%a{"data-toggle" => "tab", :href => "#Debian", "data-dismiss" => "Debian"} Debian
+		%li{"data-dismiss" => "Centos"}
+			%a{"data-toggle" => "tab", :href => "#Centos", "data-dismiss" => "Centos"} Centos
+		%li{"data-dismiss" => "RedHat"}
+			%a{"data-toggle" => "tab", :href => "#RedHat", "data-dismiss" => "RedHat"} RedHat
+		%li{"data-dismiss" => "Windows"}
+			%a{"data-toggle" => "tab", :href => "#Windows", "data-dismiss" => "Windows"} Windows
+		%li{"data-dismiss" => "Ubuntu"}
+			%a{"data-toggle" => "tab", :href => "#Ubuntu", "data-dismiss" => "Ubuntu"} Ubuntu
+		%li{"data-dismiss" => "SUSE"}
+			%a{"data-toggle" => "tab", :href => "#SUSE", "data-dismiss" => "SUSE"} SUSE
+	.tab-content
+		#Debian.tab-pane.active{"data-toggle" => "buttons-radio", "data-dismiss" => "Debian" }
+			.btn{:image_id => "7e70cf4b-c4be-480a-86e3-133dff14de5f"}
+				Debian 7.0 64位
+			.btn{:image_id => "c169732b-71fe-4474-a8a3-28b72a2e967b"}
+				Debian 7.0 32位
+			.btn{:image_id => "15776c7c-9510-47ea-a1f5-1a0cda57d5f0"}
+				Debian 6.0 64位
+			.btn{:image_id => "49cadb0c-dbe1-406c-b5b2-0d18873d79b2"}
+				Debian 6.0 32位
+		#Centos.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "Centos"}
+			.btn{:image_id => "6bd074ba-e2de-4e85-9cbb-c63fb4846d90"}
+				CentOS 6.3 64位
+			.btn{:image_id => "b2c5c777-9163-4f77-a2a5-ea69575ba5ad"}
+				CentOS 6.3 32位
+			.btn{:image_id => "9561193b-72bc-4929-b971-edc69ea4d4af"}
+				CentOS 6.2 64位
+			.btn{:image_id => "6c4bceae-df4d-4947-9770-8118ed979e8f"}
+				CentOS 6.2 32位
+			.btn{:image_id => "431d60ff-b18b-4b61-9df4-c62faf5af86e"}
+				CentOS 5.8 64位
+			.btn{:image_id => "37ccdad0-644b-4a3f-bfd7-8276612d3a5d"}
+				CentOS 5.8 32位
+			.btn{:image_id => "5e3e112d-2128-41e1-9c7c-b69edd59571c"}
+				CentOS 5.4 64位
+			.btn{:image_id => "3695b736-0df9-44fe-b8f4-1fd61cb5d472"}
+				CentOS 5.4 32位
+		#RedHat.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "RedHat"}
+			.btn{:image_id => "2a84a83b-07b3-446c-95ff-935cabcc2895"}
+				RHEL 6.3 64位
+			.btn{:image_id => "9117a7fe-9201-4f6c-b8e4-3aa1a1881d7f"}
+				RHEL 6.3 32位
+			.btn{:image_id => "c34fb01b-5182-4540-95aa-56c13c5c7c64"}
+				RHEL 6.2 64位
+			.btn{:image_id => "da2d342f-7cc5-4f4d-9e90-1176c27df93d"}
+				RHEL 6.2 32位
+		#Windows.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "Windows"}
+			.btn{:image_id => "a48050ff-a513-4750-b360-0f5e1037c6df"}
+				Win2008 64位 EN
+			.btn{:image_id => "9be74f67-6338-4bd0-9a1b-0dcec65abc83"}
+				Win2008 64位
+			.btn{:image_id => "da6ce932-b056-4231-9137-abb777fe4869"}
+				Win2008 32位
+			.btn{:image_id => "7dc92581-243e-4e4d-b2a1-1681200427dd"}
+				Win2008 32位
+			.btn{:image_id => "188575a1-8993-4b24-8e3f-4a75672a5976"}
+				Win2003 64位
+			.btn{:image_id => "a402562d-92d2-4cfd-b656-1285a66500d3"}
+				Win2003 32位
+		#Ubuntu.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "Ubuntu"}
+			.btn{:image_id => "4815d4b6-1b19-4f0e-8eea-8a1736f65d8d"}
+				Ubuntu 12.04 64位
+			.btn{:image_id => "e6ba83a5-4879-46ea-a035-d8a95439524f"}
+				Ubuntu 12.04 32位
+			.btn{:image_id => "ad5f416e-3dba-4ddd-a2f2-c5274a322f6b"}
+				Ubuntu 11.10 64位
+			.btn{:image_id => "38e14d6f-9d8a-492c-b985-94e4c4075add"}
+				Ubuntu 11.10 32位
+			.btn{:image_id => "08d3b48b-ba14-4b1a-a5dd-cbacf8b820f2"}
+				Ubuntu 10.04 64位
+			.btn{:image_id => "f71690e9-fbd7-4534-80a3-055d6200d7a3"}
+				Ubuntu 10.04 32位
+		#SUSE.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "SUSE"}
+			.btn{:image_id => "32fa5fb0-20ce-45ba-90f2-10d4edd5cbc6"}
+				openSUSE 11 64位
+			.btn{:image_id => "1bffcaf9-e609-4b06-807e-710e32ecab4e"}
+				SLES 10 64位
+			.btn{:image_id => "44708cb1-a670-4de2-b3e3-a17924ee9437"}
+				SLES 10 32位
+

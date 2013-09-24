@@ -10,6 +10,8 @@ class HostsController < ApplicationController
 
   
   def new
+    @conpute = compute
+    
   end
 
   def index

@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 gem 'bcrypt-ruby'
 
 gem 'bootstrap-sass'
+# gem 'jquery-ui-bootstrap-rails'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 gem 'openstack'
 
@@ -33,7 +34,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+ gem 'jquery-rails', '>= 3.0.0'
+ gem 'jquery-ui-rails'
+
+# gem 'jquery-rails', '~> 2.3.0'
 
 group :production do
   gem 'pg', '0.12.2'

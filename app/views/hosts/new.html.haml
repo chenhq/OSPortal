@@ -1,2 +1,19 @@
-%h1 Hosts#new
-%p Find me in app/views/hosts/new.html.haml
+.container
+	.modal-header		
+		= link_to "×", :hosts, class: "close"
+		%h3 创建主机
+	.modal-body
+		.row
+			.span8
+				= render 'hosts/image_select'
+				= render 'hosts/flavor_select'
+				= render 'hosts/charge_select'
+
+			.span4.pull-right
+				%p xxxlkjdlkjslfjsdlkfjdskjfdfjdslfj
+	.modal-footer
+		= link_to "下一步", "/hosts", class: "btn btn-primary" 
+
+:javascript
+	$(".host_popovers").popover();
+
