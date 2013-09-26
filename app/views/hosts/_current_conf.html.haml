@@ -1,0 +1,53 @@
+#select_paymode.span3.thumbnail.well
+	%h4 当前配置
+	#static-config
+		.control-group
+			%label.control-label 数据中心 :
+			.controls{:style => "color:red"}
+			%input#datacenter-selected.span3{:readonly => "", :type => "text", :value => ""}
+		.control-group
+			%label.control-label CPU :
+			.controls
+				%input#cpu-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 内存 :
+			.controls
+				%input#mem-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 系统盘 :
+			.controls
+				%input#OSdisk-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 数据盘 :
+			.controls	
+				%input#datadisk_space-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 镜像 :
+			.controls
+				%input#image-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 网络 :
+			.controls
+				%input#bandwidth-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 购买时长 :
+			.controls	
+				%input#time-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 购买数量 :
+			.controls
+				%input#count-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+		.control-group
+			%label.control-label 价格 :
+			.controls
+				%input#price-selected.span3{:readonly => "", :type => "text", :value => ""}
+
+

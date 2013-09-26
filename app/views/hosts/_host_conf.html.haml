@@ -1,0 +1,37 @@
+.tabbable
+	%ul.nav.nav-tabs
+		%li.active
+			%span.host_popovers{:data => { :content => "配置主机的名称，以便标识该主机的用途，配置主机管理员的密码。", :"original-title" => "如何配置主机？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				%h4
+					= '配置主机<i class="icon-question-sign"></i>'.html_safe
+
+%form.form-horizontal
+	.control-group
+		%label.control-label
+			%span.host_popovers{:data => { :content => "主机管理名称是在UCloud管理控制台中云主机的一个对象标签，可在管理控制台中由用户按管理需求自由定义，不同于OS中的hostname。", :"original-title" => "什么是主机管理名称？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				= '主机管理名称<i class="icon-question-sign"></i>:'.html_safe
+		.controls
+			%input#hostname.span3{:name => "hostname", :type => "text"}/
+			%p.help-block 请填写6位以上主机管理名称
+	.control-group
+		%label.control-label{:for => "mangent-username"}
+			%span.host_popovers{:data => { :content => "Ubuntu管理员用户名为ubuntu，其他linux管理员用户名为root,Windows管理员用户名为administrator。", :"original-title" => "什么是管理员账户？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				= '管理员账户<i class="icon-question-sign"></i>:'.html_safe
+		.controls
+			%input#mangent-linux-username.span3{:readonly => "", :type => "text", :value => "系统管理员"}/
+
+	.control-group
+		%label.control-label
+			%span.host_popovers{:data => { :content => "CentOS：即为root密码，ssh连接时请用root登陆； Ubuntu: 即为帐户ubuntu的密码, ssh连接时用ubuntu登陆；管理员密码请务必牢记", :"original-title" => "什么是管理员密码？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				= '管理员密码<i class="icon-question-sign"></i>:'.html_safe
+		.controls
+			%input#password.span3.class{:name => "password", :type => "password"}/
+			.password-meter
+				%span.password-meter-message
+				%span.help-inline.password-meter-safe{"data-content" => "我们对主机密码做了防穷举判断，尝试用不常见单词、非标准拼写、不易猜测的数字符号，或者用工具生成随机密码。方便记忆但安全的密码举例：“birthDAY+-0230”、“pinYIN101.;”、“zhongGuoren:__”、“2013XinNian()”", "data-original-title" => "什么是安全的密码？", :rel => "popover", :style => "display:none"}
+					%i.icon-exclamation-sign
+	.control-group
+		%label.control-label
+			确认密码 :
+		.controls
+			%input#repassword.span3{:name => "repassword", :type => "password"}/

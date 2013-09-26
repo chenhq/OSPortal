@@ -10,7 +10,15 @@ class HostsController < ApplicationController
 
   
   def new
-    @conpute = compute
+    # @conpute = compute
+    
+  end
+
+  def create
+    @compute = compute
+    image = @compute.get_image('631f67b8-be22-4cf7-adfe-07138a1edf6a')
+    flavor = @compute.get_flavor(1)
+    @newserver = @compute.create_server(:name => "dddd", :imageRef => image.id, :flavorRef => flavor.id)
     
   end
 

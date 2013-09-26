@@ -1,12 +1,12 @@
 .tabbable
-	%ul.nav.nav-tabs
+	%ul.nav.nav-tabs#os_type_list
 		%li.active
 			%span.host_popovers{:data => { :content => "基础镜像即为主机上安装的操作系统。您也可以自定义用户镜像，用户定义镜像可以包含操作系统与用户自己安装的软件(如Nginx)，从而可以用于后续快速部署。", :"original-title" => "什么是镜像？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
 				%h4
 					= '选择镜像<i class="icon-question-sign"></i>'.html_safe
-		%li.active{"data-dismiss" => "Debian"}
+		%li{"data-dismiss" => "Debian"}
 			%a{"data-toggle" => "tab", :href => "#Debian", "data-dismiss" => "Debian"} Debian
-		%li{"data-dismiss" => "Centos"}
+		%li.active{"data-dismiss" => "Centos"}
 			%a{"data-toggle" => "tab", :href => "#Centos", "data-dismiss" => "Centos"} Centos
 		%li{"data-dismiss" => "RedHat"}
 			%a{"data-toggle" => "tab", :href => "#RedHat", "data-dismiss" => "RedHat"} RedHat
@@ -16,8 +16,8 @@
 			%a{"data-toggle" => "tab", :href => "#Ubuntu", "data-dismiss" => "Ubuntu"} Ubuntu
 		%li{"data-dismiss" => "SUSE"}
 			%a{"data-toggle" => "tab", :href => "#SUSE", "data-dismiss" => "SUSE"} SUSE
-	.tab-content
-		#Debian.tab-pane.active{"data-toggle" => "buttons-radio", "data-dismiss" => "Debian" }
+	.tab-content#image_list
+		#Debian.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "Debian" }
 			.btn{:image_id => "7e70cf4b-c4be-480a-86e3-133dff14de5f"}
 				Debian 7.0 64位
 			.btn{:image_id => "c169732b-71fe-4474-a8a3-28b72a2e967b"}
@@ -26,8 +26,8 @@
 				Debian 6.0 64位
 			.btn{:image_id => "49cadb0c-dbe1-406c-b5b2-0d18873d79b2"}
 				Debian 6.0 32位
-		#Centos.tab-pane{"data-toggle" => "buttons-radio", "data-dismiss" => "Centos"}
-			.btn{:image_id => "6bd074ba-e2de-4e85-9cbb-c63fb4846d90"}
+		#Centos.tab-pane.active{"data-toggle" => "buttons-radio", "data-dismiss" => "Centos"}
+			.btn.active{:image_id => "6bd074ba-e2de-4e85-9cbb-c63fb4846d90"}
 				CentOS 6.3 64位
 			.btn{:image_id => "b2c5c777-9163-4f77-a2a5-ea69575ba5ad"}
 				CentOS 6.3 32位
@@ -85,4 +85,3 @@
 				SLES 10 64位
 			.btn{:image_id => "44708cb1-a670-4de2-b3e3-a17924ee9437"}
 				SLES 10 32位
-

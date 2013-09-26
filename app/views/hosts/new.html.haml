@@ -5,15 +5,21 @@
 	.modal-body
 		.row
 			.span8
-				= render 'hosts/image_select'
-				= render 'hosts/flavor_select'
-				= render 'hosts/charge_select'
+				#host_create_step1			
+					= render 'hosts/image_select'
+					= render 'hosts/flavor_select'
+					= render 'hosts/charge_select'
+				#host_create_step2			
+					= render 'hosts/host_conf'
 
-			.span4.pull-right
-				%p xxxlkjdlkjslfjsdlkfjdskjfdfjdslfj
+			.span3
+				= render 'hosts/current_conf'
 	.modal-footer
-		= link_to "下一步", "/hosts", class: "btn btn-primary" 
+		#step1_btns
+			= link_to "下一步", "#", class: "btn btn-primary", id: "step1_btn"
+		#step2_btns
+			= link_to "上一步", "#", class: "btn btn-primary", id: "step2_btn_pre"
+			= link_to "提交订单", "", class: "btn btn-primary", id: "step2_btn_commit"
 
-:javascript
-	$(".host_popovers").popover();
+
 
