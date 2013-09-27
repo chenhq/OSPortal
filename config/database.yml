@@ -3,11 +3,51 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+# development:
+#   adapter: sqlite3
+#   database: db/development.sqlite3
+#   pool: 5
+#   timeout: 5000
+
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
+  adapter: mysql2
+  database: osportal
+  username: osportal
+  password: osportal1234
+  host: 122.227.254.55
+  pool: 20
   timeout: 5000
+
+nova_development:
+  adapter: mysql2
+  database: nova
+  username: nova
+  password: fd7b83053efe47bc
+  host: 122.227.254.55
+  port: 3306
+
+glance_development:
+  adapter: mysql2
+  database: glance
+  username: glance
+  password: b54b09ab0d504173
+  host: 122.227.254.55
+
+cinder_development:
+  adapter: mysql2
+  database: cinder
+  username: cinder
+  password: fd17f70c198242c8
+  host: 122.227.254.55
+
+keystone_development:
+  adapter: mysql2
+  database: keystone
+  username: keystone_admin
+  password: 82cce0f524574c70
+  host: 122.227.254.55
+
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -18,8 +58,66 @@ test:
   pool: 5
   timeout: 5000
 
+nova_test:
+  adapter: mysql2
+  database: nova
+  username: nova
+  password: fd7b83053efe47bc
+  host: 122.227.254.55
+
+glance_test:
+  adapter: mysql2
+  database: glance
+  username: glance
+  password: b54b09ab0d504173
+  host: 122.227.254.55
+
+cinder_test:
+  adapter: mysql2
+  database: cinder
+  username: cinder
+  password: fd17f70c198242c8
+  host: 122.227.254.55
+
+keystone_test:
+  adapter: mysql2
+  database: keystone
+  username: keystone_admin
+  password: 82cce0f524574c70
+  host: 122.227.254.55
+
+
+
 production:
   adapter: sqlite3
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+nova_production:
+  adapter: mysql2
+  database: nova
+  username: nova
+  password: fd7b83053efe47bc
+  host: 122.227.254.55
+
+glance_production:
+  adapter: mysql2
+  database: glance
+  username: glance
+  password: b54b09ab0d504173
+  host: 122.227.254.55
+
+cinder_production:
+  adapter: mysql2
+  database: cinder
+  username: cinder
+  password: fd17f70c198242c8
+  host: 122.227.254.55
+
+keystone_production:
+  adapter: mysql2
+  database: keystone
+  username: keystone_admin
+  password: 82cce0f524574c70
+  host: 122.227.254.55
