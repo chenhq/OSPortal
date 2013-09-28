@@ -100,5 +100,7 @@ jQuery(function($) {
 		$('#step2_btn_commit').click(hostcreate);
 
 		$(".host_popovers").popover();
-
+		
+		// 镜像选择，默认选择地一个tab页
+		$("#os_type_list li:eq(1) a").tab('show');
 });

@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.12'
 gem 'bcrypt-ruby'
 
+
 gem 'bootstrap-sass'
 # gem 'jquery-ui-bootstrap-rails'
 gem 'haml-rails', '>= 0.3.4', :group => :development
@@ -12,6 +13,8 @@ group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'sqlite3'
 end
+
+gem 'mysql2'
 
 group :development do
   gem 'annotate'

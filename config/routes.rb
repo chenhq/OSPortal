@@ -1,4 +1,10 @@
 OSUPortal::Application.routes.draw do
+  resources :os_types
+
+
+  resources :operating_systems
+
+
   # get "hosts/new"
   resources :hosts
   resources :users
