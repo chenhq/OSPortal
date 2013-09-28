@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918142300) do
+ActiveRecord::Schema.define(:version => 20130927090703) do
+
+  create_table "operating_systems", :force => true do |t|
+    t.string   "name"
+    t.integer  "os_type_id"
+    t.string   "cpuarc"
+    t.integer  "cpubit"
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "image_id"
+  end
+
+  create_table "os_types", :force => true do |t|
+    t.string   "name"
+    t.string   "family"
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

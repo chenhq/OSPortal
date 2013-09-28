@@ -9,7 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-class User < ActiveRecord::Base
+require 'database_pool'
+
+class User < Portal
   attr_accessible :email, :name, :password, :password_confirmation
 
   validates :name,  presence: true, length: { maximum: 50 }

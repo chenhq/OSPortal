@@ -10,7 +10,7 @@ class HostsController < ApplicationController
 
   
   def new
-    # @conpute = compute
+    @ostypes = OsType.all
     
   end
 
