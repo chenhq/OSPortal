@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @os_type.name
+%p
+  %b Family:
+  = @os_type.family
+%p
+  %b Desc:
+  = @os_type.desc
+
+= link_to 'Edit', edit_os_type_path(@os_type)
+\|
+= link_to 'Back', os_types_path

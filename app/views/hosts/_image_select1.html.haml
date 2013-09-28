@@ -1,0 +1,19 @@
+.tabbable
+	%ul.nav.nav-tabs#os_type_list
+		%li.active
+			%span.host_popovers{:data => { :content => "基础镜像即为主机上安装的操作系统。您也可以自定义用户镜像，用户定义镜像可以包含操作系统与用户自己安装的软件(如Nginx)，从而可以用于后续快速部署。", :"original-title" => "什么是镜像？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+				%h4
+					= '选择镜像<i class="icon-question-sign"></i>'.html_safe
+
+		- @ostypes.each do |ost|
+			%li{"data-dismiss" => "#{ost.name}"}
+				%a{"data-dismiss" => "#{ost.name}", "data-toggle" => "tab", :href => "##{ost.name}"}
+					= ost.name
+	
+
+	.tab-content#image_list
+		- @ostypes.each do |ost|
+			.tab-pane{"id" => "#{ost.name}", "data-toggle" => "buttons-radio", "data-dismiss" => "#{ost.name}"}
+				- ost.operating_systems.each do |os|
+					.btn{:image_id => "#{os.image_id}"}
+						= os.name

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @operating_system.name
+%p
+  %b Os type:
+  = @operating_system.os_type_id
+%p
+  %b Cpuarc:
+  = @operating_system.cpuarc
+%p
+  %b Cpubit:
+  = @operating_system.cpubit
+%p
+  %b Desc:
+  = @operating_system.desc
+
+= link_to 'Edit', edit_operating_system_path(@operating_system)
+\|
+= link_to 'Back', operating_systems_path
