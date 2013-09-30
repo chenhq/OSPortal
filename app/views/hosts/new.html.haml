@@ -4,16 +4,15 @@
 		%h3 创建主机
 	.modal-body
 		.row
-			.span8
+			.span7
 				#host_create_step1			
-					-# = render 'hosts/image_select'
-					= render 'hosts/image_select1'
+					= render 'hosts/image_select'
 					= render 'hosts/flavor_select'
-					= render 'hosts/charge_select'
+					-# = render 'hosts/charge_select'
 				#host_create_step2			
 					= render 'hosts/host_conf'
 
-			.span3
+			.span4
 				= render 'hosts/current_conf'
 	.modal-footer
 		#step1_btns

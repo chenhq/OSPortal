@@ -5,7 +5,6 @@ gem 'bcrypt-ruby'
 
 
 gem 'bootstrap-sass'
-# gem 'jquery-ui-bootstrap-rails'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 gem 'openstack'
 

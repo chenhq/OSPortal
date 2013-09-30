@@ -1,5 +1,5 @@
 -# - form_tag ... do
-%table.table.table-bordered.table-condensed
+%table.table.table-bordered.table-condensed#tab_servers
 	%caption 主机列表
 	%thead
 		%tr
@@ -16,7 +16,7 @@
 	%tbody
 		- @servers.each do | servername, serverinfo |
 			%tr
-				%td= check_box_tag "server_ids[]", serverinfo[:id]
+				%td= check_box_tag "serverids", serverinfo[:id], false, id: "server_id_#{serverinfo[:id]}"
 				%td= link_to servername, controller: "hosts", action: "show", id: serverinfo[:id]
 				%td= serverinfo[:"OS-EXT-SRV-ATTR:host"]
 				%td= extract_ips(serverinfo[:addresses][:private])
@@ -27,5 +27,3 @@
 				%td= serverinfo[:created]
 				%td 
 				%td 
-= submit_tag "Edit Checked"
-= link_to "New Product", "#"

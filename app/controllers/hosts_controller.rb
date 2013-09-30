@@ -7,19 +7,31 @@ class HostsController < ApplicationController
                                               :authtenant_name =>"admin", 
                                               :service_type=>"compute"})
   end
-
   
   def new
     @ostypes = OsType.all
-    
+    @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
+    @distinct_mem_flavors = InstanceType.select(:memory_mb).uniq.order(:memory_mb)
   end
 
   def create
+    flavor = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:mem]).first
     @compute = compute
-    image = @compute.get_image('631f67b8-be22-4cf7-adfe-07138a1edf6a')
-    flavor = @compute.get_flavor(1)
-    @newserver = @compute.create_server(:name => "dddd", :imageRef => image.id, :flavorRef => flavor.id)
-    
+    @newserver = @compute.create_server(:name => params[:hostname], :imageRef => params[:imageid], :flavorRef => flavor.id)
+    if @newserver
+      respond_to do |format|
+        format.json { render json: { status: 0 } }
+      end
+    else
+      respond_to do |format|
+          format.json { render json: {status: 1}, status: :unprocessable_entity }
+      end
+    end
+
+    # TODO
+    # change admin passwd
+    # @newserver.change_password!(params[:password])
+
   end
 
   def index
@@ -41,11 +53,64 @@ class HostsController < ApplicationController
 
   end
 
-
   def show
     @compute = compute
     @server = @compute.get_server(params[:id])
     @flavor = @compute.get_flavor(@server.flavor["id"])
     @image = @compute.get_image(@server.image["id"])
   end
+
+  def start
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+  
+  def shutdown
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+    
+  end
+
+  def poweroff
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+
+  def reboot
+    @compute = compute
+    params[:serverids].each do |serverid| 
+      @server = @compute.get_server(serverid)
+      @server.reboot
+    end
+      
+    respond_to do |format|
+      format.json { render json: { status: 0 } }
+    end
+  end
+
+  def emergency_login
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+
+  def create_image
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+
+  def upgrade
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+
+  def reinstall
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+  
+  def delete
+    @compute = compute
+    @server = @compute.get_server(params[:id])
+  end
+
 end

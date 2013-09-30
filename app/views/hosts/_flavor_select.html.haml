@@ -10,43 +10,18 @@
 		%label.control-label CPU :
 		.controls.push-left
 			%ul#cpu_list{ "data-toggle" => "buttons-radio" }
-				%li.btn
-					1核
-				%li.btn
-					2核
-				%li.btn.active
-					4核
-				%li.btn
-					8核
-				%li.btn
-					16核
-				%li.btn
-					32核
+				- @distinct_cpu_flavors.each do |f|
+					%li.btn{"data-value" => "#{f.vcpus}"}
+						= "#{f.vcpus}核"
 
 	.control-group
 		%label.control-label 内存:
 		.controls
 			%ul#mem_list{ "data-toggle" => "buttons-radio" }
-				%li.btn.btn-bord{:style => ""}
-					2G
-				%li.btn{:style => ""}
-					3G
-				%li.btn{:style => ""}
-					4G
-				%li.btn{:style => ""}
-					6G
-				%li.btn.active{:style => ""}
-					8G
-				%li.btn{:style => ""}
-					12G
-				%li.btn{:style => ""}
-					16G
-				%li.btn{:style => ""}
-					24G
-				%li.btn{:style => ""}
-					32G
-				%li.btn{:style => ""}
-					64G
+				- @distinct_mem_flavors.each do |f|
+					%li.btn{"data-value" => "#{f.memory_mb}"}
+						= "#{f.memory_mb/1024.0}G"
+
 
 
 	.control-group
@@ -54,7 +29,7 @@
 		.controls
 			%ul{:style => "padding:5px 0px 0px 5px;"}
 				%li
-					赠送系统盘Linux(20G),Windows(40G)
+					赠送系统盘30G
 
 	.control-group
 		%label.control-label 数据盘 :
@@ -62,7 +37,7 @@
 			.input-append
 				%input#datadisk_space.span1{:type => "text"}/
 				%span.add-on G
-			#datadisk_space_slider.span4
+			#datadisk_space_slider.span3
 
 	.control-group
 		%label.control-label 高性能磁盘 :
@@ -74,17 +49,9 @@
 	.control-group
 		%label.control-label 带宽(每台) :
 		.controls
-			%ul#bandwidth_list{ "data-toggle" => "buttons-radio" }
-				%li.btn
-					电信
-				%li.btn
-					联通
-				%li.btn
-					双线
-
 			.input-append
 				%input#bandwidth.span1{:type => "text"}/
 				%span.add-on M
-			#bandwidth_slider.span4
+			#bandwidth_slider.span3
 
 

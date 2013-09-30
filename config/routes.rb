@@ -7,6 +7,21 @@ OSUPortal::Application.routes.draw do
 
   # get "hosts/new"
   resources :hosts
+
+  resources :hosts do
+    collection do
+      post 'start'
+      post 'shutdown'
+      post 'poweroff'
+      post 'reboot'
+      post 'emergency_login'
+      post 'create_image'
+      post 'upgrade'
+      post 'reinstall'
+      post 'delete'
+    end
+  end
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
  

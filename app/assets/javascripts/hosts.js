@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-
+		
 		// 隐藏第二步骤信息
 		$("#host_create_step2").hide();
 		$("#step2_btns").hide();
@@ -11,6 +11,7 @@ jQuery(function($) {
 				$("#step1_btns").hide();
 				$("#host_create_step2").show();
 				$("#step2_btns").show();
+				
 		});
 
 		// 上一步
@@ -20,7 +21,8 @@ jQuery(function($) {
 				$("#host_create_step1").show();
 				$("#step1_btns").show();
 		});
-
+		
+		//数据盘slider
 		$("#datadisk_space_slider").slider();
 
 		$(function() {
@@ -39,7 +41,7 @@ jQuery(function($) {
 				
 		});
 
-
+		//带宽slider
 		$("#bandwidth_slider").slider();
 
 		$(function() {
@@ -58,42 +60,52 @@ jQuery(function($) {
 		});
 
 
-		$("#os_list .btn").click(function() {
-				$("#image-selected").val($(this).text());
+		$("#image_list .btn").click(function() {
+				$("#image-selected").val($(this).text().trim());
+				$("#image-selected").data("imageid", $(this).data("imageid"));
 		}); 
 		$("#cpu_list .btn").click(function() {
-				$("#cpu-selected").val($(this).text());
+				$("#cpu-selected").val($(this).text().trim());
+				$("#cpu-selected").data("value", $(this).data("value"));
 		}); 
 		$("#mem_list .btn").click(function() {
-				$("#mem-selected").val($(this).text());
+				$("#mem-selected").val($(this).text().trim());
+				$("#mem-selected").data("value", $(this).data("value"));
 		}); 
 
 
-		$("#mem-selected").val($("#mem_list .active").text());
 		$("#cpu-selected").val($("#cpu_list .active").text());
+		$("#cpu-selected").data("value", $("#cpu_list .active").data("value"));
+		$("#mem-selected").val($("#mem_list .active").text());
+		$("#mem-selected").data("value", $("#mem_list .active").data("value"));
+
 		$("#OSdisk-selected").val("30");
 		$("#image-selected").val($("#image_list .active .active").text());
 		
 		function hostcreate(e) {
 				e.preventDefault();
 				
-				var cpu             = $('#cpu-selected').val();
-				var mem             = $('#mem-selected').val();
+				var imageid         = $('#image-selected').data("imageid");
+				var cpu             = $('#cpu-selected').data("value");
+				var mem             = $('#mem-selected').data("value")
 				var OSdisk          = $('#OSdisk-selected').val();
 				var datadisk_space  = $('#datadisk_space-selected').val();
-				var image           = $('#image-selected').val();
 				var bandwidth       = $('#bandwith-selected').val();
-				var time            = $('#time-selected').val();
-				var count           = $('#count-selected').val();
-
+				var hostname        = $('#hostname').val();
+				var password        = $('#password').val();
 				$.ajax({
 						url: '/hosts',
-						data: { 'cup': cpu, 'mem': mem, 'OSdisk': OSdisk, 'datadisk_space': datadisk_space },
-						dataType: 'script',
+						data: { 'imageid': imageid, 'cpu': cpu, 'mem': mem, 'OSdisk': OSdisk, 'datadisk_space': datadisk_space, 'bandwidth': bandwidth , 'hostname': hostname, 'password': password},
+						dataType: 'json',
 						type: 'POST',
-						success: function ( result) {
-								alert("okkkkkkkkkkkk....")
-								}
+						success: function(result) {
+								alert("创建成功！");
+								window.location = "/hosts"
+						},
+						error: function(xhr) {
+								var errors = $.parseJSON(xhr.responseText).errors;
+								alert("创建失败，请联系管理员！");
+						}
 				});
 		}
 
@@ -103,4 +115,40 @@ jQuery(function($) {
 		
 		// 镜像选择，默认选择地一个tab页
 		$("#os_type_list li:eq(1) a").tab('show');
+
+		$('input[name="serverids"]').click(function() { 
+				console.log("input click");
+				$(".btn-toolbar .btn").removeAttr("disabled");
+		});
+
+		function getSelectedServerIds() {
+				ids = [];
+				$('input[name="serverids"]:checked').each(function() { 
+						ids.push($(this).val());
+				})
+				console.log(ids);
+				return ids;	
+		}
+
+		$(".btn-toolbar .btn-group button").click(function() {
+				console.log($(this).html());
+				ids = getSelectedServerIds();
+				console.log(ids);
+				action = $(this).attr("action");
+				console.log(action);
+				url = "/hosts/" + action;
+				$.ajax({
+						url: url,
+						data: { 'serverids': ids },
+						dataType: 'json',
+						type: 'POST',
+						success: function(result) {
+								alert("命令执行成功！");
+						},
+						error: function(xhr) {
+								var errors = $.parseJSON(xhr.responseText).errors;
+								alert("命令执行失败！");
+						}
+				});
+		});
 });
