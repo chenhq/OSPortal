@@ -1,0 +1,10 @@
+= form_for @floating_ip do |f|
+  - if @floating_ip.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@floating_ip.errors.count, "error")} prohibited this floating_ip from being saved:"
+      %ul
+        - @floating_ip.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

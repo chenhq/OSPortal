@@ -1,6 +1,8 @@
 require 'openstack_activeresource'
 
 class HostsController < ApplicationController
+    layout 'application', :only => [:new]
+
   def compute
     @compute = OpenStack::Connection.create({:username => "admin", 
                                               :api_key=>"175245a126f74b02", 

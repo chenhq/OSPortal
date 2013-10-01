@@ -1,0 +1,21 @@
+.btn-toolbar
+	.btn-group{:style => "float:left;"}
+		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
+			%i.icon-play>
+			创建镜像
+		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
+			%i.icon-stop>
+			删除镜像
+	.btn-group{:style => "float:left;"}
+		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 从镜像创建主机
+	
+	.btn-group.pull-right
+		%a#help_btn.btn.btn-primary{:site => "uhost"}
+			%i.icon-question-sign.icon-white>
+			帮助
+	.btn-group.pull-right
+		%a.btn.refresh{:href => ""}
+			%i.icon-refresh>
+			刷新
+
+

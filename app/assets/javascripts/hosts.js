@@ -1,5 +1,4 @@
 jQuery(function($) {
-
 		
 		// 隐藏第二步骤信息
 		$("#host_create_step2").hide();

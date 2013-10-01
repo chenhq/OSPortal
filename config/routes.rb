@@ -1,4 +1,10 @@
 OSUPortal::Application.routes.draw do
+  resources :floating_ips
+
+
+  resources :securities
+
+
   resources :images
 
 

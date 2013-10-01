@@ -4,7 +4,7 @@
 		%h3 创建主机
 	.modal-body
 		.row
-			.span10
+			.span7
 				#host_create_step1			
 					= render 'hosts/image_select'
 					= render 'hosts/flavor_select'
@@ -12,8 +12,8 @@
 				#host_create_step2			
 					= render 'hosts/host_conf'
 
-			-# .span4
-			-# 	= render 'hosts/current_conf'
+			.span4
+				= render 'hosts/current_conf'
 	.modal-footer
 		#step1_btns
 			= link_to "下一步", "#", class: "btn btn-primary", id: "step1_btn"

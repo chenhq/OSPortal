@@ -1,17 +1,2 @@
-%h1 Listing images
-
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @images.each do |image|
-    %tr
-      %td= link_to 'Show', "dfdf"
-      %td= link_to 'Edit', "dfdfa"
-      %td= link_to 'Destroy', "dkfd", :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Image', new_image_path
+= render 'images/op_bar'
+= render 'images/table'
