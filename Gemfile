@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
-gem 'bcrypt-ruby'
 
 
 gem 'bootstrap-sass'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 gem 'openstack'
+gem "openstack_activeresource", "~> 0.7.1"
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
@@ -45,7 +45,7 @@ group :production do
   gem 'pg', '0.12.2'
 end
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

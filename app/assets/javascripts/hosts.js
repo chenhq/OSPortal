@@ -117,8 +117,11 @@ jQuery(function($) {
 		$("#os_type_list li:eq(1) a").tab('show');
 
 		$('input[name="serverids"]').click(function() { 
-				console.log("input click");
 				$(".btn-toolbar .btn").removeAttr("disabled");
+				inst_name = $(this).attr("hostname");
+				inst_id = $(this).val();
+				$('input[name="image_create_host"]').val(inst_name);
+				$('input[name="img-create-instance-id"]').val(inst_id);
 		});
 
 		function getSelectedServerIds() {
@@ -130,7 +133,7 @@ jQuery(function($) {
 				return ids;	
 		}
 
-		$(".btn-toolbar .btn-group button").click(function() {
+		$(".btn-toolbar .btn-group .instance_op_btn").click(function() {
 				console.log($(this).html());
 				ids = getSelectedServerIds();
 				console.log(ids);
@@ -151,4 +154,5 @@ jQuery(function($) {
 						}
 				});
 		});
+
 });

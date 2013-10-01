@@ -1,4 +1,7 @@
 OSUPortal::Application.routes.draw do
+  resources :images
+
+
   resources :os_types
 
 
@@ -12,8 +15,8 @@ OSUPortal::Application.routes.draw do
     collection do
       post 'start'
       post 'shutdown'
-      post 'poweroff'
-      post 'reboot'
+      post 'softreboot'
+      post 'hardreboot'
       post 'emergency_login'
       post 'create_image'
       post 'upgrade'

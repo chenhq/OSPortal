@@ -1,3 +1,5 @@
+require 'openstack_activeresource'
+
 class HostsController < ApplicationController
   def compute
     @compute = OpenStack::Connection.create({:username => "admin", 
@@ -7,7 +9,22 @@ class HostsController < ApplicationController
                                               :authtenant_name =>"admin", 
                                               :service_type=>"compute"})
   end
-  
+
+  def auth
+    # Set Keystone Public API endpoint
+    OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
+
+    # Authentication
+    auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
+
+    # Set the auth token for next API requests
+    OpenStack::Base.token = auth.token
+
+    # Set the Nova Compute API endpoint from the received service catalog
+    OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
+  end
+
+ 
   def new
     @ostypes = OsType.all
     @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
@@ -61,56 +78,77 @@ class HostsController < ApplicationController
   end
 
   def start
-    @compute = compute
-    @server = @compute.get_server(params[:id])
+    auth
+    params[:serverids].each do |serverid| 
+      @server = OpenStack::Nova::Compute::Server.find(serverid)
+      @server.start
+    end
+    operation_response
   end
   
   def shutdown
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-    
+   auth
+    params[:serverids].each do |serverid| 
+      @server = OpenStack::Nova::Compute::Server.find(serverid)
+      @server.stop
+    end
+    operation_response
+     
   end
 
   def poweroff
-    @compute = compute
-    @server = @compute.get_server(params[:id])
+    auth
+    params[:serverids].each do |serverid| 
+      @server = OpenStack::Nova::Compute::Server.find(serverid)
+      @server.stop
+    end
+    operation_response
   end
 
-  def reboot
-    @compute = compute
+  def reboot(type=:soft)
+    auth
     params[:serverids].each do |serverid| 
-      @server = @compute.get_server(serverid)
-      @server.reboot
+      @server = OpenStack::Nova::Compute::Server.find(serverid)
+      @server.reboot(type)
     end
-      
+    operation_response
+  end
+  
+  def softreboot
+    reboot(:soft)
+  end
+
+  def hardreboot
+    reboot(:hard)
+  end
+
+  def emergency_login
+    vnc_console
+  end
+
+  def create_image
+    auth
+    @server = OpenStack::Nova::Compute::Server.find(params[:"img-create-instance-id"])
+    @server.create_new_image(params[:"image_name"])
+    
+    # {"image_create_host"=>"wertyuio", "image_name"=>"dddddd", "image_desc"=>"ddd", "img-create-instance-id"=>"f7da34c1-025c-48e8-b42d-63fdb14c63b8"}
+    redirect_to hosts_path
+    
+  end
+
+  def upgrade
+ 
+  end
+
+  def reinstall
+  end
+  
+  def delete
+  end
+
+  def operation_response
     respond_to do |format|
       format.json { render json: { status: 0 } }
     end
   end
-
-  def emergency_login
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-  end
-
-  def create_image
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-  end
-
-  def upgrade
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-  end
-
-  def reinstall
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-  end
-  
-  def delete
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-  end
-
 end

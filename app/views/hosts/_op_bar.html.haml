@@ -4,26 +4,27 @@
 		          :new_host, class: "btn", 
 							:data => {:toggle=>"modal"}
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance-control-btn{:action => "repay", :disabled => "disabled", :href => "#"}
+		%button.btn{:action => "repay", :disabled => "disabled", :href => "#"}
 			%i.icon-shopping-cart>
 			续费
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance-control-btn{:action => "start", :disabled => "disabled", :href => "#"}
+		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
 			%i.icon-play>
 			开机
-		%button.btn.instance-control-btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
+		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
 			%i.icon-stop>
 			关机
-		%button.btn.instance-control-btn{:action => "poweroff", :disabled => "disabled", :href => "#"}
-			%i.icon-off>
-			断电
-		%button.btn.instance-control-btn{:action => "reboot", :disabled => "disabled", :href => "#"}
+		%button.btn.instance_op_btn{:action => "softreboot", :disabled => "disabled", :href => "#"}
 			%i.icon-repeat>
-			重启
+			软重启
+		%button.btn.instance_op_btn{:action => "hardreboot", :disabled => "disabled", :href => "#"}
+			%i.icon-off>
+			硬重启
 	.btn-group{:style => "float:left;"}
-		%button.btn{:action => "login", :disabled => "disabled"} 应急登录
+		%button.btn.instance_op_btn{:action => "login", :disabled => "disabled"} 应急登录
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance-control-btn{:action => "create_image", :disabled => "disabled"} 制作镜像
+		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 制作镜像
+		= render '/hosts/image_create'
 	.btn-group.pull-left
 		%a.btn{"data-toggle" => "dropdown", :href => "#"}
 			%i.icon-oper

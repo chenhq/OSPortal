@@ -32,7 +32,7 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.2.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -44,7 +44,7 @@ GEM
     coffee-script-source (1.6.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
-    execjs (2.0.1)
+    execjs (2.0.2)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -60,16 +60,22 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
-    json (1.8.0)
+    json (1.7.7)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.8.0)
-    mysql2 (0.3.11)
+    mysql2 (0.3.13)
+    oj (1.2.13)
     openstack (1.1.1)
       json
+    openstack_activeresource (0.7.1)
+      activemodel (~> 3.2.12)
+      activeresource (~> 3.2.12)
+      json (~> 1.7.7)
+      oj (~> 1.2.9)
     pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -108,7 +114,7 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    sass (3.2.10)
+    sass (3.2.11)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -134,7 +140,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  bcrypt-ruby
+  bcrypt-ruby (~> 3.0.0)
   bootstrap-sass
   coffee-rails (~> 3.2.1)
   haml-rails (>= 0.3.4)
@@ -142,6 +148,7 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   openstack
+  openstack_activeresource (~> 0.7.1)
   pg (= 0.12.2)
   rails (= 3.2.12)
   rspec-rails (= 2.13.1)
