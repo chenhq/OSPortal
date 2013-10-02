@@ -7,6 +7,11 @@ OSUPortal::Application.routes.draw do
 
   resources :images
 
+  resource :images do
+    collection do
+      post 'delete'
+      end
+  end
 
   resources :os_types
 

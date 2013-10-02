@@ -58,10 +58,28 @@ jQuery(function($) {
 				$( "#bandwidth-selected" ).val($( "#bandwidth_slider" ).slider( "value" ) );
 		});
 
-
+		//os select
 		$("#image_list .btn").click(function() {
 				$("#image-selected").val($(this).text().trim());
 				$("#image-selected").data("imageid", $(this).data("imageid"));
+				osfamily = $(this).data("osfamily").trim().toLowerCase();
+				ostype = $(this).data("ostype").trim().toLowerCase();
+				
+				if (  osfamily == "linux" ) {
+						if ( ostype == "ubuntu" ) {
+								$("#username").val("ubuntu");
+						}
+						else {
+								$("#username").val("root");
+						}
+				}
+				else if (osfamily == "windows" ){
+						$("#username").val("administrator");
+				}
+				else {
+						$("#username").val("默认用户");
+				}
+
 		}); 
 		$("#cpu_list .btn").click(function() {
 				$("#cpu-selected").val($(this).text().trim());
@@ -91,6 +109,7 @@ jQuery(function($) {
 				var datadisk_space  = $('#datadisk_space-selected').val();
 				var bandwidth       = $('#bandwith-selected').val();
 				var hostname        = $('#hostname').val();
+				var username        = $('#username').val();
 				var password        = $('#password').val();
 				$.ajax({
 						url: '/hosts',
@@ -113,7 +132,7 @@ jQuery(function($) {
 		$(".host_popovers").popover();
 		
 		// 镜像选择，默认选择地一个tab页
-		$("#os_type_list li:eq(1) a").tab('show');
+		$("#os_type_list li:eq(3) a").tab('show');
 
 		$('input[name="serverids"]').click(function() { 
 				$(".btn-toolbar .btn").removeAttr("disabled");
@@ -131,27 +150,40 @@ jQuery(function($) {
 				console.log(ids);
 				return ids;	
 		}
+		
+		$.fn.addInstanceOperation = function() {
+				return this.bind({
+						click: function(e) {
+								ids = getSelectedServerIds();
+								console.log(ids);
+								action = $(this).attr("action");
+								console.log(action);
+								url = "/hosts/" + action;
+								$.ajax({
+										url: url,
+										data: { 'serverids': ids },
+										dataType: 'json',
+										type: 'POST',
+										success: function(result) {
+												if ( action == "emergency_login" ) {
+														console.log("emergency_login");
+														window.open(result.vnc_console, '_blank');
+												}
+												else { 
+														alert("命令执行成功！");
+												}
+										},
+										error: function(xhr) {
+												var errors = $.parseJSON(xhr.responseText).errors;
+												alert("命令执行失败！");
+										}
+								});
+								}
+				})
+		}
 
-		$(".btn-toolbar .btn-group .instance_op_btn").click(function() {
-				console.log($(this).html());
-				ids = getSelectedServerIds();
-				console.log(ids);
-				action = $(this).attr("action");
-				console.log(action);
-				url = "/hosts/" + action;
-				$.ajax({
-						url: url,
-						data: { 'serverids': ids },
-						dataType: 'json',
-						type: 'POST',
-						success: function(result) {
-								alert("命令执行成功！");
-						},
-						error: function(xhr) {
-								var errors = $.parseJSON(xhr.responseText).errors;
-								alert("命令执行失败！");
-						}
-				});
-		});
+		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
+		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
+		
 
 });

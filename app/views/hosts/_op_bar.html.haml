@@ -21,36 +21,40 @@
 			%i.icon-off>
 			硬重启
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance_op_btn{:action => "login", :disabled => "disabled"} 应急登录
+		%button.btn.instance_op_btn{:action => "emergency_login", :disabled => "disabled"} 
+			%i.icon-fire
+			应急登录
 	.btn-group{:style => "float:left;"}
-		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 制作镜像
+		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 
+			%i.icon-gift
+			制作镜像
 		= render '/hosts/image_create'
 	.btn-group.pull-left
 		%a.btn{"data-toggle" => "dropdown", :href => "#"}
-			%i.icon-oper
+			%i.icon-wrench
 			更多操作
 		%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 			%span.caret
 		%ul.dropdown-menu
 			%li
 				%a{:href => "#", :itemop => "scale_up"}
-					%i.icon-up
+					%i.icon-hand-up
 					升级配置
 			%li
 				%a{:href => "#", :itemop => "reinstall_os"}
-					%i.icon-os
+					%i.icon-retweet
 					重装系统
 			%li
-				%a{:href => "#", :itemop => "delete"}
+				%a.instance_op_link{:href => "#", :action => "delete"}
 					%i.icon-trash
 					删除主机
 	.btn-group.pull-right
 		%a#help_btn.btn.btn-primary{:site => "uhost"}
-			%i.icon-question-sign.icon-white>
+			%i.icon-question-sign.icon-white
 			帮助
 	.btn-group.pull-right
 		%a.btn.refresh{:href => ""}
-			%i.icon-refresh>
+			%i.icon-refresh
 			刷新
 
 

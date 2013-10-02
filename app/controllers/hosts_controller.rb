@@ -28,9 +28,13 @@ class HostsController < ApplicationController
 
  
   def new
+    
     @ostypes = OsType.all
     @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
     @distinct_mem_flavors = InstanceType.select(:memory_mb).uniq.order(:memory_mb)
+    
+    auth
+    @images = OpenStack::Nova::Compute::Image.all
   end
 
   def create
@@ -54,21 +58,23 @@ class HostsController < ApplicationController
   end
 
   def index
-    @compute = compute    
-    @servers = Hash.new { |h, k| h[k] = { } }
+    auth
+    @servers = OpenStack::Nova::Compute::Server.all
+    # @compute = compute    
+    # @servers = Hash.new { |h, k| h[k] = { } }
 
-    @compute.list_servers_detail.each do | item |
-      @servers[item[:name]][:status] = item[:status]
-      @servers[item[:name]][:addresses] = item[:addresses]
-      @servers[item[:name]][:"OS-EXT-SRV-ATTR:host"] = item[:"OS-EXT-SRV-ATTR:host"]
-      @servers[item[:name]][:image] = item[:image]
-      @servers[item[:name]][:flavor] = item[:flavor]
-      @servers[item[:name]][:created] = item[:created]
-    end
+    # @compute.list_servers_detail.each do | item |
+    #   @servers[item[:name]][:status] = item[:status]
+    #   @servers[item[:name]][:addresses] = item[:addresses]
+    #   @servers[item[:name]][:"OS-EXT-SRV-ATTR:host"] = item[:"OS-EXT-SRV-ATTR:host"]
+    #   @servers[item[:name]][:image] = item[:image]
+    #   @servers[item[:name]][:flavor] = item[:flavor]
+    #   @servers[item[:name]][:created] = item[:created]
+    # end
     
-    @compute.list_servers.each do |item|
-      @servers[item[:name]][:id] = item[:id]
-    end
+    # @compute.list_servers.each do |item|
+    #   @servers[item[:name]][:id] = item[:id]
+    # end
 
   end
 
@@ -125,16 +131,23 @@ class HostsController < ApplicationController
   end
 
   def emergency_login
-    vnc_console
+    auth
+    params[:serverids].each do |serverid| 
+      @server = OpenStack::Nova::Compute::Server.find(serverid)
+      @vnc_console = @server.vnc_console
+    end
+    respond_to do |format|
+      format.json { render json: { vnc_console: @vnc_console } }
+    end
   end
 
   def create_image
     auth
-    @server = OpenStack::Nova::Compute::Server.find(params[:"img-create-instance-id"])
+    @server = OpenStack::Nova::Compute::Server.find(params[:"server_id"])
     @server.create_new_image(params[:"image_name"])
     
     # {"image_create_host"=>"wertyuio", "image_name"=>"dddddd", "image_desc"=>"ddd", "img-create-instance-id"=>"f7da34c1-025c-48e8-b42d-63fdb14c63b8"}
-    redirect_to hosts_path
+    redirect_to images_path
     
   end
 
@@ -146,6 +159,11 @@ class HostsController < ApplicationController
   end
   
   def delete
+    auth
+    params[:serverids].each do |serverid| 
+      @server = OpenStack::Nova::Compute::Server.find(serverid).destroy
+    end
+    operation_response
   end
 
   def operation_response
@@ -153,4 +171,5 @@ class HostsController < ApplicationController
       format.json { render json: { status: 0 } }
     end
   end
+
 end

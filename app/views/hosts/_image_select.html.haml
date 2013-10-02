@@ -9,11 +9,20 @@
 			%li{"data-dismiss" => "#{ost.name}"}
 				%a{"data-dismiss" => "#{ost.name}", "data-toggle" => "tab", :href => "##{ost.name}"}
 					= ost.name
-	
+
+		%li{"data-dismiss" => "userimages"}
+			%a{"data-dismiss" => "#userimages", "data-toggle" => "tab", :href => "#userimages"}
+				我的镜像
+
 
 	.tab-content#image_list
 		- @ostypes.each do |ost|
 			.tab-pane{"id" => "#{ost.name}", "data-toggle" => "buttons-radio", "data-dismiss" => "#{ost.name}"}
 				- ost.operating_systems.each do |os|
-					.btn{"data-imageid" => "#{os.image_id}", "data-osfamily" => "#{ost.family}"}
+					.btn{"data-imageid" => "#{os.image_id}", "data-osfamily" => "#{ost.family}", "data-ostype" => "#{ost.name}"}
 						= os.name
+
+		.tab-pane{"id" => "userimages", "data-toggle" => "buttons-radio", "data-dismiss" => "userimages"}
+			- @images.each do |img|
+				.btn{"data-imageid" => "#{img.id}", "data-osfamily" => "userimages", "data-ostype" => "userimages"}
+					= img.name

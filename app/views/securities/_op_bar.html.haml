@@ -1,13 +1,15 @@
 .btn-toolbar
 	.btn-group{:style => "float:left;"}
-		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 创建防火墙
+		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 
+			%i.icon-plus
+			创建防火墙
 
 	.btn-group{:style => "float:left;"}
 		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
-			%i.icon-play>
+			%i.icon-edit>
 			编辑
 		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
-			%i.icon-stop>
+			%i.icon-remove-sign>
 			删除
 	
 	.btn-group.pull-right

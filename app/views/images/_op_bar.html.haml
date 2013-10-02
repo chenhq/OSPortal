@@ -1,16 +1,20 @@
 .btn-toolbar
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
-			%i.icon-play>
+		%button.btn.image_op_btn{:href => "#create_image-modal", "data-toggle" => "modal" }
+			%i.icon-plus-sign
 			创建镜像
-		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
-			%i.icon-stop>
+		= render '/images/image_create'     
+
+		%button.btn.image_op_btn{:action => "delete", :disabled => "disabled", :href => "#"}
+			%i.icon-minus-sign
 			删除镜像
 	.btn-group{:style => "float:left;"}
-		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 从镜像创建主机
+		%a.btn{:href=> new_host_path, :"data-toggle" => "modal"} 
+			%i.icon-plus
+			从镜像创建主机
 	
 	.btn-group.pull-right
-		%a#help_btn.btn.btn-primary{:site => "uhost"}
+		%a#help_btn.btn.btn-primary{:site => "#"}
 			%i.icon-question-sign.icon-white>
 			帮助
 	.btn-group.pull-right

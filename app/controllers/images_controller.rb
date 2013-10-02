@@ -20,6 +20,7 @@ class ImagesController < ApplicationController
   def index
     auth
     @images = OpenStack::Nova::Compute::Image.all
+    @servers = OpenStack::Nova::Compute::Server.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @images }
@@ -94,6 +95,16 @@ class ImagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to images_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def delete
+    auth
+    params[:imageids].each do |imgid|
+      OpenStack::Nova::Compute::Image.find(imgid).destroy
+    end
+    respond_to do |format|
+      format.json { render json: { status:  "ok" } }
     end
   end
 end
