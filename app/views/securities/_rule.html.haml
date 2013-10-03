@@ -1,0 +1,9 @@
+%tr
+	%td= check_box_tag "ruleids", rule.id, false
+	%td= rule.ip_protocol 
+	%td= rule.from_port
+	%td= rule.to_port
+	%td= rule.cidr.present? ? r.cidr
+	%td
+		%a.edit{:href => "#"} 编辑
+		%a.delete{:href => "#"} 删除

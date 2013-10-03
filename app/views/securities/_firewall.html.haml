@@ -1,0 +1,48 @@
+#firewall-modal.modal.hide.fade.modal-dialog.modal-content
+	.modal-header
+		%a.close{"data-dismiss" => "modal", :href => securities_path} ×
+		%h3 编辑防火墙
+	.modal-body
+		%div
+			%label.control-label
+				%i.red> *
+				防火墙名称:
+			%input
+			%label.control-label
+				%i.red> *
+				防火墙描述:
+			%input
+	%table.table.table-bordered.table-condensed
+		%caption
+			%p dfdf
+
+			%thead
+				%tr
+					%th
+					%th 协议类型
+					%th 端口
+					%th 源地址		
+					%th 动作
+					%th 优先级
+					%th 操作
+
+			%tbody.table
+				%tr
+					-# %td= check_box_tag "ruleids", rule.id, false, rulename: "#{rule.name}"
+					-# %td= rule.name
+					-# %td= rule.description
+					%td
+					%td
+					%td
+					%td
+						%a.edit{:href => "#"} 编辑
+						%a.delete{:href => "#"} 删除
+
+		.btn-toolbar{:style => "margin:5px 5px;"}
+			.btn-group
+				%button.btn{:action => "create", :href => "#"}
+					%i.icon-plus>
+						添加规则
+	.modal-footer
+		%button#modal-confirm.btn.btn-primary 应用规则
+		%button.btn{"data-dismiss" => "modal"} 取消

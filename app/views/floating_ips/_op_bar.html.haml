@@ -1,14 +1,38 @@
 .btn-toolbar
-	.btn-group{:style => "float:left;"}
-		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 创建防火墙
+	.btn-group.pull-left
+		%a.btn{"data-toggle" => "dropdown", :href => "#"}
+			%i.icon-wrench
+			申请IP
+		%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+			%span.caret
+		%ul.dropdown-menu
+			%li
+				%a{:href => "#", :ip_op_link => "addPublicIP"}
+					%i.icon-xxx
+					申请外网IP
+			%li
+				%a{:href => "#", :ip_op_link => "addPrivateIP"}
+					%i.icon-xxx
+					申请内网IP
 
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
-			%i.icon-play>
-			编辑
-		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
-			%i.icon-stop>
-			删除
+		%button.btn.ip_op_btn{:action => "releaseIP", :disabled => "disabled", :href => "#"}
+			%i.icon-trash>
+			释放IP
+	.btn-group{:style => "float:left;"}
+		%button.btn.ip_op_btn{:action => "upgradeBandwidth", :disabled => "disabled", :href => "#"}
+			%i.icon-trash>
+			带宽升级
+		
+
+	.btn-group{:style => "float:left;"}
+		%button.btn.ip_op_btn{:action => "addIPToHost", :disabled => "disabled", :href => "#"}
+			%i.icon-link>
+			绑定主机
+		%button.btn.ip_op_btn{:action => "delIPFromHost", :disabled => "disabled", :href => "#"}
+			%i.icon-unlink>
+			解绑主机
+			
 	
 	.btn-group.pull-right
 		%a#help_btn.btn.btn-primary{:site => "host"}

@@ -14,5 +14,5 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-editable
 //= require_tree .
-

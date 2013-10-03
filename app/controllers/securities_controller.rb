@@ -43,7 +43,9 @@ class SecuritiesController < ApplicationController
   # GET /securities/new
   # GET /securities/new.json
   def new
-    @security = Security.new
+    auth
+    @security = OpenStack::Nova::Compute::SecurityGroup.new
+    @rule = OpenStack::Nova::Compute::Rule.new
 
     respond_to do |format|
       format.html # new.html.erb

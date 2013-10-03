@@ -1,22 +1,20 @@
 -# - form_tag ... do
-%table.table.table-bordered.table-condensed#tab_servers
+%table.table.table-bordered.table-condensed
+	%caption 
+		%p
 	%thead
 		%tr
 			%th
-			%th IP地址
-			%th IP类型
-			%th 线路		
-			%th 带宽
-			%th 状态
-			%th 绑定资源		
-			%th 剩余有效期
-
+			%th 弹性IP
+			%th 固定IP
+			%th 绑定主机	
+			%th 状态		
 	%tbody
-		- @firewalls.each do |fw|
+		- @floating_ips.each do |ip|
 			%tr
-				%td= check_box_tag "ipids", fw.id, false, firewellname: "#{fw.name}"
-				%td= fw.name
-				%td= fw.description
-				%td 
-				%td
+				%td= check_box_tag "ipids", ip.id, false, hostid: "#{ip.instance_id if ip.instance.present?}"
+				%td= ip.ip
+				%td= ip.fixed_ip if ip.fixed_ip.present?
+				%td= "#{ip.instance.name if ip.instance.present?}"
+				%td= "#{ip.instance.present? ? "使用中": "未使用"}"
 

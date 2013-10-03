@@ -4,6 +4,8 @@ gem 'rails', '3.2.12'
 
 
 gem 'bootstrap-sass'
+gem 'bootstrap-x-editable-rails'
+# gem 'bootstrap-editable-rails'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 gem 'openstack'
 gem "openstack_activeresource", "~> 0.7.1"

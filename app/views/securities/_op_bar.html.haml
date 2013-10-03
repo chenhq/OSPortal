@@ -1,14 +1,13 @@
 .btn-toolbar
 	.btn-group{:style => "float:left;"}
-		%a.btn{:href=> "#create_image-modal", :disabled => "disabled", :"data-toggle" => "modal"} 
+		%a.btn{:href=> new_security_path} 
 			%i.icon-plus
 			创建防火墙
-
 	.btn-group{:style => "float:left;"}
-		%button.btn.instance_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
+		%button.btn.firewall_op_btn{:action => "start", :disabled => "disabled", :href => "#"}
 			%i.icon-edit>
 			编辑
-		%button.btn.instance_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
+		%button.btn.firewall_op_btn{:action => "shutdown", :disabled => "disabled", :href => "#"}
 			%i.icon-remove-sign>
 			删除
 	
