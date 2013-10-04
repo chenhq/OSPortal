@@ -88,6 +88,14 @@ class FloatingIpsController < ApplicationController
     # end
   end
 
+  def releasePublicIP
+    auth
+    params.each do | k, v |
+      OpenStack::Nova::Compute::FloatingIp.find(v["ip"].to_i).destroy
+    end
+    redirect_to floating_ips_path
+    
+  end
   def unbindIPtoServer
     auth
     
