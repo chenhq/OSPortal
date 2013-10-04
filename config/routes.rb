@@ -1,9 +1,15 @@
 OSUPortal::Application.routes.draw do
+  resources :rules
   resources :floating_ips
 
 
   resources :securities
-
+  
+  resources :securities do
+    collection do
+      post 'delete'
+    end
+  end
 
   resources :images
 

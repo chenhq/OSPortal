@@ -13,7 +13,7 @@
 	%tbody
 		- @firewalls.each do |fw|
 			%tr
-				%td= check_box_tag "fwgids", fw.id, false, firewellname: "#{fw.name}"
+				%td= check_box_tag "fwids", fw.id, false, fwname: "#{fw.name}"
 				%td= fw.name
 				%td= fw.description
 				%td 

@@ -1,38 +1,37 @@
 #firewall-create
 	%a.close{"data-dismiss" => "modal", :href => securities_path} ×
 	%h3 创建防火墙
-	%div.inline
+	#form-firewall.form.form-inline
+		= text_field_tag "id", "-1", :type => "hidden"
 		%label.control-label
 			%i.red> *
 			防火墙名称:
-		%input
+		= text_field_tag "name","FireWall Name"
 		%label.control-label
 			%i.red> *
 			防火墙描述:
-		%input
-	%table.table.table-bordered.table-condensed
+		= text_field_tag "description", "Description"
+	%table.table.table-bordered.table-condensed#rules_table
 		%caption
-			%p dfdf
+			%p 
+		%thead
+			%tr
+				%th
+				%th 协议
+				%th 开始端口
+				%th 结束端口		
+				%th 源地址
+				%th 操作
 
-			%thead
-				%tr
-					%th
-					%th 协议
-					%th 开始端口
-					%th 结束端口		
-					%th 源地址
-					%th 操作
+		%tbody.table#rule_data
+			= render 'securities/rule_tmpl'
 
-			%tbody.table
-				%tr
-					= render 'securities/rule'
-
-		.btn-toolbar{:style => "margin:5px 5px;"}
-			.btn-group
-				%button.btn{:action => "create", :href => "#"}
-					%i.icon-plus>
-						添加规则
-
-	%button#modal-confirm.btn.btn-primary 应用规则
-	%button.btn{"data-dismiss" => "modal"} 取消
+	.btn-toolbar{:style => "margin:5px 5px;"}
+		.btn-group.pull-right
+			#add_new_rule_btn.btn{:href => "#"}
+				%i.icon-plus>
+				添加规则
+	%br/
+	%a.btn.btn-primary.submit_firewall{ :action => "create" } 创建防火墙
+	%a.btn{:href => securities_path }取消
 

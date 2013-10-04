@@ -2,13 +2,10 @@ jQuery(function($) {
 
 		$('input[name="ipids"]').click(function() { 
 				$(".btn-toolbar .btn").removeAttr("disabled");
-				addr = $(this).attr("hostname");
-				ipid = $(this).attr();
-				$('input[name="img-create-instance-id"]').val(inst_id);
 		});
 
 
-		function getSelectedIPIds() {
+		function getSelectedIds() {
 				ids = [];
 				$('input[name="ipids"]:checked').each(function() { 
 						ids.push($(this).val());
@@ -20,7 +17,7 @@ jQuery(function($) {
 		$.fn.addInstanceOperation = function() {
 				return this.bind({
 						click: function(e) {
-								ids = getSelectedServerIds();
+								ids = getSelectedIds();
 								console.log(ids);
 								action = $(this).attr("action");
 								console.log(action);
