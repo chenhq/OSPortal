@@ -12,9 +12,10 @@
 	%tbody
 		- @floating_ips.each do |ip|
 			%tr
-				%td= check_box_tag "ipids", ip.id, false, hostid: "#{ip.instance_id if ip.instance.present?}"
+				%td= check_box_tag "ip", ip.id, false, :"data-ip" => "#{ip.id}"
 				%td= ip.ip
 				%td= ip.fixed_ip if ip.fixed_ip.present?
-				%td= "#{ip.instance.name if ip.instance.present?}"
+				%td
+					= label_tag "server", "#{ip.instance.name if ip.instance.present?}", :"data-server" => "#{ip.instance_id if ip.instance.present?}"
 				%td= "#{ip.instance.present? ? "使用中": "未使用"}"
 

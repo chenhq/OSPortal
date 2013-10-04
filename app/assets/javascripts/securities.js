@@ -75,7 +75,7 @@ jQuery(function($) {
 								type: 'POST',
 								data: { _method:'PUT', firewall: firewallconf },
 								success: function(result) {
-										alert("执行命令成功");
+										alert("鎵ц鍛戒护鎴愬姛");
 								},
 						});
 				}
@@ -86,7 +86,7 @@ jQuery(function($) {
 								type: 'POST',
 								data: firewallconf,
 								success: function(result) {
-										alert("执行命令成功");
+										alert("鎵ц鍛戒护鎴愬姛");
 								},
 						});
 				}
@@ -127,11 +127,11 @@ jQuery(function($) {
 												dataType:'json',
 												type: 'POST',
 												success: function(result) {
-														alert("命令执行成功！");
+														alert("命令执行成功");
 												},
 												error: function(xhr) {
 														var errors = $.parseJSON(xhr.responseText).errors;
-														alert("命令执行失败！");
+														alert("命令执行失败");
 												}
 										});
 								}

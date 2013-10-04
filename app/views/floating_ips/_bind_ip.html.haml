@@ -1,0 +1,29 @@
+#bindip-modal.modal.hide.fade
+	%form#bindip-form.form-horizontal{:action => bindIPtoServer_floating_ips_path, :method => "POST", :novalidate => "novalidate"}
+		.modal-header
+			%a.close{"data-dismiss" => "modal"} ×
+			%h3 主机绑定IP地址
+		.modal-body
+			%p
+				%i.icon-warning-sign> 
+				如果解绑，绑定的IP地址将无法访问！
+			%div
+				.control-group
+					%label.control-label 主机名称 :
+					.controls
+						%select{:name => "server", :style => "width:150px;"}
+							- @servers.each do |s|
+								%option{:value => "#{s.id}"} 
+									= s.name
+				.control-group
+					%label.control-label
+						%i.red> *
+						IP地址 :
+					.controls
+						%select{:name => "floating_ip", :style => "width:150px;"}
+							- @floating_ips.each do |ip|
+								%option{:value => "#{ip.id}"} 
+									= ip.ip
+		.modal-footer
+			%input.btn.btn-primary{:type => "submit", :value => "确定"}
+			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消

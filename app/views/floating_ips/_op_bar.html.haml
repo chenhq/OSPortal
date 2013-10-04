@@ -7,29 +7,25 @@
 			%span.caret
 		%ul.dropdown-menu
 			%li
-				%a{:href => "#", :ip_op_link => "addPublicIP"}
+				%a.ip_op_link{:href => "#", :action => "addPublicIP"}
 					%i.icon-xxx
 					申请外网IP
 			%li
-				%a{:href => "#", :ip_op_link => "addPrivateIP"}
+				%a.ip_op_link{:href => "#", :action => "addPrivateIP"}
 					%i.icon-xxx
 					申请内网IP
 
 	.btn-group{:style => "float:left;"}
-		%button.btn.ip_op_btn{:action => "releaseIP", :disabled => "disabled", :href => "#"}
+		%button.btn.ip_op_btn{:action => "releasePublicIP", :disabled => "disabled", :href => "#"}
 			%i.icon-trash>
-			释放IP
-	.btn-group{:style => "float:left;"}
-		%button.btn.ip_op_btn{:action => "upgradeBandwidth", :disabled => "disabled", :href => "#"}
-			%i.icon-trash>
-			带宽升级
-		
+			释放IP		
 
 	.btn-group{:style => "float:left;"}
-		%button.btn.ip_op_btn{:action => "addIPToHost", :disabled => "disabled", :href => "#"}
+		%button.btn.ip_op_btn{:disabled => "disabled", :href => "#bindip-modal", :"data-toggle" => "modal"}
 			%i.icon-link>
 			绑定主机
-		%button.btn.ip_op_btn{:action => "delIPFromHost", :disabled => "disabled", :href => "#"}
+		= render 'floating_ips/bind_ip'
+		%button.btn.ip_op_btn{:action => "unbindIPtoServer", :disabled => "disabled", :href => "#"}
 			%i.icon-unlink>
 			解绑主机
 			

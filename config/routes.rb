@@ -2,6 +2,16 @@ OSUPortal::Application.routes.draw do
   resources :rules
   resources :floating_ips
 
+  resources :floating_ips do
+    collection do
+      post 'addPublicIP'
+      post 'addPrivageIP'
+      post 'releasePublicIP'
+      post 'releasePrivateIP'
+      post 'bindIPtoServer'
+      post 'unbindIPtoServer'
+    end
+  end
 
   resources :securities
   
