@@ -1,4 +1,12 @@
 OSUPortal::Application.routes.draw do
+  resources :volumes
+  resources :volumes do
+    collection do
+      post 'delete'
+      post 'mount'
+    end
+  end
+
   resources :rules
   resources :floating_ips
 

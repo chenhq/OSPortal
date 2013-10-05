@@ -1,0 +1,35 @@
+#create_volume-modal.modal.hide.fade
+	%form#create_volume.form-horizontal{:action => volumes_path, :method => "POST", :novalidate => "novalidate"}
+		.modal-header
+			%a.close{"data-dismiss" => "modal"} ×
+			%h3 创建硬盘
+		.modal-body
+			%p
+				%i.icon-warning-sign> 
+				创建硬盘可以挂载到已有的主机上，为主机扩容磁盘空间！
+			%div
+				.control-group
+					%label.control-label
+						%i.red> *
+						磁盘名称 :
+					.controls
+						%input{:class => "{required:true, messages:{required:'镜像名称必填'}}", :name => "display_name", :style => "width:150px;", :type => "text"}/
+				.control-group
+					%label.control-label
+						%i.red> *
+						磁盘描述 :
+					.controls
+						%input{:class => "{required:true, messages:{required:'镜像描述必填'}}", :name => "display_description", :style => "width:150px;", :type => "text"}/
+						
+				.control-group
+					%label.control-label 
+						%i.red> *
+						数据盘 :
+					.controls
+						.input-append
+							%input{:class => "{required:true, messages:{required:'镜像描述必填'}}", :name => "size", :style => "width:150px;", :type => "text"}/
+							%span.add-on G
+
+		.modal-footer
+			%input.btn.btn-primary{:type => "submit", :value => "确定"}
+			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消

@@ -75,7 +75,7 @@ jQuery(function($) {
 								type: 'POST',
 								data: { _method:'PUT', firewall: firewallconf },
 								success: function(result) {
-										alert("鎵ц鍛戒护鎴愬姛");
+										alert("命令执行成功！");
 								},
 						});
 				}
@@ -86,7 +86,7 @@ jQuery(function($) {
 								type: 'POST',
 								data: firewallconf,
 								success: function(result) {
-										alert("鎵ц鍛戒护鎴愬姛");
+										alert("命令执行成功");
 								},
 						});
 				}
