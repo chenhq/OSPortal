@@ -19,7 +19,7 @@
 				%td= v.display_name
 				%td= v.display_description
 				%td= "#{v.size}G"
-				%td= v.server if v.attached?
+				%td= v.server.name if v.attached?
 				%td
 				%td= v.status
 				%td= v.created_at 
