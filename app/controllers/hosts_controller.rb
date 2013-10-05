@@ -4,20 +4,26 @@ class HostsController < ApplicationController
     layout 'application', :only => [:new]
 
   def compute
-    @compute = OpenStack::Connection.create({:username => "admin", 
-                                              :api_key=>"175245a126f74b02", 
-                                              :auth_method=>"password",
-                                              :auth_url => "http://122.227.254.55:5000/v2.0", 
-                                              :authtenant_name =>"admin", 
+    @compute = OpenStack::Connection.create({:username => "user_one", 
+                                              :api_key=> "user_one", 
+                                              :auth_method=> "password",
+                                              :auth_url => "http://60.55.40.228:5000/v2.0", 
+                                              :authtenant_name =>"project_one", 
                                               :service_type=>"compute"})
   end
 
   def auth
     # Set Keystone Public API endpoint
-    OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
+    OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
 
     # Authentication
-    auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
+    auth = OpenStack::Keystone::Public::Auth.create :username => "user_one", :password => "user_one", :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
+
+    # # Set Keystone Public API endpoint
+    # OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
+
+    # # Authentication
+    # auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
 
     # Set the auth token for next API requests
     OpenStack::Base.token = auth.token

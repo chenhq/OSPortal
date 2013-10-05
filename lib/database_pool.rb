@@ -1,4 +1,3 @@
-
 require 'active_record'
 
 class Portal < ActiveRecord::Base
@@ -15,9 +14,9 @@ class Nova < ActiveRecord::Base
   self.abstract_class = true
   establish_connection(:adapter => "mysql2",
                        :database => "nova",
-                       :username => "nova",
-                       :password => "fd7b83053efe47bc",
-                       :host => "122.227.254.55",
+                       :username => "novaUser",
+                       :password => "novaPassw0rd",
+                       :host => "60.55.40.228",
                        :port => 3306)
 
 end
@@ -26,9 +25,9 @@ class Glance < ActiveRecord::Base
   self.abstract_class = true
   establish_connection(:adapter => "mysql2",
                        :database => "glance",
-                       :username => "glance",
-                       :password => "b54b09ab0d504173",
-                       :host => "122.227.254.55",
+                       :username => "glanceUser",
+                       :password => "glancePassw0rd",
+                       :host => "60.55.40.228",
                        :port => 3306)
 
 end
@@ -37,9 +36,9 @@ class Cinder < ActiveRecord::Base
   self.abstract_class = true
   establish_connection(:adapter => "mysql2",
                        :database => "cinder",
-                       :username => "cinder",
-                       :password => "fd17f70c198242c8",
-                       :host => "122.227.254.55",
+                       :username => "cinderUser",
+                       :password => "cinderPassw0rd",
+                       :host => "60.55.40.228",
                        :port => 3306)
 
 end
@@ -48,9 +47,9 @@ class Keystone < ActiveRecord::Base
   self.abstract_class = true
   establish_connection(:adapter => "mysql2",
                        :database => "keystone",
-                       :username => "keystone",
-                       :password => "82cce0f524574c70",
-                       :host => "122.227.254.55",
+                       :username => "keystoneUser",
+                       :password => "keystonePassw0rd",
+                       :host => "60.55.40.228",
                        :port => 3306)
 
 end
