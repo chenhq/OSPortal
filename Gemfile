@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
-
+gem 'devise'
 gem 'bootstrap-sass'
 gem 'bootstrap-x-editable-rails'
 # gem 'bootstrap-editable-rails'

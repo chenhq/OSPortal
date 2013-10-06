@@ -1,4 +1,6 @@
 OSUPortal::Application.routes.draw do
+  devise_for :users
+
   resources :volumes
   resources :volumes do
     collection do
@@ -60,13 +62,14 @@ OSUPortal::Application.routes.draw do
     end
   end
 
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  # # made by myself before use devise
+  # resources :users
+  # resources :sessions, only: [:new, :create, :destroy]
  
-  # get "users/new"
-  match '/signup', to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  # # get "users/new"
+  # match '/signup', to: 'users#new'
+  # match '/signin',  to: 'sessions#new'
+  # match '/signout', to: 'sessions#destroy', via: :delete
 
   get "site_skel/home"
   match '/home', to: 'site_skel#home'

@@ -44,6 +44,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    devise (2.2.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -78,6 +83,7 @@ GEM
       activeresource (~> 3.2.12)
       json (~> 1.7.7)
       oj (~> 1.2.9)
+    orm_adapter (0.4.0)
     pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -136,6 +142,8 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.1)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -146,6 +154,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-x-editable-rails
   coffee-rails (~> 3.2.1)
+  devise
   haml-rails (>= 0.3.4)
   jquery-rails (>= 3.0.0)
   jquery-ui-rails
