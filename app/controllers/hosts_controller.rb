@@ -6,14 +6,14 @@ class HostsController < ApplicationController
 
   layout 'application', :only => [:new]
 
-  def compute
-    @compute = OpenStack::Connection.create({:username => "user_one", 
-                                              :api_key=> "user_one", 
-                                              :auth_method=> "password",
-                                              :auth_url => "http://60.55.40.228:5000/v2.0", 
-                                              :authtenant_name =>"project_one", 
-                                              :service_type=>"compute"})
-  end
+  # def compute
+  #   @compute = OpenStack::Connection.create({:username => "user_one", 
+  #                                             :api_key=> "user_one", 
+  #                                             :auth_method=> "password",
+  #                                             :auth_url => "http://60.55.40.228:5000/v2.0", 
+  #                                             :authtenant_name =>"project_one", 
+  #                                             :service_type=>"compute"})
+  # end
 
   def new
     
@@ -25,9 +25,12 @@ class HostsController < ApplicationController
   end
 
   def create
-    flavor = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:mem]).first
-    @compute = compute
-    @newserver = @compute.create_server(:name => params[:hostname], :imageRef => params[:imageid], :flavorRef => flavor.id)
+    flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:mem]).first
+    flavor = OpenStack::Nova::Compute::Flavor.find(flavorid)
+    image = OpenStack::Nova::Compute::Image.find(params[:imageid])
+    # @compute = compute
+    # @newserver = @compute.create_server(:name => params[:hostname], :imageRef => params[:imageid], :flavorRef => flavor.id)
+    @newserver = OpenStack::Nova::Compute::Server.create(:name => params[:hostname], :image => image, :flavor => flavor)
     if @newserver
       respond_to do |format|
         format.json { render json: { status: 0 } }
@@ -49,10 +52,10 @@ class HostsController < ApplicationController
   end
 
   def show
-    @compute = compute
-    @server = @compute.get_server(params[:id])
-    @flavor = @compute.get_flavor(@server.flavor["id"])
-    @image = @compute.get_image(@server.image["id"])
+    # @compute = compute
+    # @server = @compute.get_server(params[:id])
+    # @flavor = @compute.get_flavor(@server.flavor["id"])
+    # @image = @compute.get_image(@server.image["id"])
   end
 
   def start

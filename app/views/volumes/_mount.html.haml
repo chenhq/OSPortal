@@ -30,5 +30,6 @@
 						%input{:class => "{required:true, messages:{required:'设备名称应该为 /dev/vdd '}}", :name => "device", :style => "width:150px;", :type => "text", :placeholder => "/dev/vdd" }
 
 		.modal-footer
+			%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
 			%input.btn.btn-primary{:type => "submit", :value => "确定"}
 			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消

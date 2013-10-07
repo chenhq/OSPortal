@@ -4,13 +4,13 @@
 			= link_to "虚拟主机", hosts_path
 		%li{:class => "#{[VolumesController].include?(controller.class)  ? 'active': 'deactive'}" }
 			= link_to "虚拟磁盘", volumes_path
-		%li
+		%li.disabled
 			= link_to "云数据库", "#"
-		%li
+		%li.disabled
 			= link_to "负载均衡", "#"
-		%li
+		%li.disabled
 			= link_to "CDN加速", "#"
-		%li
+		%li.disabled
 			= link_to "DNS解析", "#"
 		%li{:style => "float:right"}
 			= link_to "「升级公告2013-09-25 」", "#"	

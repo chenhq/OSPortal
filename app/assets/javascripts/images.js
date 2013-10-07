@@ -1,5 +1,5 @@
 jQuery(function($) {
-kk
+
 		$('input[name="imageids"]').click(function() { 
 				$(".btn-toolbar .btn").removeAttr("disabled");
 		});

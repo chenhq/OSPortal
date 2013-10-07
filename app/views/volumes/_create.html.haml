@@ -31,5 +31,6 @@
 							%span.add-on G
 
 		.modal-footer
+			%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
 			%input.btn.btn-primary{:type => "submit", :value => "确定"}
 			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消

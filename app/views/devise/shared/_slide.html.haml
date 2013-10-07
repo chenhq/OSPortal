@@ -5,16 +5,12 @@
 		%li.active{"data-slide-to" => "2", "data-target" => "#product-carousel"}
 	.carousel-inner
 		.item
-			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+			%img{:alt => "Demo Image", :src => "/assets/co1.jpg"}/
 			.carousel-caption				
 				%p The image description.
-		.item
-			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+		.item.active
+			%img{:alt => "Demo Image", :src => "/assets/co2.jpg"}/
 			.carousel-caption
 				%p The image description 2.
-		.item.active
-			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
-			.carousel-caption
-				%p The image description 3.
 	%a.carousel-control.left{"data-slide" => "prev", :href => "#product-carousel"} ‹
 	%a.carousel-control.right{"data-slide" => "next", :href => "#product-carousel"} ›
