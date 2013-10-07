@@ -1,4 +1,6 @@
 class OperatingSystemsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /operating_systems
   # GET /operating_systems.json
   def index

@@ -1,32 +1,11 @@
 require 'openstack_activeresource'
 
 class SecuritiesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :require_openstack_login
+
   layout 'hosts'
-  def auth
-    # Set Keystone Public API endpoint
-    OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-
-    # Authentication
-    auth = OpenStack::Keystone::Public::Auth.create :username => "user_one", :password => "user_one", :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
-#    auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "admin_pass", :tenant_id => "2d160a9adf58470fa5626b454a0b2075"
-
-    # # Set Keystone Public API endpoint
-    # OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
-
-    # # Authentication
-    # auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
-
-    # Set the auth token for next API requests
-    OpenStack::Base.token = auth.token
-
-    # Set the Nova Compute API endpoint from the received service catalog
-    OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
-  end
-
-  # GET /securities
-  # GET /securities.json
   def index
-    auth
     @firewalls =  OpenStack::Nova::Compute::SecurityGroup.all
     
     
@@ -50,7 +29,6 @@ class SecuritiesController < ApplicationController
   # GET /securities/new
   # GET /securities/new.json
   def new
-    auth
     @security = OpenStack::Nova::Compute::SecurityGroup.new
     @rule = OpenStack::Nova::Compute::Rule.new
 
@@ -63,7 +41,6 @@ class SecuritiesController < ApplicationController
   # not support by API
   # GET /securities/1/edit
   def edit
-    auth
     @firewall = OpenStack::Nova::Compute::SecurityGroup.find(params[:id])
     @rules = @firewall.rules
   end
@@ -71,7 +48,6 @@ class SecuritiesController < ApplicationController
   # POST /securities
   # POST /securities.json
   def create
-    auth
     @security = OpenStack::Nova::Compute::SecurityGroup.new();
     @security.name = params[:name]
     @security.description = params[:description]
@@ -108,7 +84,6 @@ class SecuritiesController < ApplicationController
   # PUT /securities/1
   # PUT /securities/1.json
   def update
-    auth
     @security = OpenStack::Nova::Compute::SecurityGroup.find('3')
     
     @security.name = params[:firewall][:name]
@@ -138,7 +113,6 @@ class SecuritiesController < ApplicationController
   end
 
   def delete
-    auth
     params[:ids].each do |id|
       OpenStack::Nova::Compute::SecurityGroup.find(id).destroy
     end

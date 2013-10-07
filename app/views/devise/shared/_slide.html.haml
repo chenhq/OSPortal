@@ -1,0 +1,20 @@
+#product-carousel.carousel.slide
+	%ol.carousel-indicators
+		%li{"data-slide-to" => "0", "data-target" => "#product-carousel"}
+		%li{"data-slide-to" => "1", "data-target" => "#product-carousel"}
+		%li.active{"data-slide-to" => "2", "data-target" => "#product-carousel"}
+	.carousel-inner
+		.item
+			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+			.carousel-caption				
+				%p The image description.
+		.item
+			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+			.carousel-caption
+				%p The image description 2.
+		.item.active
+			%img{:alt => "Demo Image", :src => "http://lorempixel.com/800/200"}/
+			.carousel-caption
+				%p The image description 3.
+	%a.carousel-control.left{"data-slide" => "prev", :href => "#product-carousel"} ‹
+	%a.carousel-control.right{"data-slide" => "next", :href => "#product-carousel"} ›

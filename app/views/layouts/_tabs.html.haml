@@ -1,9 +1,9 @@
 .offset1
 	%ul.nav.nav-tabs
-		%li.active
+		%li{:class => "#{[HostsController, ImagesController, SecuritiesController, FloatingIpsController].include?(controller.class)  ? 'active': 'deactive'}" }
 			= link_to "虚拟主机", hosts_path
-		%li
-			= link_to "虚拟磁盘", "#"
+		%li{:class => "#{[VolumesController].include?(controller.class)  ? 'active': 'deactive'}" }
+			= link_to "虚拟磁盘", volumes_path
 		%li
 			= link_to "云数据库", "#"
 		%li

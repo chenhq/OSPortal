@@ -32,6 +32,7 @@
 			#msg_container.alert.alert-block.alert-error.fade.in{:style => "display:none"}
 				%span.img-msg
 		.modal-footer
+			%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
 			%input{:name => "img-create-instance-id", :type => "hidden", :value => ""}
 			%input.btn.btn-primary{:type => "submit", :value => "确定"}
 			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消

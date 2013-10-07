@@ -1,7 +1,10 @@
 require 'openstack_activeresource'
 
 class HostsController < ApplicationController
-    layout 'application', :only => [:new]
+  before_filter :authenticate_user!
+  before_filter :require_openstack_login
+
+  layout 'application', :only => [:new]
 
   def compute
     @compute = OpenStack::Connection.create({:username => "user_one", 
@@ -12,34 +15,12 @@ class HostsController < ApplicationController
                                               :service_type=>"compute"})
   end
 
-  def auth
-    # Set Keystone Public API endpoint
-    OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-
-    # Authentication
-    auth = OpenStack::Keystone::Public::Auth.create :username => "user_one", :password => "user_one", :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
-
-    # # Set Keystone Public API endpoint
-    # OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
-
-    # # Authentication
-    # auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
-
-    # Set the auth token for next API requests
-    OpenStack::Base.token = auth.token
-
-    # Set the Nova Compute API endpoint from the received service catalog
-    OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
-  end
-
- 
   def new
     
     @ostypes = OsType.all
     @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
     @distinct_mem_flavors = InstanceType.select(:memory_mb).uniq.order(:memory_mb)
     
-    auth
     @images = OpenStack::Nova::Compute::Image.all
   end
 
@@ -64,24 +45,7 @@ class HostsController < ApplicationController
   end
 
   def index
-    auth
     @servers = OpenStack::Nova::Compute::Server.all
-    # @compute = compute    
-    # @servers = Hash.new { |h, k| h[k] = { } }
-
-    # @compute.list_servers_detail.each do | item |
-    #   @servers[item[:name]][:status] = item[:status]
-    #   @servers[item[:name]][:addresses] = item[:addresses]
-    #   @servers[item[:name]][:"OS-EXT-SRV-ATTR:host"] = item[:"OS-EXT-SRV-ATTR:host"]
-    #   @servers[item[:name]][:image] = item[:image]
-    #   @servers[item[:name]][:flavor] = item[:flavor]
-    #   @servers[item[:name]][:created] = item[:created]
-    # end
-    
-    # @compute.list_servers.each do |item|
-    #   @servers[item[:name]][:id] = item[:id]
-    # end
-
   end
 
   def show
@@ -92,7 +56,6 @@ class HostsController < ApplicationController
   end
 
   def start
-    auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.start
@@ -101,7 +64,6 @@ class HostsController < ApplicationController
   end
   
   def shutdown
-   auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.stop
@@ -111,7 +73,6 @@ class HostsController < ApplicationController
   end
 
   def poweroff
-    auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.stop
@@ -120,7 +81,6 @@ class HostsController < ApplicationController
   end
 
   def reboot(type=:soft)
-    auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.reboot(type)
@@ -137,7 +97,6 @@ class HostsController < ApplicationController
   end
 
   def emergency_login
-    auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @vnc_console = @server.vnc_console
@@ -148,7 +107,6 @@ class HostsController < ApplicationController
   end
 
   def create_image
-    auth
     @server = OpenStack::Nova::Compute::Server.find(params[:"server_id"])
     @server.create_new_image(params[:"image_name"])
     
@@ -165,7 +123,6 @@ class HostsController < ApplicationController
   end
   
   def delete
-    auth
     params[:serverids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid).destroy
     end

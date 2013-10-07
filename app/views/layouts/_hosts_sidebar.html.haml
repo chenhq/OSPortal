@@ -1,15 +1,15 @@
 %ul.nav.nav-list
 	%li.nav-header 
 		%h4 云主机管理
-	%li.active
+	%li{:class => "#{ controller.class == HostsController  ? 'active' : 'deactive'}" }
 		= link_to "主机管理", hosts_path
-	%li
+	%li{:class => "#{ controller.class == ImagesController  ? 'active' : 'deactive'}" }
 		= link_to "镜像管理", images_path
-	%li 
+	%li{:class => "#{ controller.class == SecuritiesController  ? 'active' : 'deactive'}" }
 		= link_to "防火墙管理", securities_path
-	%li
+	%li{:class => "#{ controller.class == FloatingIpsController  ? 'active' : 'deactive'}" }
 		= link_to "弹性IP", floating_ips_path
-	%li
+	%li{:class => "#{ controller.class == 'BandwidthController'  ? 'active' : 'deactive'}" }
 		= link_to "带宽包", "#"
 	%li.nav-header
 		%h4 云主机监控

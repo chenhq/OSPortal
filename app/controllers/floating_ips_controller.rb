@@ -1,26 +1,12 @@
 require 'openstack_activeresource'
 
 class FloatingIpsController < ApplicationController
-  def auth
-    # Set Keystone Public API endpoint
-    OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-
-    # Authentication
-    auth = OpenStack::Keystone::Public::Auth.create :username => "user_one", :password => "user_one", :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
-#    auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "admin_pass", :tenant_id => "2d160a9adf58470fa5626b454a0b2075"
-
-    # Set the auth token for next API requests
-    OpenStack::Base.token = auth.token
-
-    # Set the Nova Compute API endpoint from the received service catalog
-    OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
-  end
-
+  before_filter :authenticate_user!
+  before_filter :require_openstack_login
 
   # GET /floating_ips
   # GET /floating_ips.json
   def index
-    auth
     @floating_ips = OpenStack::Nova::Compute::FloatingIp.all
     @servers = OpenStack::Nova::Compute::Server.all
     respond_to do |format|
@@ -60,7 +46,6 @@ class FloatingIpsController < ApplicationController
   # POST /floating_ips.json
   def create
 
-    auth 
     @floatingip = OpenStack::Nova::Compute::FloatingIp.create(:pool => "ext_net")
 
     respond_to do |format|
@@ -69,7 +54,6 @@ class FloatingIpsController < ApplicationController
   end
 
   def addPublicIP
-    auth
     OpenStack::Nova::Compute::FloatingIp.create(:pool => "ext_net")
 
     respond_to do |format|
@@ -90,7 +74,6 @@ class FloatingIpsController < ApplicationController
   end
 
   def releasePublicIP
-    auth
     params.each do | k, v |
       OpenStack::Nova::Compute::FloatingIp.find(v["ip"]).destroy
     end
@@ -98,8 +81,6 @@ class FloatingIpsController < ApplicationController
     
   end
   def unbindIPtoServer
-    auth
-    
     # server = OpenStack::Nova::Compute::Server.find(params["0"]["server"])
     # ip     = OpenStack::Nova::Compute::FloatingIp.find(params["0"]["ip"].to_i)
     # server.remove_floating_ip(ip)
@@ -114,7 +95,6 @@ class FloatingIpsController < ApplicationController
   end
 
   def bindIPtoServer
-    auth
     server = OpenStack::Nova::Compute::Server.find(params["server"])
     ip     = OpenStack::Nova::Compute::FloatingIp.find(params["floating_ip"])
     server.add_floating_ip(ip)

@@ -1,31 +1,12 @@
 require 'openstack_activeresource'
+
 class VolumesController < ApplicationController
-  def auth
-    # Set Keystone Public API endpoint
-    OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-
-    # Authentication
-    auth = OpenStack::Keystone::Public::Auth.create :username => "user_one", :password => "user_one", :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
-
-    # # Set Keystone Public API endpoint
-    # OpenStack::Keystone::Public::Base.site = "http://122.227.254.55:5000/v2.0/"
-
-    # # Authentication
-    # auth = OpenStack::Keystone::Public::Auth.create :username => "admin", :password => "175245a126f74b02", :tenant_id => "e486e554e533455b83389720826d4c80"
-
-    # Set the auth token for next API requests
-    OpenStack::Base.token = auth.token
-
-    # Set the Nova Compute API endpoint from the received service catalog
-    OpenStack::Nova::Volume::Base.site = auth.endpoint_for('volume').publicURL
-        OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
-  end
+  before_filter :authenticate_user!
+  before_filter :require_openstack_login
 
   # GET /volumes
   # GET /volumes.json
-
   def index
-    auth
     @volumes = OpenStack::Nova::Volume::Volume.all
     @servers = OpenStack::Nova::Compute::Server.all
     respond_to do |format|
@@ -48,7 +29,6 @@ class VolumesController < ApplicationController
   # GET /volumes/new
   # GET /volumes/new.json
   def new
-    auth
     @volume = OpenStack::Nova::Volume::Volume.new()
 
     respond_to do |format|
@@ -65,7 +45,6 @@ class VolumesController < ApplicationController
   # POST /volumes
   # POST /volumes.json
   def create
-    auth
     @volume = OpenStack::Nova::Volume::Volume.new(params)
 
     respond_to do |format|
@@ -108,7 +87,6 @@ class VolumesController < ApplicationController
   end
 
   def delete
-    auth
     params["id"].each do |id| 
       OpenStack::Nova::Volume::Volume.find(id).destroy
     end
@@ -116,7 +94,6 @@ class VolumesController < ApplicationController
   end
 
   def mount
-    auth
     server = OpenStack::Nova::Compute::Server.find(params["server_id"])
     volume = OpenStack::Nova::Volume::Volume.find(params["volume_id"])
     va = OpenStack::Nova::Compute::VolumeAttachment.new(:device => params["device"],
@@ -134,7 +111,6 @@ class VolumesController < ApplicationController
   end
 
   def unmount
-    auth
   end
 
 end

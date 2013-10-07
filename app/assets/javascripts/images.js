@@ -1,4 +1,5 @@
 jQuery(function($) {
+kk
 		$('input[name="imageids"]').click(function() { 
 				$(".btn-toolbar .btn").removeAttr("disabled");
 		});
@@ -20,20 +21,22 @@ jQuery(function($) {
 								action = $(this).attr("action");
 								console.log(action);
 								url = "/images/" + action;
-								$.ajax({
-										url: url,
-										data: { 'imageids': ids },
-										dataType: 'json',
-										type: 'POST',
-										success: function(result) {
-												alert("命令执行成功！");
-												
-										},
-										error: function(xhr) {
-												var errors = $.parseJSON(xhr.responseText).errors;
-												alert("命令执行失败！");
-										}
-								});
+								if ( action == "delete" ) {
+										$.ajax({
+												url: url,
+												data: { 'imageids': ids },
+												dataType: 'json',
+												type: 'POST',
+												success: function(result) {
+														alert("命令执行成功！");
+														
+												},
+												error: function(xhr) {
+														var errors = $.parseJSON(xhr.responseText).errors;
+														alert("命令执行失败！");
+												}
+										});
+								}
 						}
 				})
 		}
