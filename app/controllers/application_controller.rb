@@ -7,52 +7,41 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # 定义登录后的页面
+
   def after_sign_in_path_for(resource)
     hosts_path
-    # stored_location_for(resource) ||
-    #   if resource.is_a?(User) && resource.can_publish?
-    #     publisher_url
-    #   else
-    #     super
-    #   end
   end
 
   private
   
   def require_openstack_login
-    if OpenStack::Base.token.nil?
+    if OpenStack::Base.token.nil?   #TODO or OpenStack::Base.token.expired? 
       OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-      # Admin API, if needed
-      # OpenStack::Keystone::Admin::Base.site = <keystone_admin_api_uri>
       
       auth = OpenStack::Keystone::Public::Auth.create :username => current_user.os_user.name , :password => current_user.os_user.password , :tenant_id => current_user.os_user.tenant_id
+      # auth = OpenStack::Keystone::Public::Auth.create :username => "user1" , :password => "userpassw0rd1" , :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
       OpenStack::Base.token = auth.token
 
       OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
       OpenStack::Nova::Volume::Base.site = auth.endpoint_for('volume').publicURL
-      # Set other endpoints if needed ...
-      # For instance:
     end
   end
 
-  # # TODO
-  # def require_openstack_admin_login
-  #   if OpenStack::Base.token.nil? or OpenStack::Base.token.expired?
-  #     OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
-  #     # Admin API, if needed
-  #     # "http://10.10.10.51:35357/v2.0"
-  #     OpenStack::Keystone::Admin::Base.site = "http://60.55.40.228:5000/v2.0/"   
+  # admin login
+  def require_openstack_admin_login
+    if OpenStack::Base.token.nil? or OpenStack::Base.token.expired?
+      OpenStack::Keystone::Public::Base.site = "http://60.55.40.228:5000/v2.0/"
 
+      # Admin API, if needed
+      OpenStack::Keystone::Admin::Base.site = "http://60.55.40.228:5000/v2.0/"   
       
-  #     auth = OpenStack::Keystone::Public::Auth.create :username => "admin" , :password => "adminP@ssw0rd" , :tenant_id => "2d160a9adf58470fa5626b454a0b2075"
-  #     OpenStack::Base.token = auth.token
+      auth = OpenStack::Keystone::Public::Auth.create :username => "admin" , :password => "adminP@ssw0rd" , :tenant_id => "2d160a9adf58470fa5626b454a0b2075"
+      OpenStack::Base.token = auth.token
 
-  #     OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
-  #     OpenStack::Nova::Volume::Base.site = auth.endpoint_for('volume').publicURL
-  #     # Set other endpoints if needed ...
-  #     # For instance:
-  #   end
-  # end
+      OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
+      OpenStack::Nova::Volume::Base.site = auth.endpoint_for('volume').publicURL
+    end
+  end
 
 
 end

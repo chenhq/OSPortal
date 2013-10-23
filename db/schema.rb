@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131006080420) do
+ActiveRecord::Schema.define(:version => 20131011061913) do
 
   create_table "floating_ips", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20131006080420) do
     t.string   "desc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "username"
   end
 
   create_table "os_users", :force => true do |t|

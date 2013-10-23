@@ -59,18 +59,6 @@ class FloatingIpsController < ApplicationController
     respond_to do |format|
       format.json { render json: { status: 0 } }
     end
-
-    # @floating_ip = FloatingIp.new(params[:floating_ip])
-
-    # respond_to do |format|
-    #   if @floating_ip.save
-    #     format.html { redirect_to @floating_ip, notice: 'Floating ip was successfully created.' }
-    #     format.json { render json: @floating_ip, status: :created, location: @floating_ip }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @floating_ip.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def releasePublicIP
@@ -81,9 +69,6 @@ class FloatingIpsController < ApplicationController
     
   end
   def unbindIPtoServer
-    # server = OpenStack::Nova::Compute::Server.find(params["0"]["server"])
-    # ip     = OpenStack::Nova::Compute::FloatingIp.find(params["0"]["ip"].to_i)
-    # server.remove_floating_ip(ip)
     params.each do | k, v |
       server = OpenStack::Nova::Compute::Server.find(v["server"])
       ip     = OpenStack::Nova::Compute::FloatingIp.find(v["ip"])

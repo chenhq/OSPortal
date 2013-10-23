@@ -1,7 +1,6 @@
 class OsTypesController < ApplicationController
   before_filter :authenticate_user!
-
-
+ 
   # GET /os_types
   # GET /os_types.json
   def index

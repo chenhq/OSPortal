@@ -6,38 +6,45 @@ class HostsController < ApplicationController
 
   layout 'application', :only => [:new]
 
-  # def compute
-  #   @compute = OpenStack::Connection.create({:username => "user_one", 
-  #                                             :api_key=> "user_one", 
-  #                                             :auth_method=> "password",
-  #                                             :auth_url => "http://60.55.40.228:5000/v2.0", 
-  #                                             :authtenant_name =>"project_one", 
-  #                                             :service_type=>"compute"})
-  # end
+  def index
+    @servers = OpenStack::Nova::Compute::Server.all
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @server }
+    end
+  end
 
   def new
-    
     @ostypes = OsType.all
+    
     @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
     @distinct_mem_flavors = InstanceType.select(:memory_mb).uniq.order(:memory_mb)
     
     @images = OpenStack::Nova::Compute::Image.all
+    @images.select! { |image| image.metadata.user_id? }
+
+    @server = OpenStack::Nova::Compute::Server.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @server }
+    end
   end
 
   def create
     flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:mem]).first
-    flavor = OpenStack::Nova::Compute::Flavor.find(flavorid)
+    flavor = OpenStack::Nova::Compute::Flavor.find(2)
     image = OpenStack::Nova::Compute::Image.find(params[:imageid])
-    # @compute = compute
-    # @newserver = @compute.create_server(:name => params[:hostname], :imageRef => params[:imageid], :flavorRef => flavor.id)
-    @newserver = OpenStack::Nova::Compute::Server.create(:name => params[:hostname], :image => image, :flavor => flavor)
-    if @newserver
-      respond_to do |format|
-        format.json { render json: { status: 0 } }
-      end
-    else
-      respond_to do |format|
-          format.json { render json: {status: 1}, status: :unprocessable_entity }
+    @server = OpenStack::Nova::Compute::Server.new(:name => params[:hostname], :image => image, 
+                                                   :flavor => flavor, :adminPass => params[:password],
+                                                   :"OS-DCF:diskConfig" => "AUTO")
+
+    respond_to do |format|
+      if @server.save
+        format.html { redirect_to @server, notice: 'server was successfully created.' }
+        format.json { render json: @server, status: :created }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @server.errors, status: :unprocessable_entity }
       end
     end
 
@@ -45,10 +52,6 @@ class HostsController < ApplicationController
     # change admin passwd
     # @newserver.change_password!(params[:password])
 
-  end
-
-  def index
-    @servers = OpenStack::Nova::Compute::Server.all
   end
 
   def show

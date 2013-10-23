@@ -18,7 +18,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
-    @image = Image.find(params[:id])
+    @image = OpenStack::Nova::Compute::Image.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +29,7 @@ class ImagesController < ApplicationController
   # GET /images/new
   # GET /images/new.json
   def new
-    @image = Image.new
+    @image = OpenStack::Nova::Compute::Image.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,13 +39,13 @@ class ImagesController < ApplicationController
 
   # GET /images/1/edit
   def edit
-    @image = Image.find(params[:id])
+    @image = OpenStack::Nova::Compute::Image.find(params[:id])
   end
 
   # POST /images
   # POST /images.json
   def create
-    @image = Image.new(params[:image])
+    @image = OpenStack::Nova::Compute::Image.new(params[:image])
 
     respond_to do |format|
       if @image.save
@@ -61,7 +61,7 @@ class ImagesController < ApplicationController
   # PUT /images/1
   # PUT /images/1.json
   def update
-    @image = Image.find(params[:id])
+    @image = OpenStack::Nova::Compute::Image.find(params[:id])
 
     respond_to do |format|
       if @image.update_attributes(params[:image])
@@ -77,7 +77,7 @@ class ImagesController < ApplicationController
   # DELETE /images/1
   # DELETE /images/1.json
   def destroy
-    @image = Image.find(params[:id])
+    @image = OpenStack::Nova::Compute::Image.find(params[:id])
     @image.destroy
 
     respond_to do |format|
