@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def full_title(page_title)
-    base_title = '胜世云-专业云计算服务提供商'
+    base_title = 'Base_title'
     if page_title
       "#{base_title} | #{page_title}"
     else
