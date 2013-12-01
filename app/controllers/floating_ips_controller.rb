@@ -54,7 +54,7 @@ class FloatingIpsController < ApplicationController
   end
 
   def addPublicIP
-    OpenStack::Nova::Compute::FloatingIp.create(:pool => "ext_net")
+    OpenStack::Nova::Compute::FloatingIp.create()
 
     respond_to do |format|
       format.json { render json: { status: 0 } }

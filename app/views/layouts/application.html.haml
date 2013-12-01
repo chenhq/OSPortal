@@ -8,10 +8,7 @@
 		= render 'layouts/shim'
 	%body	
 		= render 'layouts/header'	
-		-# %p.notice
-		-# 	= notice
-		-# %p.alert
-		-# 	= alert
+		-# = render 'layouts/flash_messages'
 		= yield
 		.container-fluid
 			= render 'layouts/footer'

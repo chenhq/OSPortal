@@ -12,14 +12,19 @@ class ApplicationController < ActionController::Base
     hosts_path
   end
 
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
   private
   
   def require_openstack_login
     if OpenStack::Base.token.nil?   #TODO or OpenStack::Base.token.expired? 
-      OpenStack::Keystone::Public::Base.site = "http://192.168.122.247:5000/v2.0/"
       
-      auth = OpenStack::Keystone::Public::Auth.create :username => current_user.os_user.name , :password => current_user.os_user.password , :tenant_id => current_user.os_user.tenant_id
-      # auth = OpenStack::Keystone::Public::Auth.create :username => "user1" , :password => "userpassw0rd1" , :tenant_id => "ea318cac66f342ca95efe7270b8b85ea"
+      OpenStack::Keystone::Public::Base.site = Figaro.env.keystone_public_site
+      
+      auth = OpenStack::Keystone::Public::Auth.create :username => current_user.os_user.name , :password => current_user.os_user.password , :tenant_id => Figaro.env.keystone_public_tenantid
+
       OpenStack::Base.token = auth.token
 
       OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL
@@ -35,7 +40,7 @@ class ApplicationController < ActionController::Base
       # Admin API, if needed
       OpenStack::Keystone::Admin::Base.site = "http://192.168.122.247:5000/v2.0/"   
       
-      auth = OpenStack::Keystone::Public::Auth.create :username => "admin" , :password => "adminP@ssw0rd" , :tenant_id => "2d160a9adf58470fa5626b454a0b2075"
+      auth = OpenStack::Keystone::Public::Auth.create :username => Figaro.env.keystone_admin_username , :password => Figaro.env.keystone_admin_password , :tenant_id => Figaro.env.keystone_admin_tenantid
       OpenStack::Base.token = auth.token
 
       OpenStack::Nova::Compute::Base.site = auth.endpoint_for('compute').publicURL

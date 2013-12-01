@@ -12,40 +12,40 @@
 development:
   adapter: mysql2
   database: osportal
-  username: osportal
-  password: osportal1234
-  host: 122.227.254.55
+  username: root
+  password: password
+  host: 192.168.122.247
   pool: 20
   timeout: 5000
 
 nova_development:
   adapter: mysql2
   database: nova
-  username: nova
-  password: fd7b83053efe47bc
-  host: 122.227.254.55
+  username: root
+  password: password
+  host: 192.168.122.247
   port: 3306
 
 glance_development:
   adapter: mysql2
   database: glance
-  username: glance
-  password: b54b09ab0d504173
-  host: 122.227.254.55
+  username: root
+  password: password
+  host: 192.168.122.247
 
 cinder_development:
   adapter: mysql2
   database: cinder
-  username: cinder
-  password: fd17f70c198242c8
-  host: 122.227.254.55
+  username: root
+  password: password
+  host: 192.168.122.247
 
 keystone_development:
   adapter: mysql2
   database: keystone
-  username: keystone_admin
-  password: 82cce0f524574c70
-  host: 122.227.254.55
+  username: root
+  password: password
+  host: 192.168.122.247
 
 
 
@@ -62,29 +62,29 @@ nova_test:
   adapter: mysql2
   database: nova
   username: nova
-  password: fd7b83053efe47bc
-  host: 122.227.254.55
+  password: password
+  host: 192.168.122.247
 
 glance_test:
   adapter: mysql2
   database: glance
   username: glance
   password: b54b09ab0d504173
-  host: 122.227.254.55
+  host: 192.168.122.247
 
 cinder_test:
   adapter: mysql2
   database: cinder
   username: cinder
   password: fd17f70c198242c8
-  host: 122.227.254.55
+  host: 192.168.122.247
 
 keystone_test:
   adapter: mysql2
   database: keystone
   username: keystone_admin
   password: 82cce0f524574c70
-  host: 122.227.254.55
+  host: 192.168.122.247
 
 
 
@@ -98,26 +98,26 @@ nova_production:
   adapter: mysql2
   database: nova
   username: nova
-  password: fd7b83053efe47bc
-  host: 122.227.254.55
+  password: password
+  host: 192.168.122.247
 
 glance_production:
   adapter: mysql2
   database: glance
   username: glance
   password: b54b09ab0d504173
-  host: 122.227.254.55
+  host: 192.168.122.247
 
 cinder_production:
   adapter: mysql2
   database: cinder
   username: cinder
   password: fd17f70c198242c8
-  host: 122.227.254.55
+  host: 192.168.122.247
 
 keystone_production:
   adapter: mysql2
   database: keystone
   username: keystone_admin
   password: 82cce0f524574c70
-  host: 122.227.254.55
+  host: 192.168.122.247

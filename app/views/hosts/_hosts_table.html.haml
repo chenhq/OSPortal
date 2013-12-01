@@ -18,6 +18,8 @@
 				%td= link_to s.name, controller: "hosts", action: "show", id: s.name
 				%td= getServerIPs(s, "fixed") 
 				%td= getServerIPs(s, "floating")
-				%td= s.status 
-				%td= s.image.name
+				%td
+					.icon-status.icon-running
+						= s.status 
+				%td= link_to s.image.name, controller: "images", action: "show", id: s.image.name
 				%td= s.created_at
