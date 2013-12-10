@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       
       OpenStack::Keystone::Public::Base.site = Figaro.env.keystone_public_site
       
-      auth = OpenStack::Keystone::Public::Auth.create :username => current_user.os_user.name , :password => current_user.os_user.password , :tenant_id => Figaro.env.keystone_public_tenantid
+      auth = OpenStack::Keystone::Public::Auth.create :username => current_user.os_user.name , :password => current_user.os_user.password , :tenant_id => current_user.os_user.tenant_id
 
       OpenStack::Base.token = auth.token
 
@@ -35,10 +35,10 @@ class ApplicationController < ActionController::Base
   # admin login
   def require_openstack_admin_login
     if OpenStack::Base.token.nil? or OpenStack::Base.token.expired?
-      OpenStack::Keystone::Public::Base.site = "http://192.168.122.247:5000/v2.0/"
+      OpenStack::Keystone::Public::Base.site = Figaro.env.keystone_public_site
 
       # Admin API, if needed
-      OpenStack::Keystone::Admin::Base.site = "http://192.168.122.247:5000/v2.0/"   
+      OpenStack::Keystone::Admin::Base.site = Figaro.env.keystone_admin_site  
       
       auth = OpenStack::Keystone::Public::Auth.create :username => Figaro.env.keystone_admin_username , :password => Figaro.env.keystone_admin_password , :tenant_id => Figaro.env.keystone_admin_tenantid
       OpenStack::Base.token = auth.token
