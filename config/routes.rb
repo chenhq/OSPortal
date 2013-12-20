@@ -9,6 +9,7 @@ OSUPortal::Application.routes.draw do
     end
   end
 
+  resources :flavors
   resources :rules
   resources :floating_ips
 

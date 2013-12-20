@@ -1,5 +1,8 @@
-- if notice
-  .alert.alert-success= notice
-- if alert
-  .alert.alert-error
-    %p= alert
+%section#flash-messages
+	%button.close{"data-dismiss" => "alert", :type => "button"} &times;
+	- if notice
+		.alert.alert-success
+			%p= notice
+	- if alert
+		.alert.alert-error
+			%p= alert
