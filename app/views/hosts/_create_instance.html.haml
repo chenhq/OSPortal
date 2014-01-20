@@ -1,0 +1,36 @@
+#create-instance-modal.modal.hide.fade
+	.modal-header
+		%a.close{"data-dismiss" => "modal"} &times
+		%h4 创建新主机
+	.modal-body
+		%section#steps
+			#wizard
+				= render "hosts/create_instance/wizard"
+			#create-instance-steps
+				= form_tag({controller: "hosts", action: "create"}) do
+					#image.step
+						%section#ostypes
+							操作系统:
+							%a.ostype{data: {owner: 'private'}, href: '#'} 自有镜像
+						%section#images
+					#flavor.step
+					#network.step
+					#others.step
+						
+		%aside#options		
+
+%script#tmpl-ostypes{type: 'text/x-jquery-tmpl'}
+	%a.ostype{data: {typeid: '${id}', owner: 'public'}, href: '#'}
+		${name}
+
+%script#tmpl-public-images{type: 'text/x-jquery-tmpl'}
+	.image{data: {id: '${image_id}', ostypeid:'${os_type_id}'}}
+		${name}
+
+%script#tmpl-private-images{type: 'text/x-jquery-tmpl'}
+	{{tmpl(image) "#tmpl-private-image"}}
+
+%script#tmpl-private-image{type: 'text/x-jquery-tmpl'}
+	.image{data: {id: '${id}'}}
+		${name}
+

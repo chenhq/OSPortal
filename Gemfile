@@ -39,7 +39,7 @@ group :assets do
 end
 
  gem 'jquery-rails', '>= 3.0.0'
- gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 
 # gem 'jquery-rails', '~> 2.3.0'
 

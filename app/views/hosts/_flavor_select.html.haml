@@ -1,57 +1,58 @@
-.tabbable
-	%ul.nav.nav-tabs
-		%li.active
-			%span.host_popovers{:data => { :content => "即主机的硬件配置，如CPU数量、内存和硬盘的大小等。请根据您的实际需求进行选择。", :"original-title" => "什么是机型？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
-				%h4
-					= '选择机型<i class="icon-question-sign"></i>'.html_safe
+%section#flavor-option
+	.tabbable
+		%ul.nav.nav-tabs
+			%li.active
+				%span.host_popovers{:data => { :content => "即主机的硬件配置，如CPU数量、内存和硬盘的大小等。请根据您的实际需求进行选择。", :"original-title" => "什么是机型？", :placement => "right", :toggle => "popover", :trigger => "hover", :container => "body"} }
+					%h4
+						= '选择机型<i class="icon-question-sign"></i>'.html_safe
 
-%form.form-horizontal
-	.control-group
-		%label.control-label CPU :
-		.controls.push-left
-			%ul#cpu_list{ "data-toggle" => "buttons-radio" }
-				- @distinct_cpu_flavors.each do |f|
-					%li.btn{"data-value" => "#{f.vcpus}"}
-						= "#{f.vcpus}核"
+	%form.form-horizontal
+		.control-group
+			%label.label CPU :
+			.controls
+				%ul#cpu_list{ "data-toggle" => "buttons-radio" }
+					- @distinct_cpu_flavors.each do |f|
+						%li.btn{"data-value" => "#{f.vcpus}"}
+							= "#{f.vcpus}核"
 
-	.control-group
-		%label.control-label 内存:
-		.controls
-			%ul#mem_list{ "data-toggle" => "buttons-radio" }
-				- @distinct_mem_flavors.each do |f|
-					%li.btn{"data-value" => "#{f.memory_mb}"}
-						= "#{f.memory_mb/1024.0}G"
+		.control-group
+			%label.label 内存:
+			.controls
+				%ul#mem_list{ "data-toggle" => "buttons-radio" }
+					- @distinct_mem_flavors.each do |f|
+						%li.btn{"data-value" => "#{f.memory_mb}"}
+							= "#{f.memory_mb/1024.0}G"
 
 
 
-	.control-group
-		%label.control-label 系统盘 :
-		.controls
-			%ul{:style => "padding:5px 0px 0px 5px;"}
-				%li
-					赠送系统盘30G
+		.control-group
+			%label.label 系统盘 :
+			.controls
+				%ul{:style => "padding:5px 0px 0px 5px;"}
+					%li
+						赠送系统盘30G
 
-	.control-group
-		%label.control-label 数据盘 :
-		.controls
-			.input-append
-				%input#datadisk_space.span1{:type => "text"}/
-				%span.add-on G
-			#datadisk_space_slider.span3
+		-# .control-group
+		-# 	%label.label 数据盘 :
+		-# 	.controls
+		-# 		.input-append
+		-# 			%input#datadisk_space.span1{:type => "text"}/
+		-# 			%span.add-on G
+		-# 		#datadisk_space_slider.span3
 
-	.control-group
-		%label.control-label 高性能磁盘 :
-		.controls
-			%label.checkbox
-				%input{ :name => "high_performance_disk", :type => "checkbox"}
-					使用
+		-# .control-group
+		-# 	%label.label 高性能磁盘 :
+		-# 	.controls
+		-# 		%label.checkbox
+		-# 			%input{ :name => "high_performance_disk", :type => "checkbox"}
+		-# 				使用
 
-	.control-group
-		%label.control-label 带宽(每台) :
-		.controls
-			.input-append
-				%input#bandwidth.span1{:type => "text"}/
-				%span.add-on M
-			#bandwidth_slider.span3
+		-# .control-group
+		-# 	%label.label 带宽(每台) :
+		-# 	.controls
+		-# 		.input-append
+		-# 			%input#bandwidth.span1{:type => "text"}/
+		-# 			%span.add-on M
+		-# 		#bandwidth_slider.span3
 
 

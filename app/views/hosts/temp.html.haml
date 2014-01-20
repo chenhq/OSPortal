@@ -1,0 +1,24 @@
+%form#myWizard.form-horizontal{:action => "", :type => "get"}
+  %section.step{"data-step-title" => "The first"}
+    .control-group
+      %label.control-label{:for => "inputEmail"} Email
+      .controls
+        %input#inputEmail.input-xlarge{:placeholder => "Email", :required => "", :title => "Email is required !", :type => "text"}/
+    .control-group
+      %label.control-label{:for => "inputPassword"} Password
+      .controls
+        %input#inputPassword.input-xlarge{:placeholder => "Password", :type => "password"}/
+  %section.step{"data-step-title" => "The second"}
+    .control-group
+      %label.control-label{:for => "inputUsername"} Username
+      .controls
+        %input#inputUsername.input-xlarge{:placeholder => "Username", :type => "text"}/
+  %section.step{"data-step-title" => "The third"}
+    .control-group
+      %label.control-label{:for => "inputFirstname"} Firstname
+      .controls
+        %input#inputFirstname.input-xlarge{:placeholder => "Firstname", :type => "text"}/
+    .control-group
+      %label.control-label{:for => "inputCity"} City
+      .controls
+        %input#inputCity.input-xlarge{:placeholder => "City", :type => "text"}/

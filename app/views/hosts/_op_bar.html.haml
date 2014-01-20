@@ -53,6 +53,10 @@
 					%i.icon-trash
 					删除主机
 	.btn-group.pull-right
+		%a#create-instance-btn.btn.btn-primary{"data-toggle" => "modal", :href => "#create-instance-modal"}
+			%i.icon-question-sign.icon-white
+			创建主机
+	.btn-group.pull-right
 		%a#help_btn.btn.btn-primary{:site => "uhost"}
 			%i.icon-question-sign.icon-white
 			帮助
@@ -60,5 +64,6 @@
 		%a.btn.refresh{:href => ""}
 			%i.icon-refresh
 			刷新
+= render "hosts/create_instance2" 
 
 

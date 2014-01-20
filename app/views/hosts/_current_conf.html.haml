@@ -1,38 +1,38 @@
-#select_paymode.span4.well
+#select_paymode.well
 	%h4.text-center 当前配置
 	#static-config.form-horizontal
-		.control-group
-			%label.control-label 数据中心 :
-			.xcontrols
-				%input#datacenter-selected.span2{:readonly => "", :type => "text", :value => "默认数据中心"}
+		-# .control-group
+		-# 	%label.control-label 数据中心 :
+		-# 	.xcontrols
+		-# 		%input#datacenter-selected.span2{:readonly => "", :type => "text", :value => "默认数据中心"}
 
 		.control-group
-			%label.control-label 系统镜像 :
+			%label.label 系统镜像 :
 			.xcontrols
 				%input#image-selected.span2{:readonly => "", :type => "text", :value => "", "data-imageid" => ""}
 
 		.control-group
-			%label.control-label CPU :
+			%label.label CPU :
 			.xcontrols
 				%input#cpu-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => ""}
 
 		.control-group
-			%label.control-label 内存 :
+			%label.label 内存 :
 			.xcontrols
 				%input#mem-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => ""}
 
 		.control-group
-			%label.control-label 系统盘(G) :
+			%label.label 系统盘(G) :
 			.xcontrols
 				%input#OSdisk-selected.span2{:readonly => "", :type => "text", :value => ""}
 
-		.control-group
-			%label.control-label 数据盘(G) :
-			.xcontrols	
-				%input#datadisk_space-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => "", "data-hpfmdsk" => "0"}
+		-# .control-group
+		-# 	%label.label 数据盘(G) :
+		-# 	.xcontrols	
+		-# 		%input#datadisk_space-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => "", "data-hpfmdsk" => "0"}
 
-		.control-group
-			%label.control-label 网络 :
-			.xcontrols
-				%input#bandwidth-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => ""}
+		-# .control-group
+		-# 	%label.label 网络 :
+		-# 	.xcontrols
+		-# 		%input#bandwidth-selected.span2{:readonly => "", :type => "text", :value => "", "data-value" => ""}
 

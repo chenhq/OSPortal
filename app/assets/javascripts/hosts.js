@@ -21,42 +21,42 @@ jQuery(function($) {
 				$("#step1_btns").show();
 		});
 		
-		//数据盘slider
-		$("#datadisk_space_slider").slider();
+		// //数据盘slider
+		// $("#datadisk_space_slider").slider();
 
-		$(function() {
-				$( "#datadisk_space_slider" ).slider({
-						value: 80,
-						min: 5,
-						max: 1000,
-						step: 5,
-						slide: function( event, ui ) {
-								$( "#datadisk_space" ).val(ui.value);
-								$( "#datadisk_space-selected" ).val(ui.value);
-						}
-				});
-				$( "#datadisk_space" ).val($( "#datadisk_space_slider" ).slider( "value" ) );
-				$( "#datadisk_space-selected" ).val($( "#datadisk_space_slider" ).slider( "value" ) );
+		// $(function() {
+		// 		$( "#datadisk_space_slider" ).slider({
+		// 				value: 80,
+		// 				min: 5,
+		// 				max: 1000,
+		// 				step: 5,
+		// 				slide: function( event, ui ) {
+		// 						$( "#datadisk_space" ).val(ui.value);
+		// 						$( "#datadisk_space-selected" ).val(ui.value);
+		// 				}
+		// 		});
+		// 		$( "#datadisk_space" ).val($( "#datadisk_space_slider" ).slider( "value" ) );
+		// 		$( "#datadisk_space-selected" ).val($( "#datadisk_space_slider" ).slider( "value" ) );
 				
-		});
+		// });
 
-		//带宽slider
-		$("#bandwidth_slider").slider();
+		// //带宽slider
+		// $("#bandwidth_slider").slider();
 
-		$(function() {
-				$( "#bandwidth_slider" ).slider({
-						value:10,
-						min: 1,
-						max: 1000,
-						step: 1,
-						slide: function( event, ui ) {
-								$( "#bandwidth" ).val(ui.value);
-								$( "#bandwidth-selected" ).val(ui.value);
-						}
-				});
-				$( "#bandwidth" ).val($( "#bandwidth_slider" ).slider( "value" ) );
-				$( "#bandwidth-selected" ).val($( "#bandwidth_slider" ).slider( "value" ) );
-		});
+		// $(function() {
+		// 		$( "#bandwidth_slider" ).slider({
+		// 				value:10,
+		// 				min: 1,
+		// 				max: 1000,
+		// 				step: 1,
+		// 				slide: function( event, ui ) {
+		// 						$( "#bandwidth" ).val(ui.value);
+		// 						$( "#bandwidth-selected" ).val(ui.value);
+		// 				}
+		// 		});
+		// 		$( "#bandwidth" ).val($( "#bandwidth_slider" ).slider( "value" ) );
+		// 		$( "#bandwidth-selected" ).val($( "#bandwidth_slider" ).slider( "value" ) );
+		// });
 
 		//os select
 		$("#image_list .btn").click(function() {
@@ -185,5 +185,102 @@ jQuery(function($) {
 		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
 		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
 		
+		
+		var showImageOptions = {
+				public_images: null,
 
+				init : function() {
+						$('#create-instance-modal').on('shown', showImageOptions.showAll);
+						$('#ostypes').delegate('a[data-owner="public"]', 'click', showImageOptions.showPublicImages);
+						$('#ostypes').delegate('a[data-owner="private"]', 'click', showImageOptions.showPrivateImages);
+				},
+
+				showAll : function() {
+						showImageOptions.showOSTypes();
+						$('#ostypes a:eq(1)').trigger('click');
+						// showImageOptions.showPublicImages();
+				},
+				
+				showOSTypes: function() {
+						$('#ostypes a[data-owner!="private"]').remove();
+						ostypes = $.ajax('/os_types.json',{
+								cache: true,
+								async: false,
+								complete: function() {
+										console.log('complete get os types');
+								},
+
+								success: function(ostypes) {
+										$("#tmpl-ostypes").tmpl(ostypes).appendTo('#ostypes');
+								},
+								error: function() {
+										alert('can not get os types');
+								}
+						})
+				},
+
+				showPublicImages: function(e) {
+						console.log('enter show public images');
+						e.preventDefault();
+						console.log($(this).text());
+						var ostypeid = $(this).data('typeid');
+						console.log('typeid:');
+						console.log(ostypeid);
+						$('#images').empty();
+						if (showImageOptions.public_images==null) {
+								$.ajax('/operating_systems.json',{
+										cache: true,
+										async: false,
+										complete: function() {
+												console.log('complete get images');
+										},
+
+										success: function(images) {
+												showImageOptions.public_images = images;
+										},
+
+										error: function() {
+												alert('can not get images');
+										}
+										
+								});
+						};
+						var filtered_images = [];
+						$.each(showImageOptions.public_images, function(index, image) {
+								if (image.os_type_id==ostypeid) {
+										filtered_images.push(image);
+								}
+						});
+						$('#tmpl-public-images').tmpl(filtered_images).appendTo('#images');								
+				},
+				
+				showPrivateImages: function() {
+						$('#images').empty();
+						$.ajax('/images.json',{
+								cache: false,
+								complete: function() {
+								},
+
+								success: function(images) {
+										$('#tmpl-private-images').tmpl(images).appendTo('#images');
+								},
+								error: function() {
+										alert('can not get images');
+								}
+						});
+
+				}
+
+		}
+		
+		showImageOptions.init();
+
+		$('#create-instance-steps').easyWizard({
+				stepsText: '{t} {n}',
+				prevButton: '上一步',
+				nextButton: '下一步',
+				submitButtonText: '创建主机',
+				buttonsClass: 'btn',
+				submitButtonClass: 'btn btn-primary'
+		});
 });
