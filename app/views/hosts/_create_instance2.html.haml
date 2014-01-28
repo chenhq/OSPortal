@@ -12,13 +12,15 @@
 							%a.ostype{data: {owner: 'private'}, href: '#'} 自有镜像
 						%section#images
 					%section#flavor.step{data: {:"step-title"=> "选择类型"}}
-						select flavors here!
+						= render :partial => "flavor_select" 
 					%section#network.step{data: {:"step-title"=> "设置网络"}}
-						select networks here
-					%section#base.step{data: {:"step-title" => "基本设置"}}
-						username and passwd
-						
-		%aside#option
+						= render :partial =>"network_setting"
+					%section#sss.step{data: {:"step-title"=> "基本设置"}}
+						= render :partial => "instance_setting" 
+
+
+		%aside#options
+			= render :partial => "instance_options" 
 
 %script#tmpl-ostypes{type: 'text/x-jquery-tmpl'}
 	%a.ostype{data: {typeid: '${id}', owner: 'public'}, href: '#'}

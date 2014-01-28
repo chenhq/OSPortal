@@ -150,7 +150,7 @@ jQuery(function($) {
 				console.log(ids);
 				return ids;	
 		}
-		
+
 		$.fn.addInstanceOperation = function() {
 				return this.bind({
 						click: function(e) {
@@ -182,6 +182,12 @@ jQuery(function($) {
 				})
 		}
 
+		$.fn.addSelectd = function() {
+				return this.bind('click', function() {
+						$(this).addClass('selected');})
+		}
+
+
 		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
 		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
 		
@@ -193,6 +199,21 @@ jQuery(function($) {
 						$('#create-instance-modal').on('shown', showImageOptions.showAll);
 						$('#ostypes').delegate('a[data-owner="public"]', 'click', showImageOptions.showPublicImages);
 						$('#ostypes').delegate('a[data-owner="private"]', 'click', showImageOptions.showPrivateImages);
+						$('#images').delegate('.image', 'click', function() { 
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+						$('#ostypes').delegate('.ostype', 'click', function() { 
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+
+						$('.custom-instance-flavor .types').delegate('.inner', 'click', function() {
+								$(this).parent().siblings().find('span').hide();
+								$(this).find('span').show();
+						});
+
+						$('
 				},
 
 				showAll : function() {
@@ -200,7 +221,7 @@ jQuery(function($) {
 						$('#ostypes a:eq(1)').trigger('click');
 						// showImageOptions.showPublicImages();
 				},
-				
+			
 				showOSTypes: function() {
 						$('#ostypes a[data-owner!="private"]').remove();
 						ostypes = $.ajax('/os_types.json',{
@@ -252,12 +273,18 @@ jQuery(function($) {
 								}
 						});
 						$('#tmpl-public-images').tmpl(filtered_images).appendTo('#images');								
+						$('#images .image:first').click();
 				},
-				
+
+				selectItem: function() {
+						
+				},
+
 				showPrivateImages: function() {
 						$('#images').empty();
 						$.ajax('/images.json',{
 								cache: false,
+								async: false,
 								complete: function() {
 								},
 
@@ -268,7 +295,7 @@ jQuery(function($) {
 										alert('can not get images');
 								}
 						});
-
+						$('#images .image:first').click();
 				}
 
 		}

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.modal-header {
+		padding: 3px 15px;
+}
+
 #create-instance-modal {
 		width: 960px;
 		position: fixed;
@@ -11,14 +15,22 @@
 			padding: 0;
 		}
 		#steps {
-			width: 70%;
+			width: 65%;
+		}
+}
+
+.ostype, .image {
+		color: #1F90C8;
+		&.selected {
+				background: #1F90C8;
+				color: white;
 		}
 }
 
 ul.easyWizardSteps {
 		background: #f2f2f2;
 		margin: 0 0;
-		padding: 20px 10%;
+		padding: 10px 10%;
 
 		li {
 				display: inline-block;
@@ -66,7 +78,7 @@ ul.easyWizardSteps {
 
 .easyWizardButtons {
 		overflow:hidden;
-		padding:30px;
+		padding:10px 30px;
 		background: #f2f2f2;
 }
 
@@ -82,8 +94,9 @@ ul.easyWizardSteps {
 }
 
 .easyWizardWrapper {
-		height: 280px;
+		height: 350px;
 }
+
 #ostypes {
 		margin: 0 5%;
 }
@@ -109,7 +122,151 @@ ul.easyWizardSteps {
 		display: inline-block;
 }
 
+aside#options {
+		position: absolute;
+		left: 65%;
+		top: 0;
+		width: 30%;
+		padding: 20px;
+}
 
+.step-inner {
+		padding: 0px 30px;
+}
+
+custom-instance-types .types {
+		overflow: hidden;
+		margin: 0 auto 40px 0;
+}
+
+.types-item:first-child {
+    margin-left: 0;
+}
+
+.types-item {
+    cursor: pointer;
+    float: left;
+    height: 70px;
+    margin: 0 2px;
+    opacity: 0.9;
+    text-align: center;
+    width: 56px;
+		
+		.inner {
+				height: 30px;
+				padding-top: 6px;
+				
+				span {
+						color: white;
+						display: none;
+						font-size: 1.2em;
+				}
+		}
+}
+
+.types .types-item:nth-child(1) .inner {
+    background-color: #6CBFE8;
+}
+
+
+.types .types-item:nth-child(2) .inner {
+    background-color: #53B4E4;
+}
+
+
+.types .types-item:nth-child(3) .inner {
+    background-color: #39A8E0;
+}
+
+.types .types-item:nth-child(4) .inner {
+    background-color: #229CD9;
+}
+
+.types .types-item:nth-child(5) .inner {
+    background-color: #1E8AC0;
+}
+
+.types .types-item:nth-child(6) .inner {
+    background-color: #1A78A6;
+}
+
+.types .types-item:nth-child(7) .inner {
+    background-color: #16658D;
+}
+
+.types .types-item:nth-child(8) .inner {
+    background-color: #125373;
+}
+
+.types .types-item:nth-child(9) .inner {
+    background-color: #0E405A;
+}
+
+.icon-selected:before {
+    content: "✓";
+}
+
+/* [class^="icon-"]:after, [class*=" icon-"]:after, [class^="icon-"]:before, [class*=" icon-"]:before { */
+/*     display: inline-block; */
+/*     font-family: Entypo; */
+/*     font-style: normal; */
+/*     font-weight: 400; */
+/*     text-align: center; */
+/*     text-decoration: none; */
+/*     width: 1em; */
+/* } */
+/* [class^="icon-"]:after, [class*=" icon-"]:after, [class^="icon-"]:before, [class*=" icon-"]:before { */
+/*     display: inline-block; */
+/*     font-family: Entypo; */
+/*     font-style: normal; */
+/*     font-weight: 400; */
+/*     text-align: center; */
+/*     text-decoration: none; */
+/*     width: 1em; */
+/* } */
+
+/* .custom-instance-types .types-item span.icon { */
+/*     color: rgba(0, 0, 0, 0); */
+/*     font-size: 20px; */
+/* } */
+
+/* [class^="icon-"], [class*=" icon-"] { */
+/*     font-size: 14px; */
+/*     vertical-align: middle; */
+/* } */
+
+.cpu {
+		clear: both;
+}
+
+.types-options {
+		padding: 20px 7px;
+		background: #fff;
+		color: #1f90c8;
+		border: 1px solid #cfeaf8;
+		font-size: 16px;
+		margin: 0 4px;
+		cursor: pointer;
+		display: inline-block;
+		text-align: center;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+}
+
+.cpu-options {
+		width: 112px;
+}
+
+.memory-options {
+		padding: 12px 8px;
+		width: 28px;
+		font-size: 12px;
+		height: 33px;
+		line-height: 33px;
+		vertical-align: middle;
+		word-break: break-all;
+}
 host_create_step1 .form-horizontal .control-label {
 	width: 60px;
 	text-align: left;
