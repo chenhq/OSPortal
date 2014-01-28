@@ -197,13 +197,13 @@ jQuery(function($) {
 
 				init : function() {
 						$('#create-instance-modal').on('shown', showImageOptions.showAll);
-						$('#ostypes').delegate('a[data-owner="public"]', 'click', showImageOptions.showPublicImages);
-						$('#ostypes').delegate('a[data-owner="private"]', 'click', showImageOptions.showPrivateImages);
-						$('#images').delegate('.image', 'click', function() { 
+						$('.ostypes').delegate('a[data-owner="public"]', 'click', showImageOptions.showPublicImages);
+						$('.ostypes').delegate('a[data-owner="private"]', 'click', showImageOptions.showPrivateImages);
+						$('.images').delegate('.image', 'click', function() { 
 								$(this).parent().find('.selected').removeClass('selected')
 								$(this).addClass('selected');
 						});
-						$('#ostypes').delegate('.ostype', 'click', function() { 
+						$('.ostypes').delegate('.ostype', 'click', function() { 
 								$(this).parent().find('.selected').removeClass('selected')
 								$(this).addClass('selected');
 						});
@@ -213,17 +213,16 @@ jQuery(function($) {
 								$(this).find('span').show();
 						});
 
-						$('
 				},
 
 				showAll : function() {
 						showImageOptions.showOSTypes();
-						$('#ostypes a:eq(1)').trigger('click');
+						$('.ostypes a:eq(1)').trigger('click');
 						// showImageOptions.showPublicImages();
 				},
 			
 				showOSTypes: function() {
-						$('#ostypes a[data-owner!="private"]').remove();
+						$('.ostypes a[data-owner!="private"]').remove();
 						ostypes = $.ajax('/os_types.json',{
 								cache: true,
 								async: false,
@@ -232,7 +231,7 @@ jQuery(function($) {
 								},
 
 								success: function(ostypes) {
-										$("#tmpl-ostypes").tmpl(ostypes).appendTo('#ostypes');
+										$("#tmpl-ostypes").tmpl(ostypes).appendTo('.ostypes');
 								},
 								error: function() {
 										alert('can not get os types');
@@ -244,10 +243,10 @@ jQuery(function($) {
 						console.log('enter show public images');
 						e.preventDefault();
 						console.log($(this).text());
-						var ostypeid = $(this).data('typeid');
-						console.log('typeid:');
+						var ostypeid = $(this).data('id');
+						console.log('id:');
 						console.log(ostypeid);
-						$('#images').empty();
+						$('.images').empty();
 						if (showImageOptions.public_images==null) {
 								$.ajax('/operating_systems.json',{
 										cache: true,
@@ -272,7 +271,7 @@ jQuery(function($) {
 										filtered_images.push(image);
 								}
 						});
-						$('#tmpl-public-images').tmpl(filtered_images).appendTo('#images');								
+						$('#tmpl-public-images').tmpl(filtered_images).appendTo('.images');								
 						$('#images .image:first').click();
 				},
 
@@ -281,7 +280,7 @@ jQuery(function($) {
 				},
 
 				showPrivateImages: function() {
-						$('#images').empty();
+						$('.images').empty();
 						$.ajax('/images.json',{
 								cache: false,
 								async: false,
@@ -289,7 +288,7 @@ jQuery(function($) {
 								},
 
 								success: function(images) {
-										$('#tmpl-private-images').tmpl(images).appendTo('#images');
+										$('#tmpl-private-images').tmpl(images).appendTo('.images');
 								},
 								error: function() {
 										alert('can not get images');
@@ -302,7 +301,7 @@ jQuery(function($) {
 		
 		showImageOptions.init();
 
-		$('#create-instance-steps').easyWizard({
+		$('#create-instance-form').easyWizard({
 				stepsText: '{t} {n}',
 				prevButton: '上一步',
 				nextButton: '下一步',

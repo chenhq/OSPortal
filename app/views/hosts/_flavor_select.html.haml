@@ -1,61 +1,28 @@
-.step-inner
-	.custom-instance-flavor
-		%h5 推荐类型
-		.types
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 小型A
-			.types-item.selected
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 小型B
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 小型C
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 中型A
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 中型B
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 中型C
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 大型A
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 大型B
-			.types-item
-				.inner
-					%span.icon.icon-selected
-				%h6.type-name 大型C
+%section#flavor
+	%h5 推荐类型
+	.flavors
 
-		.cpu
-			%h6 CPU
-			.options
-				.types-options.cpu-options.selected{"data-value" => "1"} 1核
-				.types-options.cpu-options{"data-value" => "2"} 2核
-				.types-options.cpu-options{"data-value" => "4"} 4核
-				.types-options.cpu-options{"data-value" => "8"} 8核
-		.memory
-			%h6 内存
-			.options
-				.types-options.memory-options{"data-value" => "512"} 0.5G
-				.types-options.memory-options.selected{"data-value" => "1024"} 1G
-				.types-options.memory-options{"data-value" => "2048"} 2G
-				.types-options.memory-options{"data-value" => "4096"} 4G
-				.types-options.memory-options.disabled{"data-value" => "6144"} 6G
-				.types-options.memory-options.disabled{"data-value" => "8192"} 8G
-				.types-options.memory-options.disabled{"data-value" => "12288"} 12G
-				.types-options.memory-options.disabled{"data-value" => "16384"} 16G
-				.types-options.memory-options.disabled{"data-value" => "24576"} 24G
-				.types-options.memory-options.disabled{"data-value" => "32768"} 32G
+%section#cpu
+	%h6 CPU
+	.cpus
+
+%section#memory
+	%h6 内存
+	.memeories
+
+// templates
+
+//flavors
+%script#tmpl-flavors{type: 'text/x-jquery-tmpl'}
+	.flavor-item
+		.inner
+			%span.icon.icon-selected
+		%h6 '${custom_name}'
+
+//cpus
+%script#tmpl-cpus{type: 'text/x-jquery-tmpl'}
+	.cpu{data: {value: '${cores}'} } '${cores}'核
+
+//memories
+%script#tmpl-memories{type: 'text/x-jquery-tmpl'}
+	.memory{data: {value: '${size}'}} '${size}'M
