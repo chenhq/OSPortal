@@ -1,0 +1,44 @@
+.step-inner
+  .info
+    .item
+      .control-label 主机名称
+      .controls
+        %input{:name => "instance_name", :type => "text", :value => ""}/
+    .item
+      .control-label 主机数量
+      .controls
+        %input{:name => "count", :type => "text", :value => "1"}/
+    .item
+      .control-label SSH登录方式
+      .controls
+        %label.radio.inline
+          %input{:checked => "", :name => "login_mode", :type => "radio", :value => "keypair"}>/
+          SSH密钥&nbsp;(
+          %a{:href => "https://docs.qingcloud.com/faq/index.html#ssh", :target => "_blank", :title => "详细了解如何使用SSH密钥来访问主机"}> ？
+          )
+        %label.radio.inline
+          %input{:name => "login_mode", :type => "radio", :value => "passwd"}>/
+          密码
+    .item.keypair{:style => "display: none;"}
+      .control-label 用户名
+      .controls
+        %input{:disabled => "", :name => "", :type => "text", :value => "root"}/
+    .item.keypair{:style => "display: none;"}
+      .control-label SSH密钥
+      .controls.keypairs
+        %span.none 当前没有可用的SSH密钥, 请先
+        %a.btn{:href => "#"}
+          %span.icon.icon-create
+          %span.text 新建密钥
+    .item.passwd{:style => ""}
+      .control-label 用户名
+      .controls
+        %input{:disabled => "", :name => "login_user", :type => "text", :value => "root"}/
+    .item.passwd{:style => ""}
+      .control-label 密码
+      .controls
+        %input{:name => "login_passwd", :type => "text", :value => ""}/
+        %label.inline
+          %input{:name => "toggle_passwd", :type => "checkbox"}>/
+          \&nbsp; 显示密码
+        %p.alert.alert-info 密码至少6位，并包括大小写字母及数字						
