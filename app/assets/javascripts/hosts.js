@@ -182,25 +182,21 @@ jQuery(function($) {
 				})
 		}
 
-		$.fn.addSelectd = function() {
+		$.fn.addSelectable = function() {
 				return this.bind('click', function() {
-						$(this).addClass('selected');})
-		}
-
-
-		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
-		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
+						$(this).parent().find('.selected').removeClass('selected')
+						$(this).addClass('selected');
+				});
 		
-		
-		var showImageOptions = {
+		var showInstanceOptions = {
 				public_images: null,
 
 				init : function() {
-						$('#create-instance-modal').on('shown', showImageOptions.showAll);
+						$('#create-instance-modal').on('shown', showInstanceOptions.showAll);
 						
 						// images
-						$('.ostypes').delegate('a[data-owner="public"]', 'click', showImageOptions.showPublicImages);
-						$('.ostypes').delegate('a[data-owner="private"]', 'click', showImageOptions.showPrivateImages);
+						$('.ostypes').delegate('a[data-owner="public"]', 'click', showInstanceOptions.showPublicImages);
+						$('.ostypes').delegate('a[data-owner="private"]', 'click', showInstanceOptions.showPrivateImages);
 						$('.images').delegate('.image', 'click', function() { 
 								$(this).parent().find('.selected').removeClass('selected')
 								$(this).addClass('selected');
@@ -215,10 +211,9 @@ jQuery(function($) {
 								$(this).parent().siblings().find('span').hide();
 								$(this).find('span').show();
 						});
-						$('.cpus').delegate('.cpu', 'click', function() {
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
+
+						$('.cpus .cpu').addSelectable();
+
 						$('.memories').delegate('.memory', 'click', function() {
 								$(this).parent().find('.selected').removeClass('selected')
 								$(this).addClass('selected');
@@ -228,10 +223,10 @@ jQuery(function($) {
 				},
 
 				showAll : function() {
-						showImageOptions.showOSTypes();
+						showInstanceOptions.showOSTypes();
 
-						// showImageOptions.showPublicImages();
-						showImageOptions.showFlavors();
+						// showInstanceOptions.showPublicImages();
+						showInstanceOptions.showFlavors();
 				},
 			
 				showOSTypes: function() {
@@ -261,7 +256,7 @@ jQuery(function($) {
 						console.log('id:');
 						console.log(ostypeid);
 						$('.images').empty();
-						if (showImageOptions.public_images==null) {
+						if (showInstanceOptions.public_images==null) {
 								$.ajax('/operating_systems.json',{
 										cache: true,
 										async: false,
@@ -270,7 +265,7 @@ jQuery(function($) {
 										},
 
 										success: function(images) {
-												showImageOptions.public_images = images;
+												showInstanceOptions.public_images = images;
 										},
 
 										error: function() {
@@ -280,7 +275,7 @@ jQuery(function($) {
 								});
 						};
 						var filtered_images = [];
-						$.each(showImageOptions.public_images, function(index, image) {
+						$.each(showInstanceOptions.public_images, function(index, image) {
 								if (image.os_type_id==ostypeid) {
 										filtered_images.push(image);
 								}
@@ -384,7 +379,208 @@ jQuery(function($) {
 
 		}
 		
-		showImageOptions.init();
+		showInstanceOptions.init();
+
+		}
+
+
+		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
+		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
+		
+		
+		var showInstanceOptions = {
+				public_images: null,
+
+				init : function() {
+						$('#create-instance-modal').on('shown', showInstanceOptions.showAll);
+						
+						// images
+						$('.ostypes').delegate('a[data-owner="public"]', 'click', showInstanceOptions.showPublicImages);
+						$('.ostypes').delegate('a[data-owner="private"]', 'click', showInstanceOptions.showPrivateImages);
+						$('.images').delegate('.image', 'click', function() { 
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+						$('.ostypes').delegate('.ostype', 'click', function() { 
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+
+						// flavors
+						$('.flavors').delegate('.inner', 'click', function() {
+								$(this).parent().siblings().find('span').hide();
+								$(this).find('span').show();
+						});
+						$('.cpus').delegate('.cpu', 'click', function() {
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+						$('.memories').delegate('.memory', 'click', function() {
+								$(this).parent().find('.selected').removeClass('selected')
+								$(this).addClass('selected');
+						});
+
+
+				},
+
+				showAll : function() {
+						showInstanceOptions.showOSTypes();
+
+						// showInstanceOptions.showPublicImages();
+						showInstanceOptions.showFlavors();
+				},
+			
+				showOSTypes: function() {
+						$('.ostypes a[data-owner!="private"]').remove();
+						ostypes = $.ajax('/os_types.json',{
+								cache: true,
+								async: false,
+								complete: function() {
+										console.log('complete get os types');
+								},
+
+								success: function(ostypes) {
+										$("#tmpl-ostypes").tmpl(ostypes).appendTo('.ostypes');
+								},
+								error: function() {
+										alert('can not get os types');
+								}
+						})
+						$('.ostypes a:eq(1)').trigger('click');
+				},
+
+				showPublicImages: function(e) {
+						console.log('enter show public images');
+						e.preventDefault();
+						console.log($(this).text());
+						var ostypeid = $(this).data('id');
+						console.log('id:');
+						console.log(ostypeid);
+						$('.images').empty();
+						if (showInstanceOptions.public_images==null) {
+								$.ajax('/operating_systems.json',{
+										cache: true,
+										async: false,
+										complete: function() {
+												console.log('complete get images');
+										},
+
+										success: function(images) {
+												showInstanceOptions.public_images = images;
+										},
+
+										error: function() {
+												alert('can not get images');
+										}
+										
+								});
+						};
+						var filtered_images = [];
+						$.each(showInstanceOptions.public_images, function(index, image) {
+								if (image.os_type_id==ostypeid) {
+										filtered_images.push(image);
+								}
+						});
+						$('#tmpl-public-images').tmpl(filtered_images).appendTo('.images');								
+						$('#images .image:first').click();
+				},
+
+				selectItem: function() {
+						
+				},
+
+				showPrivateImages: function() {
+						$('.images').empty();
+						$.ajax('/images.json',{
+								cache: false,
+								async: false,
+								complete: function() {
+								},
+
+								success: function(images) {
+										$('#tmpl-private-images').tmpl(images).appendTo('.images');
+								},
+								error: function() {
+										alert('can not get images');
+								}
+						});
+						$('#images .image:first').click();
+				},
+
+				showFlavors: function() {
+						$('.flavors .flavor-item').remove();
+						$('.cpus .cpu').remove();
+						$('.memories .memory').remove();
+						
+						flavors = $.ajax('/flavors.json',{
+								cache: true,
+								async: false,
+								complete: function() {
+										console.log('complete get flavors');
+								},
+
+								success: function(flavors) {
+										var named_flavors = [];
+										var uniq_cpus = [];
+										var uniq_memories =[];
+										$.each(flavors, function(index, flavor) {
+												if (flavor.alias != 'unkown') {
+														named_flavors.push(flavor);
+												}
+												if (($.inArray(flavor.vcpus, uniq_cpus)) == -1) {
+														uniq_cpus.push(flavor.vcpus);
+												}
+												if (($.inArray(flavor.memory_mb, uniq_memories)) == -1) {
+														uniq_memories.push(flavor.memory_mb);
+												}
+
+										});
+
+
+										named_flavors.sort(function(a,b) {
+												if ( a.vcpus == b.vcpus) {
+														return a.memory_mb - b.memory_mb;
+												} else {
+														return a.vcpus - b.vcpus;
+												}
+										});
+										
+										uniq_cpus.sort(function(a,b){
+												return a-b;
+										});
+										
+										uniq_memories.sort(function(a,b){
+												return a-b;
+										});
+
+										//console.log(named_flavors);
+										//console.log(uniq_cpus);
+										//console.log(uniq_memories);
+										
+										$("#tmpl-flavors").tmpl(named_flavors).appendTo('.flavors');
+										
+										var cpus = $.map(uniq_cpus, function(cpu) {
+														return '<div class="cpu" data-value="' + cpu + '">' + cpu +'核</div>'
+										});
+										$('.cpus').html(cpus.join(''));
+										
+										var memories = $.map(uniq_memories, function(memory) {
+														return '<div class="memory" data-value="' + memory + '">' + memory/1024 +'G</div>'
+										});
+										$('.memories').html(memories.join(''));
+									
+								},
+								error: function() {
+										alert('can not get flavors');
+								}
+						});
+						$('.flavors .inner:eq(3)').click();
+				},
+
+
+		}
+		
+		showInstanceOptions.init();
 
 		$('#create-instance-form').easyWizard({
 				stepsText: '{t} {n}',
