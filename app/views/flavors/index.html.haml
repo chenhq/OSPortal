@@ -1,0 +1,27 @@
+%h1 Listing flavors
+
+%table
+  %tr
+    %th Alias
+    %th Name
+    %th Vcpus
+    %th Memory mb
+    %th Flavorid
+    %th
+    %th
+    %th
+
+  - @flavors.each do |flavor|
+    %tr
+      %td= flavor.alias
+      %td= flavor.name
+      %td= flavor.vcpus
+      %td= flavor.memory_mb
+      %td= flavor.flavorid
+      %td= link_to 'Show', flavor
+      %td= link_to 'Edit', edit_flavor_path(flavor)
+      %td= link_to 'Destroy', flavor, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Flavor', new_flavor_path

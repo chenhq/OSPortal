@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Alias:
+  = @flavor.alias
+%p
+  %b Name:
+  = @flavor.name
+%p
+  %b Vcpus:
+  = @flavor.vcpus
+%p
+  %b Memory mb:
+  = @flavor.memory_mb
+%p
+  %b Flavorid:
+  = @flavor.flavorid
+
+= link_to 'Edit', edit_flavor_path(@flavor)
+\|
+= link_to 'Back', flavors_path

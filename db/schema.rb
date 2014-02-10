@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011061913) do
+ActiveRecord::Schema.define(:version => 20140128083709) do
+
+  create_table "flavors", :force => true do |t|
+    t.string   "alias"
+    t.string   "name"
+    t.integer  "vcpus"
+    t.integer  "memory_mb"
+    t.string   "flavorid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "floating_ips", :force => true do |t|
     t.datetime "created_at", :null => false

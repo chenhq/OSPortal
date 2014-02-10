@@ -78,6 +78,36 @@ redhat_list.each do | os |
 
 windows_list.each do | os |
   OperatingSystem.create(:name => os[0], :cpuarc => os[1], :cpubit => os[2], :image_id => os[3], :os_type_id => windows.id)
-  end
+end
 
 
+flavors_list = [
+                ['小型A','micro1',1,512,'1'],
+                ['小型B','micro2',1,1024,'1'],
+                ['小型C','micro3',1,2048,'1'],
+                ['unkown','micro4',2,1024,'1'],
+                ['unkown','micro5',2,2048,'1'],
+                ['中型A','small1',2,4096,'1'],
+                ['unkown','small2',2,8192,'1'],
+                ['unkown','small3',2,16384,'1'],
+                ['unkown','small4',4,2048,'1'],
+                ['unkown','small5',4,4096,'1'],
+                ['unkown','small6',4,6144,'1'],
+                ['中型B','medium1',4,8192,'1'],
+                ['unkown','medium2',4,16384,'1'],
+                ['unkown','medium3',8,4096,'1'],
+                ['unkown','medium4',8,8192,'1'],
+                ['中型C','medium5',8,16384,'1'],
+                ['unkown','medium6',8,32768,'1'],
+                ['unkown','large1',16,8192,'1'],
+                ['大型A','large2',16,16384,'1'],
+                ['大型B','large3',16,32768,'1'],
+                ['unkown','large4',16,65536,'1'],
+                ['unkown','xlarge1',32,16384,'1'],
+                ['unkown','xlarge2',32,32768,'1'],
+                ['大型C','xlarge3',32,65536,'1']
+               ]
+
+flavors_list.each do |f|
+  Flavor.create(alias: f[0], name: f[1], vcpus: f[2], memory_mb: f[3], flavorid: f[4])
+end

@@ -8,7 +8,7 @@
 
 %section#memory
 	%h6 内存
-	.memeories
+	.memories
 
 // templates
 
@@ -17,12 +17,5 @@
 	.flavor-item
 		.inner
 			%span.icon.icon-selected
-		%h6 '${custom_name}'
+		%h6 ${alias}
 
-//cpus
-%script#tmpl-cpus{type: 'text/x-jquery-tmpl'}
-	.cpu{data: {value: '${cores}'} } '${cores}'核
-
-//memories
-%script#tmpl-memories{type: 'text/x-jquery-tmpl'}
-	.memory{data: {value: '${size}'}} '${size}'M

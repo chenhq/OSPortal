@@ -1,4 +1,7 @@
 OSUPortal::Application.routes.draw do
+  resources :flavors
+
+
   devise_for :users
 
   resources :volumes

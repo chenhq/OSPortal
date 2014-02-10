@@ -1,0 +1,25 @@
+= form_for @flavor do |f|
+  - if @flavor.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@flavor.errors.count, "error")} prohibited this flavor from being saved:"
+      %ul
+        - @flavor.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :alias
+    = f.text_field :alias
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :vcpus
+    = f.number_field :vcpus
+  .field
+    = f.label :memory_mb
+    = f.number_field :memory_mb
+  .field
+    = f.label :flavorid
+    = f.text_field :flavorid
+  .actions
+    = f.submit 'Save'
