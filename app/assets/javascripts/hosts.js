@@ -182,213 +182,27 @@ jQuery(function($) {
 				})
 		}
 
-		$.fn.addSelectable = function() {
-				return this.bind('click', function() {
-						$(this).parent().find('.selected').removeClass('selected')
-						$(this).addClass('selected');
-				});
 		
-		var showInstanceOptions = {
-				public_images: null,
-
-				init : function() {
-						$('#create-instance-modal').on('shown', showInstanceOptions.showAll);
-						
-						// images
-						$('.ostypes').delegate('a[data-owner="public"]', 'click', showInstanceOptions.showPublicImages);
-						$('.ostypes').delegate('a[data-owner="private"]', 'click', showInstanceOptions.showPrivateImages);
-						$('.images').delegate('.image', 'click', function() { 
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-						$('.ostypes').delegate('.ostype', 'click', function() { 
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-
-						// flavors
-						$('.flavors').delegate('.inner', 'click', function() {
-								$(this).parent().siblings().find('span').hide();
-								$(this).find('span').show();
-						});
-
-						$('.cpus .cpu').addSelectable();
-
-						$('.memories').delegate('.memory', 'click', function() {
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-
-
-				},
-
-				showAll : function() {
-						showInstanceOptions.showOSTypes();
-
-						// showInstanceOptions.showPublicImages();
-						showInstanceOptions.showFlavors();
-				},
-			
-				showOSTypes: function() {
-						$('.ostypes a[data-owner!="private"]').remove();
-						ostypes = $.ajax('/os_types.json',{
-								cache: true,
-								async: false,
-								complete: function() {
-										console.log('complete get os types');
-								},
-
-								success: function(ostypes) {
-										$("#tmpl-ostypes").tmpl(ostypes).appendTo('.ostypes');
-								},
-								error: function() {
-										alert('can not get os types');
-								}
-						})
-						$('.ostypes a:eq(1)').trigger('click');
-				},
-
-				showPublicImages: function(e) {
-						console.log('enter show public images');
-						e.preventDefault();
-						console.log($(this).text());
-						var ostypeid = $(this).data('id');
-						console.log('id:');
-						console.log(ostypeid);
-						$('.images').empty();
-						if (showInstanceOptions.public_images==null) {
-								$.ajax('/operating_systems.json',{
-										cache: true,
-										async: false,
-										complete: function() {
-												console.log('complete get images');
-										},
-
-										success: function(images) {
-												showInstanceOptions.public_images = images;
-										},
-
-										error: function() {
-												alert('can not get images');
-										}
-										
-								});
-						};
-						var filtered_images = [];
-						$.each(showInstanceOptions.public_images, function(index, image) {
-								if (image.os_type_id==ostypeid) {
-										filtered_images.push(image);
-								}
-						});
-						$('#tmpl-public-images').tmpl(filtered_images).appendTo('.images');								
-						$('#images .image:first').click();
-				},
-
-				selectItem: function() {
-						
-				},
-
-				showPrivateImages: function() {
-						$('.images').empty();
-						$.ajax('/images.json',{
-								cache: false,
-								async: false,
-								complete: function() {
-								},
-
-								success: function(images) {
-										$('#tmpl-private-images').tmpl(images).appendTo('.images');
-								},
-								error: function() {
-										alert('can not get images');
-								}
-						});
-						$('#images .image:first').click();
-				},
-
-				showFlavors: function() {
-						$('.flavors .flavor-item').remove();
-						$('.cpus .cpu').remove();
-						$('.memories .memory').remove();
-						
-						flavors = $.ajax('/flavors.json',{
-								cache: true,
-								async: false,
-								complete: function() {
-										console.log('complete get flavors');
-								},
-
-								success: function(flavors) {
-										var named_flavors = [];
-										var uniq_cpus = [];
-										var uniq_memories =[];
-										$.each(flavors, function(index, flavor) {
-												if (flavor.alias != 'unkown') {
-														named_flavors.push(flavor);
-												}
-												if (($.inArray(flavor.vcpus, uniq_cpus)) == -1) {
-														uniq_cpus.push(flavor.vcpus);
-												}
-												if (($.inArray(flavor.memory_mb, uniq_memories)) == -1) {
-														uniq_memories.push(flavor.memory_mb);
-												}
-
-										});
-
-
-										named_flavors.sort(function(a,b) {
-												if ( a.vcpus == b.vcpus) {
-														return a.memory_mb - b.memory_mb;
-												} else {
-														return a.vcpus - b.vcpus;
-												}
-										});
-										
-										uniq_cpus.sort(function(a,b){
-												return a-b;
-										});
-										
-										uniq_memories.sort(function(a,b){
-												return a-b;
-										});
-
-										//console.log(named_flavors);
-										//console.log(uniq_cpus);
-										//console.log(uniq_memories);
-										
-										$("#tmpl-flavors").tmpl(named_flavors).appendTo('.flavors');
-										
-										var cpus = $.map(uniq_cpus, function(cpu) {
-														return '<div class="cpu" data-value="' + cpu + '">' + cpu +'核</div>'
-										});
-										$('.cpus').html(cpus.join(''));
-										
-										var memories = $.map(uniq_memories, function(memory) {
-														return '<div class="memory" data-value="' + memory + '">' + memory/1024 +'G</div>'
-										});
-										$('.memories').html(memories.join(''));
-									
-								},
-								error: function() {
-										alert('can not get flavors');
-								}
-						});
-						$('.flavors .inner:eq(3)').click();
-				},
-
-
-		}
-		
-		showInstanceOptions.init();
-
-		}
-
-
 		$(".btn-toolbar .btn-group .instance_op_btn").addInstanceOperation();
 		$(".btn-toolbar .btn-group .instance_op_link").addInstanceOperation();
 		
+		$.fn.addSelectable = function(options) {
+				var defaults = {
+						callback: function() {}
+				};
+								
+				var options = $.extend(defaults, options);
+
+				return this.bind('click', function() {
+						$(this).parent().find('.selected').removeClass('selected')
+						$(this).addClass('selected');
+						console.log(this);
+						options.callback(this);
+				});
+		};
 		
 		var showInstanceOptions = {
+
 				public_images: null,
 
 				init : function() {
@@ -397,36 +211,11 @@ jQuery(function($) {
 						// images
 						$('.ostypes').delegate('a[data-owner="public"]', 'click', showInstanceOptions.showPublicImages);
 						$('.ostypes').delegate('a[data-owner="private"]', 'click', showInstanceOptions.showPrivateImages);
-						$('.images').delegate('.image', 'click', function() { 
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-						$('.ostypes').delegate('.ostype', 'click', function() { 
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-
-						// flavors
-						$('.flavors').delegate('.inner', 'click', function() {
-								$(this).parent().siblings().find('span').hide();
-								$(this).find('span').show();
-						});
-						$('.cpus').delegate('.cpu', 'click', function() {
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-						$('.memories').delegate('.memory', 'click', function() {
-								$(this).parent().find('.selected').removeClass('selected')
-								$(this).addClass('selected');
-						});
-
 
 				},
 
 				showAll : function() {
 						showInstanceOptions.showOSTypes();
-
-						// showInstanceOptions.showPublicImages();
 						showInstanceOptions.showFlavors();
 				},
 			
@@ -446,7 +235,8 @@ jQuery(function($) {
 										alert('can not get os types');
 								}
 						})
-						$('.ostypes a:eq(1)').trigger('click');
+						$('.ostypes .ostype').addSelectable();						
+						$('.ostypes .ostype:eq(1)').trigger('click');
 				},
 
 				showPublicImages: function(e) {
@@ -481,12 +271,9 @@ jQuery(function($) {
 										filtered_images.push(image);
 								}
 						});
-						$('#tmpl-public-images').tmpl(filtered_images).appendTo('.images');								
-						$('#images .image:first').click();
-				},
-
-				selectItem: function() {
-						
+						$('#tmpl-public-images').tmpl(filtered_images).appendTo('.images');
+						$('.images .image').addSelectable();
+						$('.images .image:first').click();
 				},
 
 				showPrivateImages: function() {
@@ -504,6 +291,8 @@ jQuery(function($) {
 										alert('can not get images');
 								}
 						});
+						
+						$('.images .image').addSelectable();
 						$('#images .image:first').click();
 				},
 
@@ -557,6 +346,8 @@ jQuery(function($) {
 										//console.log(uniq_cpus);
 										//console.log(uniq_memories);
 										
+										$('.flavors .flavor').remove();
+										
 										$("#tmpl-flavors").tmpl(named_flavors).appendTo('.flavors');
 										
 										var cpus = $.map(uniq_cpus, function(cpu) {
@@ -568,8 +359,67 @@ jQuery(function($) {
 														return '<div class="memory" data-value="' + memory + '">' + memory/1024 +'G</div>'
 										});
 										$('.memories').html(memories.join(''));
-									
+
+										// add selectable to flavor cpu memory
+										$('.memories .memory').addSelectable();
+
+										$('.cpus .cpu').addSelectable({
+												callback: function(cpu) {
+														var vcpus = $(cpu).data('value');
+														var enable_memories = [];
+														$.each(flavors, function(index, flavor) {
+																if ( vcpus == flavor.vcpus ) {
+																		enable_memories.push(flavor.memory_mb);
+																}
+														});
+														$('.memories .memory').removeClass('selected').addClass('disabled');
+														
+														console.log(enable_memories);
+														$.each(enable_memories, function(index, memory_mb) {
+																var memory_element = '.memories .memory[data-value=' + memory_mb + ']';
+																console.log(memory_element);
+																$(memory_element).removeClass('disabled');
+														});
+														
+														$('.memories [class=memory]').last().addClass('selected');
+												}
+										});
+														
+										$('.flavors .flavor').addSelectable({
+												callback: function(flavor) {
+														var alias = $(flavor).find('h6').text();
+														
+														var vcpus, memory_mb;
+														$.each(named_flavors, function(index, flavor) {
+																if ( alias == flavor.alias ) {
+																		vcpus = flavor.vcpus;
+																		return;
+																}
+														});
+														
+														$.each(named_flavors, function(index, flavor) {
+																if ( alias == flavor.alias ) {
+																		memory_mb = flavor.memory_mb;
+																		return;
+																}
+														});
+
+														var cpu_element = '.cpus .cpu[data-value=' + vcpus + ']';
+														var memory_element = '.memories .memory[data-value=' + memory_mb + ']';
+														$(cpu_element).trigger('click');
+														$(memory_element).trigger('click');
+
+														console.log('alias:');
+														console.log(alias);
+														console.log(vcpus);
+														console.log(memory_mb);
+
+														
+												}
+										});
+										
 								},
+
 								error: function() {
 										alert('can not get flavors');
 								}

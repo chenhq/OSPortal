@@ -21,6 +21,9 @@
 
 .ostype, .image, .cpu, .memory {
 		color: #1F90C8;
+		&:hover {
+				background: #eff4fb;
+		}
 		&.selected {
 				background: #1F90C8;
 				color: white;
@@ -143,11 +146,11 @@ custom-instance-types .types {
 		margin: 0 auto 40px 0;
 }
 
-.flavor-item:first-child {
+.flavor:first-child {
     margin-left: 20px;
 }
 
-.flavor-item {
+.flavor {
     cursor: pointer;
     float: left;
     height: 70px;
@@ -159,50 +162,56 @@ custom-instance-types .types {
 		.inner {
 				height: 30px;
 				padding-top: 6px;
-				
-				span {
-						color: white;
-						display: none;
-						font-size: 1.2em;
-				}
 		}
+		
+		span {
+				color: white;
+				display: none;
+				font-size: 1.2em;
+				display:none;
+		}
+
+		&.selected span {
+				display:inline-block;
+		}
+
 }
 
-.flavors .flavor-item:nth-child(1) .inner {
+.flavors .flavor:nth-child(1) .inner {
     background-color: #6CBFE8;
 }
 
 
-.flavors .flavor-item:nth-child(2) .inner {
+.flavors .flavor:nth-child(2) .inner {
     background-color: #53B4E4;
 }
 
 
-.flavors .flavor-item:nth-child(3) .inner {
+.flavors .flavor:nth-child(3) .inner {
     background-color: #39A8E0;
 }
 
-.flavors .flavor-item:nth-child(4) .inner {
+.flavors .flavor:nth-child(4) .inner {
     background-color: #229CD9;
 }
 
-.flavors .flavor-item:nth-child(5) .inner {
+.flavors .flavor:nth-child(5) .inner {
     background-color: #1E8AC0;
 }
 
-.flavors .flavor-item:nth-child(6) .inner {
+.flavors .flavor:nth-child(6) .inner {
     background-color: #1A78A6;
 }
 
-.flavors .flavor-item:nth-child(7) .inner {
+.flavors .flavor:nth-child(7) .inner {
     background-color: #16658D;
 }
 
-.flavors .flavor-item:nth-child(8) .inner {
+.flavors .flavor:nth-child(8) .inner {
     background-color: #125373;
 }
 
-.flavors .flavor-item:nth-child(9) .inner {
+.flavors .flavor:nth-child(9) .inner {
     background-color: #0E405A;
 }
 
@@ -227,6 +236,15 @@ custom-instance-types .types {
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
+
+
+		&.disabled {
+				background: #EEEEEE;
+				border: 1px solid #D6D6D6;
+				color: #777777;
+				cursor: no-drop; 
+				text-shadow: 0 1px #FFFFFF;
+		}
 }
 
 .cpu {
