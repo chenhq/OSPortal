@@ -8,7 +8,16 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap
+ *= require css/bootstrap.min
+ *= require bootstrap-reset
+ *= require css/font-awesome
+ *= require demo/css/jquery.steps
+ *= require media/css/demo_page
+ *= require media/css/demo_table
+ *= require DT_bootstrap
+ *= require skins/square/yellow
+ *= require style
+ *= require style-responsive
  *= require_self
  *= require_tree .
  */

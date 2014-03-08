@@ -11,7 +11,7 @@ jQuery(function($) {
 										console.log(value);
 										$("#RuleTemplate").tmpl(value).appendTo( "#rules_table");
 										// TODO
-										$(".rule-editable").editable();
+										// $(".rule-editable").editable();
  										$(".delRule").click(function(){
 												console.log($(this).closest('tr'));
 												$(this).closest('tr').remove();
@@ -93,7 +93,7 @@ jQuery(function($) {
 		});
 
 		$("#add_new_rule_btn").click(add_new_rule)
-		$(".rule-editable").editable();
+//		$(".rule-editable").editable();
 
 		$('input[name="fwids"]').click(function() { 
 				$(".btn-toolbar .btn").removeAttr("disabled");

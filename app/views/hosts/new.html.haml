@@ -1,25 +1,44 @@
-.container
-	.modal-header		
-		= link_to "×", :hosts, class: "close"
-		%h3 创建主机
-	.modal-body
-		.row
-			.span8
-				#host_create_step1			
-					= render 'hosts/image_select'
-					= render 'hosts/flavor_select'
-					-# = render 'hosts/charge_select'
-				#host_create_step2			
-					= render 'hosts/host_conf'
-
-			.span3
-				= render 'hosts/current_conf'
-	.modal-footer
-		#step1_btns
-			= link_to "下一步", "#", class: "btn btn-primary", id: "step1_btn"
-		#step2_btns
-			= link_to "上一步", "#", class: "btn btn-primary", id: "step2_btn_pre"
-			= link_to "创建主机", "", class: "btn btn-primary", id: "step2_btn_commit"
-
-
-
+.col-sm-12
+	%section.panel
+		%header.panel-heading
+			创建主机
+			%span.tools.pull-right
+				%a.fa.fa-chevron-down{:href => "javascript:;"}
+				%a.fa.fa-cog{:href => "javascript:;"}
+				%a.fa.fa-times{:href => "javascript:;"}
+		.panel-body
+			= form_tag({:controller => "hosts", :action => "create"}, :method => "post", :class => "form-wizard form-horizontal validate", :id =>"inst-wizard-form") do
+				.steps-progress
+					.progress-indicator
+				%ul
+					%li.active
+						%a{"data-toggle" => "tab", :href => "#inst-tab1"}
+							%span> 1
+							选择映像
+					%li
+						%a{"data-toggle" => "tab", :href => "#inst-tab2"}
+							%span> 2
+							选择类型
+					%li
+						%a{"data-toggle" => "tab", :href => "#inst-tab3"}
+							%span> 3
+							创建主机
+				.tab-content
+					#inst-tab1.tab-pane.active
+						= render :partial => "image_select"
+					#inst-tab2.tab-pane
+						= render :partial => "flavor_select" 
+					#inst-tab3.tab-pane
+						= render :partial => "instance_setting"
+					%ul.pager.wizard
+						%li.previous.pull-left
+							%button.btn.btn-primary{:href => "#"}
+								%i.fa.fa-angle-left
+								上一步
+						%li.next.pull-right
+							%button.btn.btn-primary{:href => "#"}
+								下一步
+								%i.fa.fa-angle-right
+						%li.next.finish.pull-right{:style => "display:none;"}
+							%button#create_instance_commit.btn.btn-primary{:href => "javascript:;"} 创建主机
+							-# submit_tag "创建主机", class: "btn btn-primary", id: "create_instance_commit"

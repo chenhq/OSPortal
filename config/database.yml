@@ -15,7 +15,7 @@ development:
   username: root
   password: password
   encoding: utf8
-  host: 192.168.122.247
+  host: 192.168.122.232
   pool: 20
   timeout: 5000
 
@@ -24,7 +24,7 @@ nova_development:
   database: nova
   username: root
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
   port: 3306
 
 glance_development:
@@ -32,21 +32,21 @@ glance_development:
   database: glance
   username: root
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 cinder_development:
   adapter: mysql2
   database: cinder
   username: root
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 keystone_development:
   adapter: mysql2
   database: keystone
   username: root
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 
 
@@ -64,28 +64,28 @@ nova_test:
   database: nova
   username: nova
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 glance_test:
   adapter: mysql2
   database: glance
   username: glance
   password: b54b09ab0d504173
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 cinder_test:
   adapter: mysql2
   database: cinder
   username: cinder
   password: fd17f70c198242c8
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 keystone_test:
   adapter: mysql2
   database: keystone
   username: keystone_admin
   password: 82cce0f524574c70
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 
 
@@ -100,25 +100,25 @@ nova_production:
   database: nova
   username: nova
   password: password
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 glance_production:
   adapter: mysql2
   database: glance
   username: glance
   password: b54b09ab0d504173
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 cinder_production:
   adapter: mysql2
   database: cinder
   username: cinder
   password: fd17f70c198242c8
-  host: 192.168.122.247
+  host: 192.168.122.232
 
 keystone_production:
   adapter: mysql2
   database: keystone
   username: keystone_admin
   password: 82cce0f524574c70
-  host: 192.168.122.247
+  host: 192.168.122.232

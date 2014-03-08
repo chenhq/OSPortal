@@ -1,21 +1,66 @@
-%section#flavor
-	%h5 推荐类型
-	.flavors
+.col-lg-10.col-lg-offset-1
+	%section#flavor
+		%h5 推荐类型
+		.flavors
+			
+	%br
+	%section#cpu
+		%h6 CPU
+		.cpus
 
-%section#cpu
-	%h6 CPU
-	.cpus
+	%section#memory
+		%h6 内存
+		.memories
 
-%section#memory
-	%h6 内存
-	.memories
+	// templates
 
-// templates
+	//flavors
+	%script#tmpl-flavors{type: 'text/x-jquery-tmpl'}
+		.flavor
+			.inner
+				%span.fa.fa-check-square
+			%h6 ${alias}
 
-//flavors
-%script#tmpl-flavors{type: 'text/x-jquery-tmpl'}
-	.flavor
-		.inner
-			%span.icon.icon-selected
-		%h6 ${alias}
+
+.form-group{:style=> "display: none;"}
+	%label.control-label.col-lg-3{:for => "memory"} Memory
+	.col-lg-6
+		%input#flavor-memory.form-control{:name => "memory", :type => "text"}
+		
+.form-group{:style=> "display: none;"}
+	%label.control-label.col-lg-3{:for => "cpu"} CPU
+	.col-lg-6
+		%input#flavor-cpu.form-control{:name => "cpu", :type => "text", :placeholder => 1}
+
+%table.table.table-invoice#table-flavor-price
+	%thead
+		%tr
+			%th #
+			%th 计费方式
+			%th 单价(每秒)
+			%th.text-center 数量
+			%th.text-center 每分钟（元）
+			%th.text-center 每小时（元）
+			%th.text-center 每天（元）
+	%tbody
+		%tr#cpu
+			%td 1
+			%td
+				%h4 CPU
+				%p 按照每Core使用时长计费
+			%td.perprice 0.005
+			%td.text-center.count
+			%td.text-center.minute
+			%td.text-center.hour
+			%td.text-center.day
+		%tr#memory
+			%td 2
+			%td
+				%h4 内存
+				%p 按照每G使用时长计费
+			%td.perprice 0.005
+			%td.text-center.count
+			%td.text-center.minute
+			%td.text-center.hour
+			%td.text-center.day
 

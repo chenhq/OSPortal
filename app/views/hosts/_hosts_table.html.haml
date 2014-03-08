@@ -1,25 +1,100 @@
--# - form_tag ... do
-%table.table.table-bordered.table-condensed
-	%caption 
-		%p
-	%thead
-		%tr
-			%th
-			%th 主机名称
-			%th 固定IP
-			%th 弹性IP
-			%th 状态
-			%th 原始镜像
-			%th 创建日期
-	%tbody
-		- @servers.each do |s|
-			%tr
-				%td= check_box_tag "serverids", s.id, false, id: "server_id_#{s.id}", hostname: "#{s.name}"
-				%td= link_to s.name, controller: "hosts", action: "show", id: s.name
-				%td= getServerIPs(s, "fixed") 
-				%td= getServerIPs(s, "floating")
-				%td
-					.icon-status.icon-running
-						= s.status 
-				%td= link_to s.image.name, controller: "images", action: "show", id: s.image.name
-				%td= s.created_at
+.col-sm-12
+	%section.panel
+		%header.panel-heading
+			主机管理
+			%span.tools.pull-right
+				%a.fa.fa-chevron-down{:href => "javascript:;"}
+				%a.fa.fa-cog{:href => "javascript:;"}
+				%a.fa.fa-times{:href => "javascript:;"}
+		.panel-body
+			#inst-toolbar.clearfix
+				.btn-group
+					%a#inst-new.btn.btn-primary{ :href => '/hosts/new' }
+						新建
+						%i.fa.fa-plus
+				.btn-group
+					%button.btn.btn-primary.inst-op-btn.disabled{:action => "start", :href => "#"}
+						开机
+						%i.fa.fa-play
+				.btn-group
+					%button.btn.btn-primary.inst-op-btn.disabled{:action => "shutdown", :href => "#"}
+						关机
+						%i.fa.fa-stop
+				.btn-group
+					%button.btn.btn-primary.inst-op-btn.disabled{:action => "softreboot", :href => "#"}
+						软重启
+						%i.fa.fa-repeat
+				.btn-group
+					%button.btn.btn-primary.inst-op-btn.disabled{:action => "hardreboot", :href => "#"}
+						硬重启
+						%i.fa.fa-power-off
+
+				.btn-group
+					%button.btn.btn-primary.inst-op-btn.disabled.dropdown-toggle{"data-toggle" => "dropdown"}
+						更多操作...
+						%i.fa.fa-angle-down
+					%ul.dropdown-menu
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-hdd-o
+								&nbsp;加载硬盘
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-link
+								&nbsp;绑定公网IP
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-instagram
+								&nbsp;制作镜像
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-shield
+								&nbsp;加载防火墙
+
+						%li.divider
+
+						%li
+							%a{:href => "#", :itemop => "resetPassword"}
+								%i.fa.fa-key	
+								&nbsp;重置密码
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-lock
+								&nbsp;加载SSH密钥
+
+						%li.divider
+
+						%li
+							%a{:href => "#", :itemop => "scale_up"}
+								%i.fa.fa-level-up
+								&nbsp;升级配置
+						%li
+							%a{:href => "#", :itemop => "reinstall_os"}
+								%i.fa.fa-retweet
+								&nbsp;重装系统
+						%li.divider
+						%li
+							%a.inst-op-btn{:href => "#", :action => "delete"}
+								%i.fa.fa-trash-o
+								&nbsp;删除主机
+
+				.btn-group.pull-right
+					%button#inst-refresh.btn.btn-primary
+						刷新
+						%i.fa.fa-refresh
+
+			.adv-table
+				%table#inst-table.display.table.table-bordered{:width=>"100%"}
+					%thead
+						%tr
+							%th 
+							%th 主机名称
+							%th 状态
+							%th 固定IP
+							%th 弹性IP
+					%tbody
+
+
+-# cpu mem disk disk
+-# name status create_time update-time image
+-# ip ssh_key securiy

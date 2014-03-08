@@ -6,9 +6,25 @@ class OperatingSystemsController < ApplicationController
   def index
     @operating_systems = OperatingSystem.all
 
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @operating_systems }
+      format.json { render json: OperatingSystemDatatable.new(view_context)}
+      # format.json  {  render json: {
+      #     sEcho: 6,
+      #     iTotalRecords: 20,
+      #     iTotalDisplayRecords: 6,
+      #     aaData: @operating_systems.map do |os|
+      #       [
+      #        os.name,
+      #        os.cpubit,
+      #        os.image_id,
+      #        os.os_type_id,
+      #        os.os_type_id
+      #       ]
+      #     end
+      #   }
+      # }
     end
   end
 

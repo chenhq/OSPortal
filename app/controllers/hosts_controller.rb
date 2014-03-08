@@ -4,25 +4,27 @@ class HostsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :require_openstack_login
 
-  layout 'application', :only => [:new]
-
+  # layout 'application', :only => [:new]
+  layout 'hosts2'
   def index
     @servers = OpenStack::Nova::Compute::Server.all
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @server }
+      format.json { render json: @servers.to_json(:except => [ :tenant_id,
+                                                               :user_data],
+                                                  :include => { 
+                                                    :image => {:only => [:id, :name] },
+                                                    :flavor => {:only => [:id, :name, :vcpus, :ram, :disk] }
+                                                  } 
+                                                  )
+      }
     end
   end
 
   def new
-    @ostypes = OsType.all
-    
-    @distinct_cpu_flavors = InstanceType.select(:vcpus).uniq.order(:vcpus)
-    @distinct_mem_flavors = InstanceType.select(:memory_mb).uniq.order(:memory_mb)
-    
+    @operating_systems = OperatingSystem.all
     @images = OpenStack::Nova::Compute::Image.all
     @images.select! { |image| image.metadata.user_id? }
-
     @server = OpenStack::Nova::Compute::Server.new
     respond_to do |format|
       format.html # new.html.erb
@@ -31,12 +33,14 @@ class HostsController < ApplicationController
   end
 
   def create
-    flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:mem]).first
+    flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:memory]).first
     flavor = OpenStack::Nova::Compute::Flavor.find(2)
-    image = OpenStack::Nova::Compute::Image.find(params[:imageid])
-    @server = OpenStack::Nova::Compute::Server.new(:name => params[:hostname], :image => image, 
+    image = OpenStack::Nova::Compute::Image.find(params[:"image-radio"])
+    1.upto(params[:hostnum].to_i) do |i| 
+      @server = OpenStack::Nova::Compute::Server.new(:name => params[:hostname], :image => image, 
                                                    :flavor => flavor, :adminPass => params[:password],
                                                    :"OS-DCF:diskConfig" => "AUTO")
+    end
 
     respond_to do |format|
       if @server.save

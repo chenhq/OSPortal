@@ -1,10 +1,12 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
 
 gem 'devise'
-gem 'bootstrap-sass'
-gem 'bootstrap-x-editable-rails'
+
+gem 'will_paginate'
+# gem 'bootstrap-sass'
+# gem 'bootstrap-x-editable-rails'
 # gem 'bootstrap-editable-rails'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 gem 'openstack'
@@ -36,6 +38,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+
 end
 
  gem 'jquery-rails', '>= 3.0.0'

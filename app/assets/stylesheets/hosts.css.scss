@@ -2,172 +2,105 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.modal-header {
-		padding: 3px 15px;
+/* .modal-header { */
+/* 		padding: 3px 15px; */
+/* } */
+
+/* #create-instance-modal { */
+/* 		width: 960px; */
+/* 		margin-left: -480px; */
+
+/* 		.modal-body { */
+/* 			padding: 0; */
+/* 		} */
+/* 		#create-instance-steps { */
+/* 			width: 599px; */
+/* 			border-right: 1px solid blue; */
+/* 		} */
+/* } */
+
+
+
+/* tr td:first { */
+/* 		width: 10em; */
+/* } */
+
+.btn.disabled {
+		background-color: #b0b5b9;
+		border-color: #b0b5b9;
+		color: #fff;
 }
 
-#create-instance-modal {
-		width: 960px;
-		margin-left: -480px;
-
-		.modal-body {
-			padding: 0;
-		}
-		#create-instance-steps {
-			width: 599px;
-			border-right: 1px solid blue;
-		}
+.hostname {
+		font-size: 1.2em;
+		color: #35bcb5;
 }
 
-.ostype, .image, .cpu, .memory {
+.btn-active {
+		background-color: #5cb85c;
+		color: #fff;
+}
+
+.btn-build, .btn-hard-reboot, .btn-password, .btn-reboot, .btn-rebuild, .btn-resize, .btn-revert-resize, .btn-verify-resize {
+		background-color: #8175c7;
+		color: #fff;
+}
+
+.btn-error, .btn-deleted {
+		background-color: #ff6c60;
+		color: #fff;
+}
+
+.btn-shutoff, .btn-suspended, .btn-paused {
+		background-color: #344860;
+		color: #fff;
+}
+
+.btn-rescue, .btn-unknown {
+		background-color: #FCB322;
+		color: #fff;
+}
+
+.cpu, .memory {
 		color: #1F90C8;
 		&:hover {
 				background: #eff4fb;
 		}
 		&.selected {
-				background: #1F90C8;
+				background: #17b5ac;
 				color: white;
 		}
 }
 
-ul.easyWizardSteps {
-		background: #f2f2f2;
-		margin: 0 0 20px 0;
-		padding: 10px 5%;
-
-		.current span {
-				background: green;
-				border-radius: 25px 25px 25px 25px;
-				color: white;
-				border: 4px solid #E2E2E2;
-				width: 20px;
-				margin: 0 auto;
-		}
-
-		li {
-				display: inline-block;
-				text-align: center;
-				width: 25%;
-				position: relative;
-				&.current {
-						color: green;
-				}
-				span {
-						display: block;
-						background: #777777;
-						border-radius: 25px 25px 25px 25px;
-						color: #ffffff;
-						border: 4px solid #E2E2E2;
-						width: 20px;
-						margin: 0 auto;
-						with: 6px;
-						hr {
-								background: #E2E2E2;
-								height: 8px;
-								left: 60%;
-								position: absolute;
-								top: 60%;
-								width: 87%;
-								margin: 0;
-						}
-				}
-		}
-}
-
-.easyWizardButtons {
-		overflow: hidden;
-		padding: 10px 30px;
-		background: #f2f2f2;
-
-		button, .submit {
-				cursor:pointer
-		}
-		.prev {
-				float:left 
-		} 
-
-		.next, .submit {
-				float:right
-		}
-}
-
-
-.easyWizardWrapper {
-		height: 350px;
-}
-
-.ostypes {
-		margin: 0 5px;
-}
-
-.ostype {
-		border-radius: 25px;
-		margin: 5px 5px auto auto;
-		background-color: #eeeeee;
-		padding: 5px 15px;
-}
-
-.images {
-		margin: 30px 10%;
-		
-}
-
-.image {
-		border: 1px solid  #CFEAF8;
-		border-radius: 5px;
-		padding: 5px;
-		width: 90%;
-		text-align: center;
-		margin: 5px auto;
-}
-
-.ostype, .image {
-		color: #1F90C8;
-		&.selected {
-				background: #1F90C8;
-				color: white;
-		}
-}
-
-aside#options {
-		position: absolute;
-		left: 65%;
-		top: 0;
-		width: 30%;
-		padding: 20px;
-}
-
-.step-inner {
-		padding: 0px 30px;
-}
 
 custom-instance-types .types {
 		overflow: hidden;
 		margin: 0 auto 40px 0;
 }
 
-.flavor:first-child {
-    margin-left: 20px;
-}
+/* .flavor:first-child { */
+/*     margin-left: 20px; */
+/* } */
 
 .flavor {
     cursor: pointer;
     float: left;
-    height: 70px;
-    margin: 0 2px;
+    height: 7em;
+    margin: 1em 0.555%;
     opacity: 0.9;
     text-align: center;
-    width: 56px;
+    width: 10%;
 		
 		.inner {
-				height: 30px;
-				padding-top: 6px;
+				height: 5em;
+				background-color: red;
+				padding-top: 1.5em;
 		}
 		
 		span {
 				color: white;
 				display: none;
-				font-size: 1.2em;
+				font-size: 2em;
 				display:none;
 		}
 
@@ -177,59 +110,56 @@ custom-instance-types .types {
 
 }
 
-.flavors .flavor:nth-child(1) .inner {
-    background-color: #6CBFE8;
-}
 
+
+.flavors .flavor:nth-child(1) .inner {
+  background-color: #d2f9f7;
+}
 
 .flavors .flavor:nth-child(2) .inner {
-    background-color: #53B4E4;
+  background-color: #a4f4ef;
 }
 
-
 .flavors .flavor:nth-child(3) .inner {
-    background-color: #39A8E0;
+  background-color: #77eee7;
 }
 
 .flavors .flavor:nth-child(4) .inner {
-    background-color: #229CD9;
+  background-color: #4ae8df;
 }
 
 .flavors .flavor:nth-child(5) .inner {
-    background-color: #1E8AC0;
+  background-color: #1ce3d7;
 }
 
 .flavors .flavor:nth-child(6) .inner {
-    background-color: #1A78A6;
+  background-color: #17b5ac;
 }
 
 .flavors .flavor:nth-child(7) .inner {
-    background-color: #16658D;
+  background-color: #118881;
 }
 
 .flavors .flavor:nth-child(8) .inner {
-    background-color: #125373;
+  background-color: #0b5b56;
 }
 
 .flavors .flavor:nth-child(9) .inner {
-    background-color: #0E405A;
+  background-color: #062d2b;
 }
 
-.icon-selected:before {
-    content: "✓";
-}
 
 #cpu {
 		clear: both;
 }
 
 .cpu, .memory {
-		padding: 20px 7px;
 		background: #fff;
-		color: #1f90c8;
+		color: #17b5ac;
+		font-size: 1.2em;
+		padding-top: 1.2em;
+		height: 4em;
 		border: 1px solid #cfeaf8;
-		font-size: 16px;
-		margin: 0 4px;
 		cursor: pointer;
 		display: inline-block;
 		text-align: center;
@@ -248,17 +178,24 @@ custom-instance-types .types {
 }
 
 .cpu {
-		width: 70px;
+		width: 12%;
+		margin: 1em 2.3333%;
 }
 
 .memory {
-		padding: 12px 8px;
-		width: 38px;
-		font-size: 12px;
-		height: 33px;
-		line-height: 33px;
-		vertical-align: middle;
-		word-break: break-all;
+		width: 10%;
+		margin: 1em 1.25% 2em;
+}
+
+input.error textarea.error {
+		border-color: #B94A48 !important;
+}
+
+label.error {
+		display: inline;
+		margin: 5px 0px;
+		width: auto;
+		color: #B94A48;
 }
 
 host_create_step1 .form-horizontal .control-label {

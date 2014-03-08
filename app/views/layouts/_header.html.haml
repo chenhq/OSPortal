@@ -1,39 +1,164 @@
-.navbar.navbar-inverse.navbar-fixed-top
-	.navbar-inner
-		.container		
-			= link_to "胜世云平台", root_path, :class => "brand"
-			%a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-				%span.icon-bar
-				%span.icon-bar
-				%span.icon-bar
-			.collapse.nav-collapse
-				%ul.nav.pull-right
+%header.header.fixed-top.clearfix
+	/ logo start
+	.brand
+		%a.logo{:href => "index.html"}
+			%img
+				= image_tag "logo.png"
+		.sidebar-toggle-box
+			.fa.fa-bars
+	/ logo end
+	#top_menu.nav.notify-row
+		/ notification start
+		%ul.nav.top-menu
+			/ settings start
+			%li.dropdown
+				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+					%i.fa.fa-tasks
+					%span.badge.bg-success 8
+				%ul.dropdown-menu.extended.tasks-bar
 					%li
-						= link_to "首页", root_path
+						%p You have 8 pending tasks
 					%li
-						= link_to "产品介绍", product_path
+						%a{:href => "#"}
+						.task-info.clearfix
+							.desc.pull-left
+								%h5 Target Sell
+								%p 25% , Deadline  12 June’13
+							%span.notification-pie-chart.pull-right{"data-percent" => "45"}
+								%span.percent
 					%li
-						= link_to "关于我们", about_path
-					- if user_signed_in?
-						%li 
-							= link_to "管理控制台", hosts_path
-							%li#fat-menu.dropdown
-								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-									= current_user.email
-									%b.caret
-								%ul.dropdown-menu
-									%li 
-										= link_to "账户信息", hosts_path
-									%li.divider
-									%li 
-										= link_to "管理控制台", hosts_path
-									%li 
-										= link_to "充值通道", '#'
-									%li.divider
-									%li
-										= link_to "注销", destroy_user_session_path, method: "delete"
-					- else
-						%li  
-							= link_to "登录", new_user_session_path
-
-
+						%a{:href => "#"}
+						.task-info.clearfix
+							.desc.pull-left
+								%h5 Product Delivery
+								%p 45% , Deadline  12 June’13
+							%span.notification-pie-chart.pull-right{"data-percent" => "78"}
+								%span.percent
+					%li
+						%a{:href => "#"}
+						.task-info.clearfix
+							.desc.pull-left
+								%h5 Payment collection
+								%p 87% , Deadline  12 June’13
+							%span.notification-pie-chart.pull-right{"data-percent" => "60"}
+								%span.percent
+					%li
+						%a{:href => "#"}
+						.task-info.clearfix
+							.desc.pull-left
+								%h5 Target Sell
+								%p 33% , Deadline  12 June’13
+							%span.notification-pie-chart.pull-right{"data-percent" => "90"}
+								%span.percent
+					%li.external
+						%a{:href => "#"} See All Tasks
+			/ settings end
+			/ inbox dropdown start
+			%li#header_inbox_bar.dropdown
+				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+					%i.fa.fa-envelope-o
+					%span.badge.bg-important 4
+				%ul.dropdown-menu.extended.inbox
+					%li
+						%p.red You have 4 Mails
+					%li
+						%a{:href => "#"}
+							%span.photo
+								%img
+									= image_tag "avatar-mini.jpg"
+							%span.subject
+								%span.from Jonathan Smith
+								%span.time Just now
+							%span.message
+								Hello, this is an example msg.
+					%li
+						%a{:href => "#"}
+							%span.photo
+								%img
+									= image_tag "avatar-mini-2.jpg"
+							%span.subject
+								%span.from Jane Doe
+								%span.time 2 min ago
+							%span.message
+								Nice admin template
+					%li
+						%a{:href => "#"}
+							%span.photo
+								%img
+									= image_tag "avatar-mini-3.jpg"
+							%span.subject
+								%span.from Tasi sam
+								%span.time 2 days ago
+							%span.message
+								This is an example msg.
+					%li
+						%a{:href => "#"}
+							%span.photo
+								%img
+									image_tag "avatar-mini.jpg"
+							%span.subject
+								%span.from Mr. Perfect
+								%span.time 2 hour ago
+							%span.message
+								Hi there, its a test
+					%li
+						%a{:href => "#"} See all messages
+			/ inbox dropdown end
+			/ notification dropdown start
+			%li#header_notification_bar.dropdown
+				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+					%i.fa.fa-bell-o
+					%span.badge.bg-warning 3
+				%ul.dropdown-menu.extended.notification
+					%li
+						%p Notifications
+					%li
+						.alert.alert-info.clearfix
+							%span.alert-icon
+								%i.fa.fa-bolt
+							.noti-info
+								%a{:href => "#"} Server #1 overloaded.
+					%li
+						.alert.alert-danger.clearfix
+							%span.alert-icon
+								%i.fa.fa-bolt
+							.noti-info
+								%a{:href => "#"} Server #2 overloaded.
+					%li
+						.alert.alert-success.clearfix
+							%span.alert-icon
+								%i.fa.fa-bolt
+							.noti-info
+								%a{:href => "#"} Server #3 overloaded.
+			/ notification dropdown end
+		/ notification end
+	.top-nav.clearfix
+		/ search &amp; user info start
+		%ul.nav.pull-right.top-menu
+			%li
+				%input.form-control.search{:placeholder => " Search", :type => "text"}/
+			/ user login dropdown start
+			%li.dropdown
+				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+					%img
+						= image_tag "avatar1_small.jpg"
+					%span.username John Doe
+					%b.caret
+				%ul.dropdown-menu.extended.logout
+					%li
+						%a{:href => "#"}
+							%i.fa.fa-suitcase>
+							Profile
+					%li
+						%a{:href => "#"}
+							%i.fa.fa-cog
+							Settings
+					%li
+						%a{:href => "login.html"}
+							%i.fa.fa-key
+							Log Out
+			/ user login dropdown end
+			%li
+				.toggle-right-box
+					.fa.fa-bars
+		/ search &amp; user info end

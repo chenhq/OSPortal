@@ -1,28 +1,35 @@
 %section#ostype
-	.ostypes
-		%strong 镜像:
-		%a.ostype{data: {id: 0, owner: 'private'}, href: '#'} 自有镜像
-
-%section#image
-	.images
-
-// templates
-
-// ostypes
-%script#tmpl-ostypes{type: 'text/x-jquery-tmpl'}
-	%a.ostype{data: {id: '${id}', owner: 'public'}, href: '#'}
-		${name}
-
-// public images
-%script#tmpl-public-images{type: 'text/x-jquery-tmpl'}
-	.image{data: {id: '${image_id}', ostypeid:'${os_type_id}'}}
-		${name}
-
-// private images
-%script#tmpl-private-images{type: 'text/x-jquery-tmpl'}
-	{{tmpl(image) "#tmpl-private-image"}}
-
-%script#tmpl-private-image{type: 'text/x-jquery-tmpl'}
-	.image{data: {id: '${id}'}}
-		${name}
-
+	.adv-table
+		%table#images-table.display.table.table-bordered.table-striped
+			%thead
+				%tr
+					%th 
+					%th 类型		
+					%th 操作系统
+					%th 版本/名称
+					%th 用户名
+					%th 使用次数
+			%tbody
+				- @images.each do |i|
+					%tr
+						%td.center.radio
+							.square-yellow
+								.radio
+									%input{:name => "image-radio", :value => "#{i.id}", :type => "radio"}
+						%td 专有镜像
+						%td N/A
+						%td.center= i.name
+						%td.center 
+						%td.center X
+				- @operating_systems.each do |o|
+					%tr
+						%td.center
+							.square-yellow
+								.radio
+									%input{:name => "image-radio", :value => "#{o.image_id}", :type => "radio"}
+						%td 公共镜像
+						%td= o.os_type.name
+						%td= o.name
+						%td.center.username= o.os_type.username
+						%td.center X
+					

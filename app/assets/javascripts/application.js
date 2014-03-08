@@ -10,7 +10,18 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require bootstrap
+//= require lib/jquery
+//= require js/bootstrap
+//= require accordion-menu/jquery.dcjqaccordion.2.7
+//= require jquery.slimscroll
+//= require nicescroll/jquery.nicescroll
+//= require build/jquery.steps
+//= require media/js/jquery.dataTables
+//= require jquery-validate/jquery.validate.min
+//= require DT_bootstrap
+//= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
+//= require jquery.icheck
+//= require scripts
+//= require dynamic_table/dynamic_table_init
 //= require jquery.easyWizard
 //= require_tree .
