@@ -5,18 +5,11 @@ class HostsController < ApplicationController
   before_filter :require_openstack_login
 
   # layout 'application', :only => [:new]
-  layout 'hosts2'
   def index
     @servers = OpenStack::Nova::Compute::Server.all
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @servers.to_json(:except => [ :tenant_id,
-                                                               :user_data],
-                                                  :include => { 
-                                                    :image => {:only => [:id, :name] },
-                                                    :flavor => {:only => [:id, :name, :vcpus, :ram, :disk] }
-                                                  } 
-                                                  )
+      format.json { render json: server_to_json(@servers)
       }
     end
   end
@@ -34,23 +27,31 @@ class HostsController < ApplicationController
 
   def create
     flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:memory]).first
-    flavor = OpenStack::Nova::Compute::Flavor.find(2)
+    flavor = OpenStack::Nova::Compute::Flavor.find(42)
     image = OpenStack::Nova::Compute::Image.find(params[:"image-radio"])
+    @servers = [];
     1.upto(params[:hostnum].to_i) do |i| 
-      @server = OpenStack::Nova::Compute::Server.new(:name => params[:hostname], :image => image, 
-                                                   :flavor => flavor, :adminPass => params[:password],
-                                                   :"OS-DCF:diskConfig" => "AUTO")
+      server = OpenStack::Nova::Compute::Server.create(:name => params[:hostname], :image => image, 
+                                              :flavor => flavor, :adminPass => params[:password],
+                                              :"OS-DCF:diskConfig" => "AUTO")
+      @servers << server
     end
 
+
     respond_to do |format|
-      if @server.save
-        format.html { redirect_to @server, notice: 'server was successfully created.' }
-        format.json { render json: @server, status: :created }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @server.errors, status: :unprocessable_entity }
-      end
+      format.html # show.html.erb
+      format.json { render json: server_to_json(@servers) }
     end
+    
+    # respond_to do |format|
+    #   if @server.save
+    #     format.html { redirect_to @server, notice: 'server was successfully created.' }
+    #     format.json { render json: @server, status: :created }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @server.errors, status: :unprocessable_entity }
+    #   end
+    # end
 
     # TODO
     # change admin passwd
@@ -60,30 +61,59 @@ class HostsController < ApplicationController
 
   def show
     # @compute = compute
-    # @server = @compute.get_server(params[:id])
+    if params[:id] != 'show'
+      @servers = OpenStack::Nova::Compute::Server.find(params[:id])
+    else
+      @servers = params[:instanceids].map do |id|
+        begin
+          OpenStack::Nova::Compute::Server.find(id)
+        rescue ActiveResource::ResourceNotFound
+          deletedServer = OpenStack::Nova::Compute::Server.new
+          deletedServer.id = id
+          deletedServer.status = 'deleted';
+          deletedServer
+        end
+      end
+    end
+    # @compute.get_server(params[:id])
     # @flavor = @compute.get_flavor(@server.flavor["id"])
     # @image = @compute.get_image(@server.image["id"])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: server_to_json(@servers) }
+    end
+
   end
 
   def start
-    params[:serverids].each do |serverid| 
-      @server = OpenStack::Nova::Compute::Server.find(serverid)
-      @server.start
+    params[:instanceids].each do |serverid| 
+      begin
+        @server = OpenStack::Nova::Compute::Server.find(serverid)
+        @server.start
+      rescue ActiveResource::ResourceNotFound, ActiveResource::BadRequest
+      end
     end
-    operation_response
+    respond_to do |format|
+      format.json { render json: server_to_json(@server) }
+    end
+
   end
   
   def shutdown
-    params[:serverids].each do |serverid| 
-      @server = OpenStack::Nova::Compute::Server.find(serverid)
-      @server.stop
+    params[:instanceids].each do |serverid| 
+      begin
+        @server = OpenStack::Nova::Compute::Server.find(serverid)
+        @server.stop
+      rescue ActiveResource::ResourceNotFound, ActiveResource::BadRequest
+      end  
     end
     operation_response
      
   end
 
   def poweroff
-    params[:serverids].each do |serverid| 
+    params[:instanceids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.stop
     end
@@ -91,7 +121,7 @@ class HostsController < ApplicationController
   end
 
   def reboot(type=:soft)
-    params[:serverids].each do |serverid| 
+    params[:instanceids].each do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
       @server.reboot(type)
     end
@@ -107,12 +137,12 @@ class HostsController < ApplicationController
   end
 
   def emergency_login
-    params[:serverids].each do |serverid| 
+    @vnc_consoles = params[:instanceids].map do |serverid| 
       @server = OpenStack::Nova::Compute::Server.find(serverid)
-      @vnc_console = @server.vnc_console
+      @server.vnc_console
     end
     respond_to do |format|
-      format.json { render json: { vnc_console: @vnc_console } }
+      format.json { render json: @vnc_consoles }
     end
   end
 
@@ -133,8 +163,11 @@ class HostsController < ApplicationController
   end
   
   def delete
-    params[:serverids].each do |serverid| 
-      @server = OpenStack::Nova::Compute::Server.find(serverid).destroy
+    begin
+      params[:instanceids].each do |inst| 
+        @server = OpenStack::Nova::Compute::Server.find(inst).destroy
+      end
+    rescue ActiveResource::ResourceNotFound
     end
     operation_response
   end
@@ -144,5 +177,20 @@ class HostsController < ApplicationController
       format.json { render json: { status: 0 } }
     end
   end
+
+
+  def server_to_json(server)
+    options = { 
+      :except => [ :tenant_id], #,
+                   # :user_data],
+      :include => { 
+        :image => {:only => [:id, :name] },
+        :flavor => {:only => [:id, :name, :vcpus, :ram, :disk] }
+      }
+    }
+    
+    return server.to_json(options);
+  end
+    
 
 end

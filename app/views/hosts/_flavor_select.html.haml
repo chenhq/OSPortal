@@ -32,35 +32,35 @@
 	.col-lg-6
 		%input#flavor-cpu.form-control{:name => "cpu", :type => "text", :placeholder => 1}
 
-%table.table.table-invoice#table-flavor-price
-	%thead
-		%tr
-			%th #
-			%th 计费方式
-			%th 单价(每秒)
-			%th.text-center 数量
-			%th.text-center 每分钟（元）
-			%th.text-center 每小时（元）
-			%th.text-center 每天（元）
-	%tbody
-		%tr#cpu
-			%td 1
-			%td
-				%h4 CPU
-				%p 按照每Core使用时长计费
-			%td.perprice 0.005
-			%td.text-center.count
-			%td.text-center.minute
-			%td.text-center.hour
-			%td.text-center.day
-		%tr#memory
-			%td 2
-			%td
-				%h4 内存
-				%p 按照每G使用时长计费
-			%td.perprice 0.005
-			%td.text-center.count
-			%td.text-center.minute
-			%td.text-center.hour
-			%td.text-center.day
+-# %table.table.table-invoice#table-flavor-price
+-# 	%thead
+-# 		%tr
+-# 			%th #
+-# 			%th 计费方式
+-# 			%th 单价(每秒)
+-# 			%th.text-center 数量
+-# 			%th.text-center 每分钟（元）
+-# 			%th.text-center 每小时（元）
+-# 			%th.text-center 每天（元）
+-# 	%tbody
+-# 		%tr#cpu
+-# 			%td 1
+-# 			%td
+-# 				%h4 CPU
+-# 				%p 按照每Core使用时长计费
+-# 			%td.perprice 0.005
+-# 			%td.text-center.count
+-# 			%td.text-center.minute
+-# 			%td.text-center.hour
+-# 			%td.text-center.day
+-# 		%tr#memory
+-# 			%td 2
+-# 			%td
+-# 				%h4 内存
+-# 				%p 按照每G使用时长计费
+-# 			%td.perprice 0.005
+-# 			%td.text-center.count
+-# 			%td.text-center.minute
+-# 			%td.text-center.hour
+-# 			%td.text-center.day
 

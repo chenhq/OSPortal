@@ -1,0 +1,47 @@
+#vol-toolbar.clearfix
+	.btn-group
+		%button.btn.btn-primary{:href => "#create-volume-modal", "data-toggle" => "modal" }
+			新建
+			%i.fa.fa-plus
+		= render '/volumes/create'     
+
+
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn{:href => "#mount-volume-modal", "data-toggle" => "modal" }
+			挂载
+			%i.fa.fa-upload
+		= render '/volumes/mount'     
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }
+			卸载
+			%i.fa.fa-download
+		-# = render '/volumes/unmount'     
+
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }
+			快照
+			%i.fa.fa-camera-retro
+		-# = render '/volumes/create_snapshot'     
+
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }
+			克隆
+			%i.fa.fa-copy
+			
+		-# = render '/volumes/clone_disk'     
+
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }
+			扩容
+			%i.fa.fa-expand
+		-# = render '/volumes/resize'     
+
+	.btn-group
+		%button.btn.btn-primary.volume_op_btn.disabled{:action => "delete", :href => "#" }
+			删除
+			%i.fa.fa-trash-o
+
+	.btn-group.pull-right
+		%a.btn.btn-primary.refresh{:href => ""}
+			刷新
+			%i.fa.fa-refresh

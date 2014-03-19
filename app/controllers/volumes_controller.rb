@@ -18,11 +18,23 @@ class VolumesController < ApplicationController
   # GET /volumes/1
   # GET /volumes/1.json
   def show
-    @volume = Volume.find(params[:id])
-
+    if params[:id] != 'show'
+      @volumes = OpenStack::Nova::Compute::Server.find(params[:id])
+    else
+      @volumes = params[:ids].map do |id|
+        begin
+          OpenStack::Nova::Volume::Volume.find(id)
+        rescue ActiveResource::ResourceNotFound
+          deletedVolume = OpenStack::Nova::Volume::Volume.new
+          deletedVolume.id = id
+          deletedVolume.status = 'deleted';
+          deletedVolume
+        end
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @volume }
+      format.json { render json: @volumes }
     end
   end
 
@@ -87,7 +99,7 @@ class VolumesController < ApplicationController
   end
 
   def delete
-    params["id"].each do |id| 
+    params["ids"].each do |id| 
       OpenStack::Nova::Volume::Volume.find(id).destroy
     end
     redirect_to volumes_path

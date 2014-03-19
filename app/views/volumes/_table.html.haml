@@ -1,25 +1,13 @@
--# - form_tag ... do
-%table.table.table-bordered.table-condensed
-	%caption 
-		%p
-	%thead
-		%tr
-			%th
-			%th 名称
-			%th 描述
-			%th 容量
-			%th 挂载主机		
-			%th 设备名称
-			%th 状态
-			%th 创建时间
-	%tbody
-		- @volumes.each do |v|
+.adv-table
+	%table#vol-table.display.table.table-bordered{ :width => "100%" }
+		%thead
 			%tr
-				%td= check_box_tag "id", v.id, false, :id => "#{v.id}"
-				%td= v.display_name
-				%td= v.display_description
-				%td= "#{v.size}G"
-				%td= v.server.name if v.attached?
-				%td
-				%td= v.status
-				%td= v.created_at 
+				%th
+				%th 名称
+				%th 状态
+				%th 容量
+				%th 挂载主机		
+				%th 设备名称
+				%th 描述
+				%th 创建时间
+		%tbody

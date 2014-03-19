@@ -1,1 +1,10 @@
-= render 'hosts/hosts_table'
+%section.panel
+	%header.panel-heading
+		主机管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		= render :partial => "hosts/op_btn" 
+		= render :partial => "hosts/table" 

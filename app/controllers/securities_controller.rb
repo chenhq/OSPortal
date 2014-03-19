@@ -4,7 +4,7 @@ class SecuritiesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :require_openstack_login
 
-  layout 'hosts'
+  # layout 'hosts'
   def index
     @firewalls =  OpenStack::Nova::Compute::SecurityGroup.all
     

@@ -1,2 +1,10 @@
-= render 'images/op_bar'
-= render 'images/table'
+%section.panel
+	%header.panel-heading
+		镜像管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		= render 'images/op_btn'
+		= render 'images/table'

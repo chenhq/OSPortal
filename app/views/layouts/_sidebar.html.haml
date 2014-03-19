@@ -1,0 +1,50 @@
+%aside
+	#sidebar.nav-collapse
+
+		/ sidebar menu start
+		.leftside-navigation
+			%ul#nav-accordion.sidebar-menu
+				%li
+					%a{:href => "#"}
+						%i.fa.fa-dashboard
+						%span 监控面板
+				%li.sub-menu
+					%a{:class => "#{ [ HostsController, VolumesController, ImagesController].include?(controller.class)   ? 'active' : 'deactive'}" }
+						%i.fa.fa-laptop
+						%span 虚拟主机
+					%ul.sub
+						%li{:class => "#{ controller.class == HostsController  ? 'active' : 'deactive'}" }
+							= link_to "主机管理", hosts_path 
+						%li{:class => "#{ controller.class == VolumesController  ? 'active' : 'deactive'}" }
+							= link_to "磁盘管理", volumes_path
+						%li{:class => "#{ controller.class == ImagesController  ? 'active' : 'deactive'}" }
+							= link_to "镜像管理", images_path
+				%li
+					%a{:href => "#"}
+						%i.fa.fa-bullhorn
+						%span 网络带宽
+				%li.sub-menu
+					%a{:href => "javascript:;"}
+						%i.fa.fa-tasks
+						%span 安全管理
+					%ul.sub
+						%li
+							%a{:href => "#"} SSH密钥
+						%li
+							%a{:href => "#"} 防火墙
+						%li
+							%a{:href => "#" } 操作日志
+				%li.sub-menu
+					%a{:href => "javascript:;"}
+						%i.fa.fa-bar-chart-o
+						%span 账户信息
+					%ul.sub
+						%li
+							%a{:href => "#"} 账户概况
+						%li
+							%a{:href => "#"} 消费记录
+				%li.sub-menu
+					%a{:href => "javascript:;"}
+						%i.fa.fa-bar-chart-o
+						%span 锁定
+		/ sidebar menu end

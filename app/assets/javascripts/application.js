@@ -21,7 +21,7 @@
 //= require DT_bootstrap
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require jquery.icheck
+//= require jquery-timer/jquery.timer
 //= require scripts
 //= require dynamic_table/dynamic_table_init
-//= require jquery.easyWizard
 //= require_tree .
