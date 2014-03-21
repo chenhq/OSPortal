@@ -6,13 +6,13 @@ class SecuritiesController < ApplicationController
 
   # layout 'hosts'
   def index
-    @firewalls =  OpenStack::Nova::Compute::SecurityGroup.all
+    @securities = OpenStack::Nova::Compute::SecurityGroup.all
     
     
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render json: @securities }
-    # end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @securities }
+    end
   end
 
   # GET /securities/1

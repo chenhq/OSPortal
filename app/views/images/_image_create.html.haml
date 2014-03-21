@@ -1,38 +1,35 @@
-#create_image-modal.modal.hide.fade
-	%form#create_image.form-horizontal{:action => create_image_hosts_path, :method => "POST", :novalidate => "novalidate"}
-		.modal-header
-			%a.close{"data-dismiss" => "modal"} ×
-			%h3 制作镜像
-		.modal-body
-			%p
-				%i.icon-warning-sign> 
-				当前主机运行中,内存中数据存在未写入镜像概率，建议停机做镜像！
-			%div
-				.control-group
-					%label.control-label 主机名称 :
-					.controls
-						%select{:name => "server_id", :style => "width:150px;"}
-							- @servers.each do |s|
-								%option{:value => "#{s.id}"} 
-									= s.name
-				.control-group
-					%label.control-label
-						%i.red> *
-						镜像名称 :
-					.controls
-						%input{:class => "{required:true, messages:{required:'镜像名称必填'}}", :name => "image_name", :style => "width:150px;", :type => "text"}/
-				.control-group
-					%label.control-label
-						%i.red> *
-						镜像描述 :
-					.controls
-						%input{:class => "{required:true, messages:{required:'镜像描述必填'}}", :name => "image_desc", :style => "width:150px;", :type => "text"}/
-			%p{:style => "display:none"}
-				镜像制作由于需要进行大量的数据Copy,根据用户系统的实际数据量需要数分钟到十多分钟不等的时间，请您耐心等待。
-			#msg_container.alert.alert-block.alert-error.fade.in{:style => "display:none"}
-				%span.img-msg
-		.modal-footer
-			%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
-			%input{:name => "img-create-instance-id", :type => "hidden", :value => ""}
-			%input.btn.btn-primary{:type => "submit", :value => "确定"}
-			%button.btn{"data-dismiss" => "modal", :type => "text"} 取消
+#create-image-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "create-image-lab", :role => "dialog", :tabindex => "-1"}
+	.modal-dialog
+		.modal-content
+			%form#create-image.form-horizontal{:action => create_image_hosts_path, :method => "POST"}
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#create-image-lab.modal-title 制作镜像
+				.modal-body
+
+					.form-group
+						%label.control-label.col-lg-3{:for => "server_id" } 主机名称 :
+						.col-lg-6
+							%select#server_id.form-control{:name => "server_id"}
+								- @servers.each do |s|
+									%option{:value => "#{s.id}"} 
+										= s.name
+					.form-group
+						%label.control-label.col-lg-3{:for => "image_name"}
+							%i.red> *
+							镜像名称 :
+						.col-lg-6
+							%input#image_name.form-control{ :name => "image_name",:type => "text"}
+					.form-group
+						%label.control-label.col-lg-3{:for => "image_desc" }
+							%i.red> *
+							描述 :
+						.col-lg-6
+							%textarea#image_desc.form-control{:name => "image_desc", :row => "3"}
+
+					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+
+				.modal-footer
+					-# %input{:name => "img-create-instance-id", :type => "hidden", :value => ""}
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消

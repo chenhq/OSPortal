@@ -5,8 +5,8 @@ class Portal < ActiveRecord::Base
   establish_connection(:adapter => "mysql2",
                        :database => "osportal",
                        :username => "root",
-                       :password => "password",
-                       :host => "192.168.122.232",
+                       :password => "iheartdatabisses",
+                       :host => "60.55.40.211",
                        :port => 3306)
 end
 
@@ -15,8 +15,8 @@ class Nova < ActiveRecord::Base
   establish_connection(:adapter => "mysql2",
                        :database => "nova",
                        :username => "root",
-                       :password => "password",
-                       :host => "192.168.122.232",
+                       :password => "iheartdatabisses",
+                       :host => "60.55.40.211",
                        :port => 3306)
 
 end
@@ -26,8 +26,8 @@ class Glance < ActiveRecord::Base
   establish_connection(:adapter => "mysql2",
                        :database => "glance",
                        :username => "root",
-                       :password => "password",
-                       :host => "192.168.122.232",
+                       :password => "iheartdatabisses",
+                       :host => "60.55.40.211",
                        :port => 3306)
 
 end
@@ -37,8 +37,8 @@ class Cinder < ActiveRecord::Base
   establish_connection(:adapter => "mysql2",
                        :database => "cinder",
                        :username => "root",
-                       :password => "password",
-                       :host => "192.168.122.232",
+                       :password => "iheartdatabisses",
+                       :host => "60.55.40.211",
                        :port => 3306)
 
 end
@@ -48,8 +48,8 @@ class Keystone < ActiveRecord::Base
   establish_connection(:adapter => "mysql2",
                        :database => "keystone",
                        :username => "root",
-                       :password => "password",
-                       :host => "192.168.122.232",
+                       :password => "iheartdatabisses",
+                       :host => "60.55.40.211",
                        :port => 3306)
 
 end

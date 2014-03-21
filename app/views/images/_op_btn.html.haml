@@ -1,19 +1,19 @@
 #img-toolbar.clearfix
 	.btn-group
-		%button.btn.btn-primary.image_op_btn{:href => "#create_image-modal", "data-toggle" => "modal" }
+		%button.btn.btn-primary{ "data-target" => "#create-image-modal", "data-toggle" => "modal" }
 			新建
 			%i.fa.fa-plus
-		= render '/images/image_create'     
+		= render '/images/image_create' 
 
 	.btn-group
 		%button.btn.btn-primary.image_op_btn.disabled{:action => "delete", :href => "#"}
 			删除
-			%i.fa.fa-trash-o
+			%i.fa.fa-trash-o   
 
-	.btn-group
-		%a.btn.btn-primary.disabled{:href=> new_host_path, :"data-toggle" => "modal"} 
-			创建主机
-			%i.fa.fa-laptop
+	-# .btn-group
+	-# 	%a.btn.btn-primary.disabled{:href=> new_host_path, :"data-toggle" => "modal"} 
+	-# 		使用镜像创建主机
+	-# 		%i.fa.fa-laptop
 	
 	.btn-group.pull-right
 		%a.btn.btn-primary{:href => ""}

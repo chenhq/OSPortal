@@ -9,6 +9,7 @@ class VolumesController < ApplicationController
   def index
     @volumes = OpenStack::Nova::Volume::Volume.all
     @servers = OpenStack::Nova::Compute::Server.all
+    @new_volume = OpenStack::Nova::Volume::Volume.new()
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @volumes }
@@ -99,8 +100,11 @@ class VolumesController < ApplicationController
   end
 
   def delete
-    params["ids"].each do |id| 
-      OpenStack::Nova::Volume::Volume.find(id).destroy
+    begin
+      params["ids"].each do |id| 
+        OpenStack::Nova::Volume::Volume.find(id).destroy
+      end
+    rescue ActiveResource::ResourceNotFound
     end
     redirect_to volumes_path
   end

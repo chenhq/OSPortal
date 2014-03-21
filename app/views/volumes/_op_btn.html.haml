@@ -1,10 +1,9 @@
 #vol-toolbar.clearfix
 	.btn-group
-		%button.btn.btn-primary{:href => "#create-volume-modal", "data-toggle" => "modal" }
+		%button.btn.btn-primary{ "data-target" => "#create-volume-modal", "data-toggle" => "modal" }
 			新建
 			%i.fa.fa-plus
 		= render '/volumes/create'     
-
 
 	.btn-group
 		%button.btn.btn-primary.volume_op_btn{:href => "#mount-volume-modal", "data-toggle" => "modal" }
@@ -21,7 +20,7 @@
 		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }
 			快照
 			%i.fa.fa-camera-retro
-		-# = render '/volumes/create_snapshot'     
+		= render '/volumes/create_snapshot'     
 
 	.btn-group
 		%button.btn.btn-primary.volume_op_btn{:href => "#create-image-modal", "data-toggle" => "modal" }

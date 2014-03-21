@@ -24,4 +24,5 @@
 //= require jquery-timer/jquery.timer
 //= require scripts
 //= require dynamic_table/dynamic_table_init
+//= require table_actionable
 //= require_tree .

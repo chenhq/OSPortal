@@ -1,21 +1,18 @@
--# - form_tag ... do
-%table.table.table-bordered.table-condensed
-	%caption 
-		%p
-	%thead
-		%tr
-			%th
-			%th 防火墙名称
-			%th 防火墙描述
-			%th 已绑定主机		
-			%th 创建时间
-
-	%tbody
-		- @firewalls.each do |fw|
+.adv-table
+	%table#sec-table.table.table-bordered.display{ :width => "100%" }
+		%thead
 			%tr
-				%td= check_box_tag "fwids", fw.id, false, fwname: "#{fw.name}"
-				%td= fw.name
-				%td= fw.description
-				%td 
-				%td
+				%th
+				%th 名称
+				%th 描述
+				%th 绑定主机		
+				%th 创建时间
+		%tbody
+		-# - @firewalls.each do |fw|
+		-# 	%tr
+		-# 		%td= check_box_tag "fwids", fw.id, false, fwname: "#{fw.name}"
+		-# 		%td= fw.name
+		-# 		%td= fw.description
+		-# 		%td 
+		-# 		%td
 

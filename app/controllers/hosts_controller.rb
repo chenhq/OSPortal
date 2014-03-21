@@ -27,7 +27,7 @@ class HostsController < ApplicationController
 
   def create
     flavorid = InstanceType.where(vcpus: params[:cpu], memory_mb: params[:memory]).first
-    flavor = OpenStack::Nova::Compute::Flavor.find(42)
+    flavor = OpenStack::Nova::Compute::Flavor.find("d38a9a7c-4f88-4c74-bdce-a386fe37e2ee")
     image = OpenStack::Nova::Compute::Image.find(params[:"image-radio"])
     @servers = [];
     1.upto(params[:hostnum].to_i) do |i| 

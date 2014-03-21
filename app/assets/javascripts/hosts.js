@@ -325,7 +325,7 @@ jQuery(function($) {
 		 // 		instTable.fnReloadAjax();}, 15000);
 
 		 var instTableRefreshAll = $.timer(function() {
-				 instTable.fnReloadAjax();b
+				 instTable.fnReloadAjax();
 		 });
 		 // $('#inst-table').on('click', 'tr', function(){
 		 // 		// var oData = instTable.fnGetData(this);

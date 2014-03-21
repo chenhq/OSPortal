@@ -13,9 +13,9 @@ development:
   adapter: mysql2
   database: osportal
   username: root
-  password: password
+  password: iheartdatabisses
   encoding: utf8
-  host: 192.168.122.232
+  host: 60.55.40.211
   pool: 20
   timeout: 5000
 
@@ -23,30 +23,30 @@ nova_development:
   adapter: mysql2
   database: nova
   username: root
-  password: password
-  host: 192.168.122.232
+  password: iheartdatabisses
+  host: 60.55.40.211
   port: 3306
 
 glance_development:
   adapter: mysql2
   database: glance
   username: root
-  password: password
-  host: 192.168.122.232
+  password: iheartdatabisses
+  host: 60.55.40.211
 
 cinder_development:
   adapter: mysql2
   database: cinder
   username: root
-  password: password
-  host: 192.168.122.232
+  password: iheartdatabisses
+  host: 60.55.40.211
 
 keystone_development:
   adapter: mysql2
   database: keystone
   username: root
-  password: password
-  host: 192.168.122.232
+  password: iheartdatabisses
+  host: 60.55.40.211
 
 
 
@@ -63,7 +63,7 @@ nova_test:
   adapter: mysql2
   database: nova
   username: nova
-  password: password
+  password: iheartdatabisses
   host: 192.168.122.232
 
 glance_test:
@@ -99,7 +99,7 @@ nova_production:
   adapter: mysql2
   database: nova
   username: nova
-  password: password
+  password: iheartdatabisses
   host: 192.168.122.232
 
 glance_production:

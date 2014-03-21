@@ -1,23 +1,13 @@
 .adv-table
-	%table#img-table.display.table.table-bordered{ :width => "100%" }
+	%table#img-table.table.table-bordered.display{ :width => "100%" }
 		%thead
 			%tr
 				%th
 				%th 名称
 				%th 状态
-				%th 容量
-				%th 基础镜像		
-				%th 描述
+				%th 进度
+				%th 基础镜像
+				%th 镜像主机
 				%th 创建时间
 		%tbody
-			-# - @images.each do |image|
-			-# 	%tr
-			-# 		%td= check_box_tag "imageids", image.id, false, imagename: "#{image.name}"
-			-# 		%td= image.name
-			-# 		%td
-			-# 		%td
-			-# 		%td= image.status
-			-# 		%td= image.created_at
-			-# 		%td
-			-# 		%td 
-			-# 		%td 
+

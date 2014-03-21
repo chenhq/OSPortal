@@ -87,7 +87,7 @@ class ImagesController < ApplicationController
   end
   
   def delete
-    params[:imageids].each do |imgid|
+    params[:ids].each do |imgid|
       OpenStack::Nova::Compute::Image.find(imgid).destroy
     end
     respond_to do |format|

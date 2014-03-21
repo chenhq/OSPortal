@@ -1,2 +1,11 @@
-= render 'securities/op_bar'
-= render 'securities/table'
+%section.panel
+	%header.panel-heading
+		防火墙管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		#sec-tableactionable
+			= render 'securities/op_btn'
+			= render 'securities/table'
