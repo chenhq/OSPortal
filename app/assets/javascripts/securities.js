@@ -155,7 +155,7 @@ jQuery(function($) {
 										"sWidth": "10%",
 										"bSearchable": false,
 										"bSortable": false,
-										"mData": "image.id",
+										"mData": "security_group.id",
 										"mRender": function(data, type, full) {
 												return '<div class="square-yellow"> <div class="checkbox"><input type="checkbox" name="id", value="'+ data + '"></div> </div>'
 										}
@@ -163,15 +163,15 @@ jQuery(function($) {
 								{ 
 										"sClass": "center",
 										"sWidth": "10%",
-										"mData": "image.name",
+										"mData": "security_group.name",
 										"mRender": function(data, type, full) {
-												return '<a href="#">' + data  + '</a>'
+												return '<a class="name" href="#">' + data  + '</a>'
 										}
 								},
 								{ 
 										"sClass": "center",
 										"sWidth": "10%",
-										"mData": "image.status",
+										"mData": "security_group.name",
 										"mRender": function(data, type, full) {
 												var css_class, status, icon;
 												switch(data.toLowerCase()) {
@@ -212,30 +212,10 @@ jQuery(function($) {
 								{ 
 										"sClass": "center",
 										"sWidth": "15%",
-										"mData": "image.progress",
+										"mData": "security_group.description",
 										"mRender": function(data, type, full) {
 												return data
 										}
-								},
-								{ 
-										"sClass": "center",
-										"mWidth": "15%",					
-										"mData": "image.metadata",
-										"mRender": function(data, type, full) {
-												return data
-										}
-								},
-								{ 
-										"sClass": "center",
-										"mWidth": "15%",					
-										"mData": "image.server_id",
-										"mRender": function(data, type, full) {
-												return data
-										}
-								},
-								{ 
-										"mWidth": "20%",
-										"mData": "image.created_at",
 								}
 						],
 

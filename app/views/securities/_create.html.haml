@@ -1,0 +1,28 @@
+#create-sec-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "create-sec-lab", :role => "dialog", :tabindex => "-1"}
+	.modal-dialog.modal-lg
+		.modal-content
+			%form#create-sec.form-horizontal{:action => securities_path, :method => "POST"}
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#create-sec-lab.modal-title 创建防火墙
+				.modal-body
+
+					.form-group
+						%label.control-label.col-lg-3{:for => "name"}
+							%i.red> *
+							防火墙名称 :
+						.col-lg-6
+							%input#sec_name.form-control{ :name => "name",:type => "text"}
+					.form-group
+						%label.control-label.col-lg-3{:for => "description" }
+							%i.red> *
+							描述 :
+						.col-lg-6
+							%textarea#sec_desc.form-control{:name => "description", :row => "3"}
+
+					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+
+				.modal-footer
+					-# %input{:name => "img-create-instance-id", :type => "hidden", :value => ""}
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消

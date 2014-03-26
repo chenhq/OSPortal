@@ -1,4 +1,12 @@
-#firewall-create
+%section.panel
+	%header.panel-heading
+		规则管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		#rule-tableactionable
 	%a.close{"data-dismiss" => "modal", :href => securities_path} ×
 	%h3 创建防火墙
 	#form-firewall.form.form-inline

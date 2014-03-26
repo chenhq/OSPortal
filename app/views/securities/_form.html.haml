@@ -1,10 +1,35 @@
 = form_for @security do |f|
-  - if @security.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@security.errors.count, "error")} prohibited this security from being saved:"
-      %ul
-        - @security.errors.full_messages.each do |msg|
-          %li= msg
+	- if @security.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@security.errors.count, "error")} prohibited this security from being saved:"
+			%ul
+				- @security.errors.full_messages.each do |msg|
+					%li= msg
 
-  .actions
-    = f.submit 'Save'
+	.field
+		= f.label :name
+		= f.text_field :name
+	.field
+		= f.label :family
+		= f.text_field :family
+
+		-# = render 'securities/form'
+		#rules-tableactionable
+			= render :partial => "rules/op_btn"
+			= render :partial => "rules/table" 
+
+
+	.actions
+		= f.submit '保存'
+
+
+-# #form-firewall.form.form-inline
+-# 	= text_field_tag "id", @firewall.id, :type => "hidden"
+-# 	%label.control-label
+-# 		%i.red> *
+-# 		防火墙名称:
+-# 	= text_field_tag "name", @firewall.name
+-# 	%label.control-label
+-# 		%i.red> *
+-# 		防火墙描述:
+-# 	= text_field_tag "description", @firewall.description

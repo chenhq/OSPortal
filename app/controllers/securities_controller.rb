@@ -18,7 +18,7 @@ class SecuritiesController < ApplicationController
   # GET /securities/1
   # GET /securities/1.json
   def show
-    @security = Security.find(params[:id])
+    @security = OpenStack::Nova::Compute::SecurityGroup.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,33 +41,36 @@ class SecuritiesController < ApplicationController
   # not support by API
   # GET /securities/1/edit
   def edit
-    @firewall = OpenStack::Nova::Compute::SecurityGroup.find(params[:id])
-    @rules = @firewall.rules
+    @security = OpenStack::Nova::Compute::SecurityGroup.find('19')
+    @rules = @security.rules
   end
 
   # POST /securities
   # POST /securities.json
   def create
-    @security = OpenStack::Nova::Compute::SecurityGroup.new();
-    @security.name = params[:name]
-    @security.description = params[:description]
-    @security.save
-    
-    # TODO
-    params[:rules].each do |k, v|
-      @rule = OpenStack::Nova::Compute::Rule.new
-      @rule.ip_protocol = v[:ip_protocol]
-      @rule.from_port = v[:from_port]
-      @rule.to_port = v[:to_port]
-      @rule.cidr = v[:cidr]
-      @rule.parent_group = @security
-      @security.rule = @rule
-      @rule.save
-      @security.rule = @rule
-    end
+    @security = OpenStack::Nova::Compute::SecurityGroup.new(params);
+
+    # # TODO
+    # params[:rules].each do |k, v|
+    #   @rule = OpenStack::Nova::Compute::Rule.new
+    #   @rule.ip_protocol = v[:ip_protocol]
+    #   @rule.from_port = v[:from_port]
+    #   @rule.to_port = v[:to_port]
+    #   @rule.cidr = v[:cidr]
+    #   @rule.parent_group = @security
+    #   @security.rule = @rule
+    #   @rule.save
+    #   @security.rule = @rule
+    # end
 
     respond_to do |format|
-      format.json { render json: { status: 0 } }
+      if @security.save 
+        format.html { redirect_to securities_path, notice: "Security Group successfully create. "}
+        format.json { render json: @security, status: :created, location: @security}
+      else 
+        format.haml { render action: :new}
+        format.json { render json: @security.errors, stauts: :unprocessable_entity }
+      end
     end
 
     # respond_to do |format|
@@ -117,8 +120,14 @@ class SecuritiesController < ApplicationController
       OpenStack::Nova::Compute::SecurityGroup.find(id).destroy
     end
     respond_to do |format|
-      format.json { render json: { status:  "ok" } }
+      format.html { redirect_to securities_url }
+      format.json { head :no_content }
     end
   end
 
+  def security_to_json(security)
+    options = {
+      :include => :rules }
+    return security.to_json(options)
+  end
 end
