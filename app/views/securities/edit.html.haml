@@ -1,17 +1,26 @@
-%section.panel
-	%header.panel-heading
-		编辑防火墙
-		%span.tools.pull-right
-			%a.fa.fa-chevron-down{:href => "javascript:;"}
-			%a.fa.fa-cog{:href => "javascript:;"}
-			%a.fa.fa-times{:href => "javascript:;"}
-	.panel-body
-		= render 'securities/form'
-		
-		= link_to 'Show', @security
-		\|
-		= link_to 'Back', securities_path
+#edit-sec-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "edit-sec-lab", :role => "dialog", :tabindex => "-1"}
+	.modal-dialog
+		.modal-content
+			%form#edit-sec.form-horizontal{:action => edit_securities_path, :method => "POST"}
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#edit-sec-lab.modal-title 创建防火墙
+				.modal-body
 
-		-# #rules-tableactionable
-		-# 	= render :partial => "rules/op_btn" 
-		-# 	= render :partial => "rules/table" 
+					.form-group
+						%label.control-label.col-lg-3{:for => "name"}
+							防火墙名称 :
+						.col-lg-6
+							%input#sec_name.form-control{ :name => "name",:type => "text"}
+					.form-group
+						%label.control-label.col-lg-3{:for => "description" }
+							描述 :
+						.col-lg-6
+							%textarea#sec_desc.form-control{:name => "description", :row => "3"}
+
+					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+
+				.modal-footer
+					-# %input{:name => "img-create-instance-id", :type => "hidden", :value => ""}
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消

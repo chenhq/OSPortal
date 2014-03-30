@@ -13,8 +13,8 @@
 								.icheck
 									.square-yellow
 										.checkbox
-											%input{:name => "ids[]", :value=> "${id}", :type => "checkbox"}
-											%label ${name}
+											%input{:name => "ids[]", :value=> "${security_group.id}", :type => "checkbox"}
+											%label ${security_group.name}
 
 				.modal-footer
 					%input.btn.btn-primary{:type => "submit", :value => "确定"}

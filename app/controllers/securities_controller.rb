@@ -87,20 +87,18 @@ class SecuritiesController < ApplicationController
   # PUT /securities/1
   # PUT /securities/1.json
   def update
-    @security = OpenStack::Nova::Compute::SecurityGroup.find('3')
+    @sg = OpenStack::Nova::Compute::SecurityGroup.find(params[:id])
     
-    @security.name = params[:firewall][:name]
-    @security.description = params[:firewall][:description]
-    @security.save
-    # respond_to do |format|
-    #   if @security.update_attributes(params[:security])
-    #     format.html { redirect_to @security, notice: 'Security was successfully updated.' }
-    #     format.json { head :no_content }
-    #   else
-    #     format.html { render action: "edit" }
-    #     format.json { render json: @security.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    
+    respond_to do |format|
+      if @sg.update_attributes(params[:security_group])
+        format.html { redirect_to '/securities/', notice: 'Security was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @sg.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /securities/1

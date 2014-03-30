@@ -6,8 +6,9 @@
 		= render 'securities/create'
 		
 	.btn-group
-		%button.btn.btn-primary.sec_op_btn.disabled{:action => "edit", :href => "#"}
+		%button.btn.btn-primary.sec_op_btn.disabled{ "data-target" => "#edit-sec-modal", "data-toggle" => "modal" }
 			编辑
+		= render 'securities/edit'
 
 	.btn-group
 		%button.btn.btn-primary.sec_op_btn.disabled{ "data-target" => "#delete-sec-modal", "data-toggle" => "modal" }

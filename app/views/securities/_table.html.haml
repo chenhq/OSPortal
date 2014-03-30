@@ -4,14 +4,11 @@
 			%tr
 				%th
 				%th 名称
-				%th 绑定主机		
+				%th 访问规则		
 				%th 描述
 		%tbody
-		-# - @firewalls.each do |fw|
-		-# 	%tr
-		-# 		%td= check_box_tag "fwids", fw.id, false, fwname: "#{fw.name}"
-		-# 		%td= fw.name
-		-# 		%td= fw.description
-		-# 		%td 
-		-# 		%td
 
+
+= render 'securities/rules_modal_tmpl'
+
+		

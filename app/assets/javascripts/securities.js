@@ -171,42 +171,9 @@ jQuery(function($) {
 								{ 
 										"sClass": "center",
 										"sWidth": "10%",
-										"mData": "security_group.name",
+										"mData": "security_group.rules",
 										"mRender": function(data, type, full) {
-												var css_class, status, icon;
-												switch(data.toLowerCase()) {
-												case 'active':
-														css_class = "btn-success";
-														status = "活动";
-														icon = "fa-check";
-														break;
-												case 'saving': 
-														css_class = "btn-info";
-														status = "创建...";
-														icon = "fa-cog fa-spin";
-														break;
-												case 'error': 
-														css_class = "btn-error";
-														status = "错误";
-														icon = "fa-frown-o";
-														break;
-												case 'deleted': 
-														css_class = "btn-error";
-														status = "已删除";
-														icon = "fa-frown-o";
-														break;
-												case 'unknown': 
-														css_class = "btn-error";
-														status = "异常";
-														icon = "fa-frown-o";
-														break;
-												default: 
-														css_class = "default";
-														status = "未知";
-														icon = "";
-												}
-												
- 												return '<span class="btn-sm btn-block ' + css_class + '"><i class="fa ' + icon + '"></i>&nbsp' + status + '</span>'
+ 												return data.length +'&nbsp;&nbsp;条规则&nbsp;&nbsp;' + '<span class="btn-sm btn-primary show-rules" "data-target"="#rules-modal" "data-toggle"="modal"><i class="fa fa-hand-o-right">&nbsp;详情...</i></span>'
 										}
 								},
 								{ 
@@ -219,9 +186,38 @@ jQuery(function($) {
 								}
 						],
 
+				},
+				modalFunctions : 	{
+						"delete-sec-modal": function(selected) {
+								$(this).find('.modal-checkboxes').html($('#tmpl-modal-checkbox').tmpl(selected));
+								
+								icheck = $(this).find('input[type="checkbox"]');
+
+								icheck.iCheck({
+										checkboxClass: 'icheckbox_square-yellow',
+										radioClass: 'iradio_square-yellow',
+										increaseArea: '20%' // optional
+								});
+								icheck.iCheck('check');
+						},
+						"edit-sec-modal": function(selected) {
+								var sg = selected[0].security_group;
+								var sg_edit_path = '/securities/' + sg.id;
+								$(this).find('form').attr('action', sg_edit_path);
+							
+								$(this).find('input[name="security_group[name]"]').val(sg.name);
+								$(this).find('textarea[name="security_group[description]"]').val(sg.description);
+						}
 				}
+
 		});
-
-
+		
+		// $('.show-rules').on('click', function(event) {
+		// 		event.preventDefault();
+		// 		otable = $('#sec-table').dataTable();
+		// 		oData = otable.fnGetData($(this).closest('tr')[0]);
+		// 		console.log(oData);
+		// 		$('#rules-modal').html($('#RulesModalTemplate').tmpl(oData)).modal('show');
+		// });
 		
 });

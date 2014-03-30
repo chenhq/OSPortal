@@ -1,14 +1,19 @@
-%table#rule-table.table.table-bordered.display{ :width => "100%" }
-	%thead
-		%tr
-			%th
-			%th 协议
-			%th 开始端口
-			%th 结束端口		
-			%th 源地址
-			%th 操作
+.adv-table
+	%table#rules-table.table.table-bordered.display{ :width => "100%" }
+		%thead
+			%tr
+				%th ID
+				%th 协议
+				%th 开始端口
+				%th 结束端口		
+				%th 源地址
+				%th 编辑
+				%th 删除
+		%tbody
+			{{each security_group.rules}}
+			{{tmpl($value) '#ruleTemplate'}}
+			{{/each}}
 
-	%tbody
 
 -# .table#rule_data
 -# 			= render 'securities/rule_tmpl'
