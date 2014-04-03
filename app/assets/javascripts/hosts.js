@@ -75,7 +75,7 @@ jQuery(function($) {
             { "bSortable": false, "aTargets": [ 0 ] }
         ],
         "aaSorting": [ [1,'desc'], [5, 'desc']],
-				"aLengthMenu": [[6, 8, 12, 20, -1], [6, 8, 12, 20, "All"]],
+				"aLengthMenu": [[6, 10, 20, -1], [6,  10, 20, "All"]],
 				"iDisplayLength": 6
 		} );
 

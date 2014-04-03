@@ -1,5 +1,5 @@
-#rules-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "rules-lab", :role => "dialog", :tabindex => "-1"}
-%script#RulesModalTemplate{:type => "text/x-jquery-tmpl"}
+#detail-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "rules-lab", :role => "dialog", :tabindex => "-1"}
+%script#detail-modal-tmpl{:type => "text/x-jquery-tmpl"}
 	.modal-dialog.modal-lg
 		.modal-content
 			%form#sg-rules.form-horizontal{:action => '/securities/${security_group.id}', :method => "POST"}
@@ -8,6 +8,8 @@
 					%h4#rules-lab.modal-title 防火墙规则
 				.modal-body
 					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+					%input{:name=>"_method", :type=>"hidden", :value=>"put"}
+
 					= render 'rules/op_btn'
 					= render 'rules/table'
 
@@ -15,7 +17,7 @@
 					%input.btn.btn-primary{:type => "submit", :value => "确定"}
 					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消
 
-%script#ruleTemplate{:type => "text/x-jquery-tmpl"}
+%script#detail-item{:type => "text/x-jquery-tmpl"}
 	%tr
 		%td ${rule.id}
 		%td ${rule.ip_protocol}
@@ -23,9 +25,9 @@
 		%td ${rule.to_port}
 		%td ${rule.cidr}
 		%td 
-			%a.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
+			%a.edit.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
 				编辑
 		%td
-			%a.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
+			%a.delete.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
 				删除
 

@@ -25,4 +25,5 @@
 //= require scripts
 //= require dynamic_table/dynamic_table_init
 //= require table_actionable
+//= require editable-table/table-editable
 //= require_tree .

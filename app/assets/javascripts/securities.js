@@ -173,7 +173,7 @@ jQuery(function($) {
 										"sWidth": "10%",
 										"mData": "security_group.rules",
 										"mRender": function(data, type, full) {
- 												return data.length +'&nbsp;&nbsp;条规则&nbsp;&nbsp;' + '<span class="btn-sm btn-primary show-rules" "data-target"="#rules-modal" "data-toggle"="modal"><i class="fa fa-hand-o-right">&nbsp;详情...</i></span>'
+ 												return data.length +'&nbsp;&nbsp;条规则&nbsp;&nbsp;' + '<span class="btn-xs btn-primary show-detail" "data-target"="#detail-modal" "data-toggle"="modal"><i class="fa fa-hand-o-right">&nbsp;详情...</i></span>'
 										}
 								},
 								{ 
@@ -201,6 +201,8 @@ jQuery(function($) {
 								icheck.iCheck('check');
 						},
 						"edit-sec-modal": function(selected) {
+								console.log('edit-sec-modal....');
+								console.log(selected);
 								var sg = selected[0].security_group;
 								var sg_edit_path = '/securities/' + sg.id;
 								$(this).find('form').attr('action', sg_edit_path);
@@ -211,13 +213,19 @@ jQuery(function($) {
 				}
 
 		});
+
+		$('#detail-modal').on('show.bs.modal', function() {
+				// $(this).find('#detail-table').dataTable({ 
+				// 		"aLengthMenu": [[5, 10, -1], [5, 10, "All"]],
+				// 		"iDisplayLength": 5});
+
+				detailEditableTable.init();
+		});
 		
-		// $('.show-rules').on('click', function(event) {
-		// 		event.preventDefault();
-		// 		otable = $('#sec-table').dataTable();
-		// 		oData = otable.fnGetData($(this).closest('tr')[0]);
-		// 		console.log(oData);
-		// 		$('#rules-modal').html($('#RulesModalTemplate').tmpl(oData)).modal('show');
-		// });
 		
+		$('#detail-modal').on('click', 'input[type="submit"]', function(e) {
+				e.preventDefault();
+				var aData = $(this).parents('form').find('.dataTable').dataTables().fnGetData();
+				console.log(aData);
+		});
 });

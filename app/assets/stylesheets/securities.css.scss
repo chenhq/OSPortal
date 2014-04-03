@@ -1,3 +1,17 @@
 // Place all the styles related to the Securities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table .form-control {
+		width: 100%;
+}
+
+#detail-modal { 
+		.modal-body {
+				margin-bottom: 0px;
+				padding-bottom: 0px;
+		}
+		.modal-footer {
+				margin-top: 0px;
+		}
+}
