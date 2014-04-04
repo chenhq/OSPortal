@@ -13,21 +13,21 @@
 					= render 'rules/op_btn'
 					= render 'rules/table'
 
-				.modal-footer
-					%input.btn.btn-primary{:type => "submit", :value => "确定"}
-					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消
+				-# .modal-footer
+				-# 	%input.btn.btn-primary{:type => "submit", :value => "确定"}
+				-# 	%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消
 
 %script#detail-item{:type => "text/x-jquery-tmpl"}
 	%tr
-		%td ${rule.id}
+		-# %td ${rule.id}
 		%td ${rule.ip_protocol}
 		%td ${rule.from_port}
 		%td ${rule.to_port}
 		%td ${rule.cidr}
 		%td 
-			%a.edit.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
+			%a.edit.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;", :data => { :id => '${rule.id}'} }
 				编辑
 		%td
-			%a.delete.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;"}
+			%a.delete.btn.btn-sm.btn-block.btn-primary{:href => "javascript:;", :data => { :id => '${rule.id}'} }
 				删除
 
