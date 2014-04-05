@@ -214,18 +214,17 @@ jQuery(function($) {
 
 		});
 
-		$('#detail-modal').on('show.bs.modal', function() {
-				// $(this).find('#detail-table').dataTable({ 
-				// 		"aLengthMenu": [[5, 10, -1], [5, 10, "All"]],
-				// 		"iDisplayLength": 5});
 
+		$('#detail-modal').on('show.bs.modal', function() {
+				console.log('=======');
 				detailEditableTable.init();
 		});
 		
 		
-		$('#detail-modal').on('click', 'input[type="submit"]', function(e) {
-				e.preventDefault();
-				var aData = $(this).parents('form').find('.dataTable').dataTables().fnGetData();
-				console.log(aData);
-		});
+		// $('#detail-modal').on('click', 'input[type="submit"]', function(e) {
+		// 		e.preventDefault();
+		// 		var aData = $(this).parents('form').find('.dataTable').dataTables().fnGetData();
+		// 		console.log(aData);
+		// });
+
 });
