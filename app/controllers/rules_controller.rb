@@ -10,7 +10,8 @@ class RulesController < ApplicationController
                                                :to_port     => "22",
                                                :cidr        => "0.0.0.0/0")
     respond_to do |format|
-      format.json { render json: @rule }
+      # format.json { render json: @rule }
+      format.json { render :partial => 'new.json.erb' }
     end
   end
 

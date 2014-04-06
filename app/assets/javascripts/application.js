@@ -19,6 +19,7 @@
 //= require media/js/jquery.dataTables
 //= require jquery-validate/jquery.validate.min
 //= require DT_bootstrap
+//= require datatable-extend
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min
 //= require jquery.icheck
 //= require jquery-timer/jquery.timer
