@@ -24,6 +24,7 @@
 //= require jquery.icheck
 //= require jquery-timer/jquery.timer
 //= require scripts
+//= require select2
 //= require dynamic_table/dynamic_table_init
 //= require table_actionable
 //= require editable-table/table-editable

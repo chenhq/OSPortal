@@ -1,0 +1,64 @@
+#create-rule-modal.modal.fade{ "aria-hidden" => "true", "aria-labelledby" => "create-rule-lab", :role => "dialog"}
+	.modal-dialog
+		.modal-content
+			%form#create-rule.form-horizontal{:action => rules_path, :method => "POST"}
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#create-rule-lab.modal-title 创建规则
+				.modal-body
+
+					.form-group.hidden
+						%label.control-label.col-lg-3{:for => "ip_protocol"}
+							安全组 :
+						.col-lg-6
+							%input.form-control{ :name => "security_group_id",:type => "text", :value => "#{@security.id}"}
+
+					.form-group
+						%label.control-label.col-lg-3{:for => "ip_protocol"}
+							IP协议 :
+						.col-lg-6
+							%select.form-control{ :name => "ip_protocol",:type => "text"}
+								%option{:value => "TCP", :selected => "selected"} TCP
+								%option{:value => "UDP"} UDP
+								%option{:value => "ICMP"} ICMP
+
+					.form-group#port-option
+						%label.col-sm-3.control-label 端口 :
+						.col-sm-9.icheck
+							.square-yellow
+								.radio
+									%input{:name => "port_option", :value => "single-port", :option => "#single-port", :type => "radio"}
+									%label 单个端口
+							.square-yellow
+								.radio
+									%input{:name => "port-option", :value => "port-range", :option => "#port-range", :type => "radio"}
+									%label 端口范围
+
+					#port-option
+						#single-port		
+							.form-group
+								%label.control-label.col-lg-3{:for => "port"} 单个端口 :
+								.col-lg-6
+									%input#select-port.form-control{:name=> "single_port", :type => "hidden", :style => "width: 100%"}
+
+						#port-range
+							.form-group
+								%label.control-label.col-lg-3{:for => "from_port"} 开始端口 :
+								.col-lg-6
+									%input.form-control{:name => "from_port", :type => "text"}
+							.form-group
+								%label.control-label.col-lg-3{:for => "to_port"} 结束端口 :
+								.col-lg-6
+									%input.form-control{:name => "to_port", :type => "text"}
+
+					.form-group
+						%label.control-label.col-lg-3{:for => "cidr"}
+							源地址 :
+						.col-lg-6
+							%input.form-control{ :name => "cidr",:type => "text"}
+
+					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
+
+				.modal-footer
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消

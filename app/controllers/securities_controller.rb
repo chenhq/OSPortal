@@ -20,11 +20,19 @@ class SecuritiesController < ApplicationController
   def show
     @security = OpenStack::Nova::Compute::SecurityGroup.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @security }
+    if params[:content]= 'only-rules'
+      @rules = @security.rules
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @rules }
+      end
+    else 
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @security }
+      end
     end
-  end
+end
 
   # GET /securities/new
   # GET /securities/new.json

@@ -16,6 +16,32 @@ class RulesController < ApplicationController
   end
 
   def create
+    @security_group = OpenStack::Nova::Compute::SecurityGroup.find(params[:security_group_id]);
+    if params[:"port_option"] = "single-port"
+      from_port = to_port = params[:single_port].to_i
+    else
+      from_port = params[:from_port].to_i
+      to_port = params[:to_port].to_i
+    end
+
+    @rule = OpenStack::Nova::Compute::Rule.new(:ip_protocol => params[:ip_protocol].downcase,
+                                               :from_port   => from_port,
+                                               :to_port     => to_port,
+                                               :cidr        => params[:cidr]
+                                               );
+    @rule.parent_group = @security_group
+    
+    respond_to do |format|
+      if @rule.save
+        format.html { redirect_to '/securities/' + @security_group.id.to_s, notice: 'Rule was successfully created.' }
+        format.json { render json: @security_group.rules, status: :created, location: @security_group }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @rule.errors, status: :unprocessable_entity }
+      end
+    end
+
+
   end
 
   def destory

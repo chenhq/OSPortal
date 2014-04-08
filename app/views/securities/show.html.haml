@@ -1,7 +1,15 @@
-= render 'securities/form'
--# %p#notice= notice
+%section.panel
+	%header.panel-heading
+		%a
+			#{@security.name}
+		规则管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		#rules-tableactionable
+			= render 'rules/op_btn'
+			= render 'rules/table'
 
 
--# = link_to 'Edit', edit_security_path(@security)
--# \|
--# = link_to 'Back', securities_path
