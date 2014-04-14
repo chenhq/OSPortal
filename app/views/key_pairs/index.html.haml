@@ -1,0 +1,11 @@
+%section.panel
+	%header.panel-heading
+		SSH密钥管理
+		%span.tools.pull-right
+			%a.fa.fa-chevron-down{:href => "javascript:;"}
+			%a.fa.fa-cog{:href => "javascript:;"}
+			%a.fa.fa-times{:href => "javascript:;"}
+	.panel-body
+		#keypairs-tableactionable
+			= render 'op_btn'
+			= render 'table'

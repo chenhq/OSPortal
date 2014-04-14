@@ -31,7 +31,7 @@
 									%label 单个端口
 							.square-yellow
 								.radio
-									%input{:name => "port-option", :value => "port-range", :option => "#port-range", :type => "radio"}
+									%input{:name => "port_option", :value => "port-range", :option => "#port-range", :type => "radio"}
 									%label 端口范围
 
 					#port-option
@@ -55,7 +55,7 @@
 						%label.control-label.col-lg-3{:for => "cidr"}
 							源地址 :
 						.col-lg-6
-							%input.form-control{ :name => "cidr",:type => "text"}
+							%input.form-control{ :name => "cidr", :type => "text", :"data-inputmask" => "'alias': 'ipandmask'"}
 
 					%input{:type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token.to_s}
 

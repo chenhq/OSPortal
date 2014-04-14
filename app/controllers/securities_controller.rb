@@ -122,12 +122,19 @@ end
   end
 
   def delete
-    params[:ids].each do |id|
-      OpenStack::Nova::Compute::SecurityGroup.find(id).destroy
-    end
-    respond_to do |format|
-      format.html { redirect_to securities_url }
-      format.json { head :no_content }
+    begin
+      params[:ids].each do |id|
+        OpenStack::Nova::Compute::SecurityGroup.find(id).destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to securities_url }
+        format.json { head :no_content }
+      end
+    rescue Exception => e
+      respond_to do |format|
+        format.html { redirect_to securities_url, notice: e.to_s }
+        format.json { render json: { errors: e.to_s }, status: :unprocessable_entity }
+      end
     end
   end
 

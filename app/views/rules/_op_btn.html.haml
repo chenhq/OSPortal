@@ -5,10 +5,10 @@
 			%i.fa.fa-plus
 		= render 'rules/create'
 	.btn-group
-		%button.btn.btn-primary.rules-op-btn.disabled{ "data-target" => "#delete-rules-modal", "data-toggle" => "modal" }
+		%button.btn.btn-primary.rules-op-btn.disabled{ "data-target" => "#delete-rule-modal", "data-toggle" => "modal" }
 			删除
 			%i.fa.fa-trash-o
-		-# = render 'securities/delete_rules'
+		= render 'rules/destroy'
 
 	.btn-group.pull-right
 		%a.btn.btn-primary{:href => ""}

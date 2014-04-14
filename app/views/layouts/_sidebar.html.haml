@@ -24,14 +24,14 @@
 						%i.fa.fa-bullhorn
 						%span 网络带宽
 				%li.sub-menu
-					%a{:href => "javascript:;"}
+					%a{:class => "#{ [ KeyPairsController, SecuritiesController, RulesController].include?(controller.class)   ? 'active' : 'deactive'}" }
 						%i.fa.fa-tasks
 						%span 安全管理
 					%ul.sub
-						%li
-							%a{:href => "#"} SSH密钥
-						%li
-							%a{:href => "#"} 防火墙
+						%li{:class => "#{ controller.class == KeyPairsController  ? 'active' : 'deactive'}" }
+							= link_to "SSH密钥", key_pairs_path
+						%li{:class => "#{[ SecuritiesController, RulesController].include?(controller.class)  ? 'active' : 'deactive'}" }
+							= link_to "防火墙", securities_path
 						%li
 							%a{:href => "#" } 操作日志
 				%li.sub-menu

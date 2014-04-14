@@ -1,0 +1,28 @@
+#delete-rule-modal.modal.modal-comfirm.fade{ "aria-hidden" => "true", "aria-labelledby" => "delete-rule-lab", :role => "dialog", :tabindex => "-1"}
+	.modal-dialog
+		.modal-content
+			= form_tag(delete_rules_path, method: "POST") do
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#delete-rule-lab.modal-title 删除防火墙
+				.modal-body
+					.form-group.hidden
+						%label.control-label.col-lg-3{:for => "ip_protocol"}
+							安全组 :
+						.col-lg-6
+							%input.form-control{ :name => "security_group_id",:type => "text", :value => "#{@security.id}"}
+
+					.modal-checkboxes
+					%script#tmpl-modal-checkbox{type: 'text/x-jquery-tmpl'}
+						.col-md-6.col-md-offset-3
+							.form-group
+								.icheck
+									.square-yellow
+										.checkbox
+											%input{:name => "ids[]", :value=> "${rule.id}", :type => "checkbox"}
+											%label ID: ${rule.id}
+
+				.modal-footer
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消
+

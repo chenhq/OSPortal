@@ -1,0 +1,16 @@
+#rules-toolbar.clearfix
+	.btn-group
+		%button.btn.btn-primary{ "data-target" => "#create-keypair-modal", "data-toggle" => "modal" }
+			新增
+			%i.fa.fa-plus
+		= render 'create'
+	.btn-group
+		%button.btn.btn-primary.op-btn.disabled{ "data-target" => "#delete-keypairs-modal", "data-toggle" => "modal" }
+			删除
+			%i.fa.fa-trash-o
+		= render 'destroy'
+
+	.btn-group.pull-right
+		%a.btn.btn-primary{:href => ""}
+			刷新
+			%i.fa.fa-refresh

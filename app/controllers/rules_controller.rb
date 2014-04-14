@@ -17,7 +17,7 @@ class RulesController < ApplicationController
 
   def create
     @security_group = OpenStack::Nova::Compute::SecurityGroup.find(params[:security_group_id]);
-    if params[:"port_option"] = "single-port"
+    if params[:port_option] == "single-port"
       from_port = to_port = params[:single_port].to_i
     else
       from_port = params[:from_port].to_i
@@ -46,4 +46,19 @@ class RulesController < ApplicationController
 
   def destory
   end
+  
+  def delete
+    @security_group = OpenStack::Nova::Compute::SecurityGroup.find(params[:security_group_id])
+    @security_group.rules.each do |rule|
+      if params[:ids].include? rule.id.to_s 
+        rule.destroy
+      end
+    end
+   
+    respond_to do |format|
+      format.html { redirect_to '/securities/' + @security_group.id.to_s }
+      format.json { head :no_content }
+    end
+  end
+
 end

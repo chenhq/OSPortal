@@ -14,6 +14,20 @@ OSUPortal::Application.routes.draw do
 
   resources :flavors
   resources :rules
+
+  resources :rules do
+    collection do
+      post 'delete'
+    end
+  end
+
+  resources :key_pairs
+
+  resources :key_pairs do
+    collection do
+      post 'delete'
+    end
+  end
   resources :floating_ips
 
   resources :floating_ips do

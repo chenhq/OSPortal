@@ -1,7 +1,7 @@
 #delete-sec-modal.modal.modal-comfirm.fade{ "aria-hidden" => "true", "aria-labelledby" => "delete-sec-lab", :role => "dialog", :tabindex => "-1"}
 	.modal-dialog
 		.modal-content
-			= form_tag(delete_securities_path, method: "POST") do
+			= form_tag(delete_securities_path, method: "POST", id: "delete-securities") do
 				.modal-header
 					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
 					%h4#delete-sec-lab.modal-title 删除防火墙

@@ -1,0 +1,22 @@
+#delete-keypairs-modal.modal.modal-comfirm.fade{ "aria-hidden" => "true", "aria-labelledby" => "delete-keypair-lab", :role => "dialog", :tabindex => "-1"}
+	.modal-dialog
+		.modal-content
+			= form_tag(delete_key_pairs_path, method: "POST") do
+				.modal-header
+					%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+					%h4#delete-keypair-lab.modal-title 删除密钥
+				.modal-body
+					.modal-checkboxes
+					%script#tmpl-modal-checkbox{type: 'text/x-jquery-tmpl'}
+						.col-md-6.col-md-offset-3
+							.form-group
+								.icheck
+									.square-yellow
+										.checkbox
+											%input{:name => "names[]", :value=> "${key_pair.name}", :type => "checkbox"}
+											%label 名称: ${key_pair.name}
+
+				.modal-footer
+					%input.btn.btn-primary{:type => "submit", :value => "确定"}
+					%button.btn.btn-primary{"data-dismiss" => "modal", :type => "text"} 取消
+

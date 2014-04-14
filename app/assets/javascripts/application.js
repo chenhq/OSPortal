@@ -18,6 +18,15 @@
 //= require build/jquery.steps
 //= require media/js/jquery.dataTables
 //= require jquery-validate/jquery.validate.min
+//= require jquery-validation-master/src/additional/alphanumeric
+//= require jquery-validation-master/src/additional/pattern
+//= require jquery-validation-master/src/additional/lettersonly
+//= require jquery-validation-master/src/additional/nowhitespace
+//= require jquery-validation-master/src/localization/messages_zh
+//= require jquery-validation-custom/messages_zh
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.my.extensions
 //= require DT_bootstrap
 //= require datatable-extend
 //= require twitter-bootstrap-wizard/jquery.bootstrap.wizard.min

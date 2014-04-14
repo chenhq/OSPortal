@@ -1,147 +1,4 @@
 jQuery(function($) {
-
-// 		function add_new_rule(){
-// 				$.ajax({
-// 						url: '/rules/new',
-// 						dataType: 'json',
-// 						type: 'GET',
-// 						success: function(result) {
-// 								$.each(result , function(key, value) {
-// 										console.log(key);
-// 										console.log(value);
-// 										$("#RuleTemplate").tmpl(value).appendTo( "#rules_table");
-// 										// TODO
-// 										// $(".rule-editable").editable();
-//  										$(".delRule").click(function(){
-// 												console.log($(this).closest('tr'));
-// 												$(this).closest('tr').remove();
-// 										});
-// 								});
-// 						},                                                                                              
-// 				});
-// 		}
-
-// 		$(".delRule").click(function(){
-// 				console.log($(this).closest('tr'));
-// 				$(this).closest('tr').remove();
-//     });
-
-// 		// function del_rule(){
-				
-// 		// 		$.ajax({
-// 		// 				url: '/rules/new',
-// 		// 				dataType: 'json',
-// 		// 				type: 'GET',
-// 		// 				success: function(result) {
-// 		// 						$.each(result , function(key, value) {
-// 		// 								console.log(key);
-// 		// 								console.log(value);
-// 		// 								$("#RuleTemplate").tmpl(value).appendTo( "#rules_table");
-// 		// 								$(".rule-editable").editable(); 										
-// 		// 						});
-// 		// 				},                                                                                              
-// 		// 		});
-// 		// }
-
-// 		function getFirewallConfig() {
-// 				var firewall={};
-// 				$('#form-firewall').find('input').each(function(){
-// 						firewall[$(this).attr('name')]=$(this).val();
-// 				});
-// 				// console.log(firewall);
-// 				var i = 0;
-// 				var rules={};
-// 				$('#rule_data').find('tr').each(function(){
-// 						var rule={};
-// 						$(this).find('a').each(function(){
-// 								rule[$(this).attr('name')]=$(this).text();
-// 						});
-// 						rules[i] = rule;
-// 						i += 1;
-// 						// console.log(rules);
-// 				});
-// 				firewall["rules"] = rules;
-// 				return firewall;    
-// 		}
-
-
-// 		$(".submit_firewall").click(function() {
-// 				var firewallconf = getFirewallConfig();
-// 				var action = $(this).attr("action");
-// 				if ( action  == "update" ) {
-// 						$.ajax({
-// 								url: '/securities/' + firewallconf.id,
-// 								dataType: 'json',
-// 								type: 'POST',
-// 								data: { _method:'PUT', firewall: firewallconf },
-// 								success: function(result) {
-// 										alert("命令执行成功！");
-// 								},
-// 						});
-// 				}
-// 				else if ( action  == "create" ) {
-// 						$.ajax({
-// 								url: '/securities',
-// 								dataType: 'json',
-// 								type: 'POST',
-// 								data: firewallconf,
-// 								success: function(result) {
-// 										alert("命令执行成功");
-// 								},
-// 						});
-// 				}
-// 		});
-
-// 		$("#add_new_rule_btn").click(add_new_rule)
-// //		$(".rule-editable").editable();
-
-// 		$('input[name="fwids"]').click(function() { 
-// 				$(".btn-toolbar .btn").removeAttr("disabled");
-// 		});
-
-
-// 		function getSelectedIds() {
-// 				ids = [];
-// 				$('input[name="fwids"]:checked').each(function() { 
-// 						ids.push($(this).val());
-// 				})
-// 				console.log(ids);
-// 				return ids;	
-// 		}
-		
-// 		$.fn.addOperation = function() {
-// 				return this.bind({
-// 						click: function(e) {
-// 								ids = getSelectedIds();
-// 								console.log(ids);
-// 								action = $(this).attr("action");
-// 								console.log(action);
-// 								if ( action == "edit" ) {
-// 										window.location.replace("/securities/" + ids[0] + "/edit");
-// 								}
-// 								else if (action == "delete") {
-// 										url = "/securities/" + action;
-// 										$.ajax({
-// 												url: url,
-// 												data: { 'ids': ids },
-// 												dataType:'json',
-// 												type: 'POST',
-// 												success: function(result) {
-// 														alert("命令执行成功");
-// 												},
-// 												error: function(xhr) {
-// 														var errors = $.parseJSON(xhr.responseText).errors;
-// 														alert("命令执行失败");
-// 												}
-// 										});
-// 								}
-// 						}	
-// 				})
-// 		}
-				
-// 		$(".firewall_op_btn").addOperation();
-
-
 		$('#sec-tableactionable').tableActionable( {
 				btnClass: "sec_op_btn",
 				ajaxBaseURL: "/securities/",
@@ -214,122 +71,45 @@ jQuery(function($) {
 
 		});
 
-		ajaxUrl = window.location.pathname + '.json?content=only-rules'
-		console.log(ajaxUrl);
-		$('#rules-tableactionable').tableActionable( {
-				btnClass:  "rules-op-btn",
-				ajaxBaseURL: ajaxUrl,
-				datatable: 	{
-						"sAjaxSource": ajaxUrl,
-						"aLengthMenu": [
-								[5, 15, 20, -1],
-								[5, 15, 20, "All"]
-						],
-						"iDisplayLength": 5,
-						"aoColumns": [
-								{
-										"sClass": "center",
-										"mData": "rule.id",
-										"bSearchable": false,
-										"bSortable": false,
-										"mRender": function(data, type, full) {
-												return '<div class="square-yellow"> <div class="checkbox"><input type="checkbox" name="id", value="'+ data + '"></div> </div>'} 
-								},	
-								{
-										"sClass": "center",
-										"mData": "rule.ip_protocol",
-								},
-								{ 
-										"sClass": "center",
-										"mData": "rule.from_port"
-								},
-								{ 
-										"sClass": "center",
-										"mData": "rule.to_port"
-								},
-								{ 
-										"sClass": "center",
-										"mData": "rule.cidr",
-								}
-						]
+
+		// validations
+		$('#create-sec').validate({
+				rules: {
+						name: {
+								required: true,
+								alphanumeric: true,
+								rangelength: [3, 30]
+						},
+						description: {
+								maxlength: 255
+						}
 				}
-		});
+		})
+
+		$('#delete-securities').submit(deleteSecurityGroups);
+
+		function deleteSecurityGroups (e) {
+				e.preventDefault();
+				var data = $(this).serialize();
+				console.log(data);
+				$.ajax({
+						url: '/securities/delete',
+						beforeSend: function(xhr) {
+								xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+						},
+						data: data,
+						dataType: 'json',
+						type: 'POST',
+						success: function(result) {
+								// table reload
+								$('#sec-table').dataTable().fnReloadAjax();
+						},
+						error: function(xhr) {
+								var errors = $.parseJSON(xhr.responseText).errors;
+								alert("命令执行失败！\n\n\t" + errors);
+						}
+				});
+		}
 
 
-		$('#port-option input').on('ifChecked', function(event){
-				$('#port-option .form-group').hide();
-				$($(this).attr("option")+ ' .form-group').show();
-		});
-		
-		$('#port-option input[option="#single-port"]').iCheck('check');
-
-		// $('#select-port').otherize("其他", '');
-
-		// $('#detail-modal').on('show.bs.modal', function() {
-
-		// 		detailEditableTable.init();
-		// });
-		
-		
-		// $('#detail-modal').on('click', 'input[type="submit"]', function(e) {
-		// 		e.preventDefault();
-		// 		var aData = $(this).parents('form').find('.dataTable').dataTables().fnGetData();
-		// 		console.log(aData);
-		// });
-
-		// rulesTable = $('#rules-table').dataTable({
-		// 		"aLengthMenu": [
-		// 				[5, 15, 20, -1],
-		// 				[5, 15, 20, "All"] // change per page values here
-		// 		],
-		// 		// set the initial value
-		// 		"iDisplayLength": 5,
-		// 		"aoColumns": [
-		// 				{
-		// 						"sClass": "center",
-		// 						"mData": "rule.ip_protocol",
-		// 				},
-		// 				{ 
-		// 						"sClass": "center",
-		// 						"mData": "rule.from_port",
-		// 				},
-		// 				{ 
-		// 						"sClass": "center",
-		// 						"mData": "rule.to_port",
-		// 				},	
-		// 				{ 
-		// 						"sClass": "center",
-		// 						"mData": "rule.cidr",
-		// 				},	
-		// 				{ 
-		// 						"sClass": "center",
-		// 						"mData": "rule.id",
-		// 						"mRender": function(data, type, full) {
-		// 								return '<a class="delete btn btn-sm btn-block btn-primary" data-id="' + data +'" href="javascript:;">编辑</a>'
-		// 						}
-		// 				},
-		// 				{ 
-		// 						"sClass": "center",
-		// 						"mData": "rule.id",
-		// 						"mRender": function(data, type, full) {
-		// 								return '<a class="delete btn btn-sm btn-block btn-primary" data-id="' + data +'" href="javascript:;">删除</a>'
-		// 						}
-		// 				},
-		// 		]
-		// });
-		
-		$('#select-port').select2({
-        allowClear: true,
-				createSearchChoice: function(term, data) {
-						if ($(data).filter(function() {return this.text.localeCompare(term)===0; }).length===0) {
-								return {id:term, text:term};}
-				},
-				data: [ 
-						{id: 22, text: 'SSH'},
-						{id: 23, text: 'Telnet'},
-						{id: 21, text: 'FTP'},
-						{id: 80, text: 'HTTP'},
-						{id: 53, text: 'DNS'}
-				]
-		});
 });
