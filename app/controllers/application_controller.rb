@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class ApplicationController < ActionController::Base
-  
+  after_filter :flash_to_headers  
   # before_filter :authenticate_user!
   # before_filter :require_openstack_login
 
@@ -15,6 +15,15 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     root_path
   end
+
+  def flash_to_headers
+    return unless request.xhr?
+    response.headers['X-Message'] = flash_message
+    response.headers["X-Message-Type"] = flash_type.to_s
+    
+    flash.discard # don't want the flash to appear when you reload page
+  end
+
 
   private
   
@@ -48,5 +57,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def flash_message
+    [:error, :warning, :notice].each do |type|
+      return flash[type] unless flash[type].blank?
+    end
+  end
+
+  def flash_type
+    [:error, :warning, :notice].each do |type|
+      return type unless flash[type].blank?
+    end
+  end
 
 end

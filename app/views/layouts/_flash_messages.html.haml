@@ -1,0 +1,11 @@
+%section#flash-messages
+	%button.close{"data-dismiss" => "alert", :type => "button"} &times;
+	- flash.each do |name, msg|
+		= content_tag :div, msg, :id => "flash_#{name}"
+
+	-# - if notice
+	-# 	.alert.alert-success
+	-# 		%p= notice
+	-# - if alert
+	-# 	.alert.alert-error
+	-# 		%p= alert
