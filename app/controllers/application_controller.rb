@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+# -*- coding: utf-8 -*-
 class ApplicationController < ActionController::Base
   after_filter :flash_to_headers  
   # before_filter :authenticate_user!
