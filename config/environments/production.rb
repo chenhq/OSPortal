@@ -1,6 +1,17 @@
 OSUPortal::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+
+  config.action_mailer.default_url_options = { :host => '183.136.130.82:8089' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address => "smtp.163.com",
+      :domain => "163.com",
+      :authentication => :login,
+      :user_name => "icloudy_nireply@163.com",
+      :password => "letme1N"
+  }
   # Code is not reloaded between requests
   config.cache_classes = true
 

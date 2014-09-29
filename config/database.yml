@@ -88,37 +88,42 @@ keystone_test:
   host: 192.168.122.232
 
 
-
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
+  adapter: mysql2
+  database: osportal
+  username: root
+  password: iheartdatabisses
+  encoding: utf8
+  host: 183.136.130.82
+  pool: 20
   timeout: 5000
 
 nova_production:
   adapter: mysql2
   database: nova
-  username: nova
+  username: root
   password: iheartdatabisses
-  host: 192.168.122.232
+  host: 183.136.130.82
+  port: 3306
 
 glance_production:
   adapter: mysql2
   database: glance
-  username: glance
-  password: b54b09ab0d504173
-  host: 192.168.122.232
+  username: root
+  password: iheartdatabisses
+  host: 183.136.130.82
 
 cinder_production:
   adapter: mysql2
   database: cinder
-  username: cinder
-  password: fd17f70c198242c8
-  host: 192.168.122.232
+  username: root
+  password: iheartdatabisses
+  host: 183.136.130.82
 
 keystone_production:
   adapter: mysql2
   database: keystone
-  username: keystone_admin
-  password: 82cce0f524574c70
-  host: 192.168.122.232
+  username: root
+  password: iheartdatabisses
+  host: 183.136.130.82
+

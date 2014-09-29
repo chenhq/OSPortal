@@ -6,7 +6,7 @@ class Portal < ActiveRecord::Base
                        :database => "osportal",
                        :username => "root",
                        :password => "iheartdatabisses",
-                       :host => "60.55.40.211",
+                       :host => "183.136.130.82",
                        :port => 3306)
 end
 
@@ -16,7 +16,7 @@ class Nova < ActiveRecord::Base
                        :database => "nova",
                        :username => "root",
                        :password => "iheartdatabisses",
-                       :host => "60.55.40.211",
+                       :host => "183.136.130.82",
                        :port => 3306)
 
 end
@@ -27,7 +27,7 @@ class Glance < ActiveRecord::Base
                        :database => "glance",
                        :username => "root",
                        :password => "iheartdatabisses",
-                       :host => "60.55.40.211",
+                       :host => "183.136.130.82",
                        :port => 3306)
 
 end
@@ -38,7 +38,7 @@ class Cinder < ActiveRecord::Base
                        :database => "cinder",
                        :username => "root",
                        :password => "iheartdatabisses",
-                       :host => "60.55.40.211",
+                       :host => "183.136.130.82",
                        :port => 3306)
 
 end
@@ -49,7 +49,7 @@ class Keystone < ActiveRecord::Base
                        :database => "keystone",
                        :username => "root",
                        :password => "iheartdatabisses",
-                       :host => "60.55.40.211",
+                       :host => "183.136.130.82",
                        :port => 3306)
 
 end

@@ -3,12 +3,13 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.12'
 
 gem 'devise'
-
+gem 'thin'
 gem 'will_paginate'
 # gem 'bootstrap-sass'
 # gem 'bootstrap-x-editable-rails'
 # gem 'bootstrap-editable-rails'
-gem 'haml-rails', '>= 0.3.4', :group => :development
+gem 'haml-rails', '>= 0.3.4'
+gem 'haml'
 gem 'openstack'
 gem "openstack_activeresource", "~> 0.7.1"
 
@@ -31,16 +32,23 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 end
+
+# move from asssets
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
+
+gem 'uglifier', '>= 1.0.3'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+
+# end of move
+
+
 
  gem 'jquery-rails', '>= 3.0.0'
 # gem 'jquery-ui-rails'
