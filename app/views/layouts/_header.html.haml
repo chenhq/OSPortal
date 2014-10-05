@@ -154,9 +154,12 @@
 							%i.fa.fa-cog
 							Settings
 					%li
-						%a{:href => "/users/sign_out"}
+						%a{:href => "/users/sign_out", "method" => "delete"}
 							%i.fa.fa-key
 							Log Out
+					%li
+						= link_to 'Sign out', destroy_user_session_path, :method => :delete
+
 			/ user login dropdown end
 			%li
 				.toggle-right-box

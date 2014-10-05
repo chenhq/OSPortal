@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require lib/jquery
+//= require jquery_ujs
 //= require js/bootstrap
 //= require accordion-menu/jquery.dcjqaccordion.2.7
 //= require jquery.slimscroll

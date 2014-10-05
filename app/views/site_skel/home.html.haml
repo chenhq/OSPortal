@@ -3,17 +3,17 @@
 %section
 	.container-fluid
 		.row
-			.span4
+			.col-md-4
 				%h2 胜世云计算
 				%p 为广大互联网企业提供了一个可以运行应用程序的基础架构平台，客户企业通过该平台，显著的降低了IT成本投入、加快了业务扩展速度，并且获得了可支撑海量访问的专业架构能力。
 				.c-cta
 					.btn-group
-						= link_to "登 录", new_user_session_path, :class => "btn btn-info btn-large"
-						= link_to "试 用", new_user_registration_path, :class => "btn btn-large"						
+						= link_to "登 录", new_user_session_path, :class => "btn btn-primary btn-lg"
+						= link_to "试 用", new_user_registration_path, :class => "btn btn-success btn-lg"
 				%p
 					%a{:href => ""} 了解更多产品信息... &raquo;
-			.span8
-				= link_to image_tag("cloud_saving.jpg", alt: "Cloud Saving"), '#'
+			.col-md-8
+				= link_to image_tag("cloud_saving.jpg", alt: "Cloud Saving", :height => "100%", :width => "100%"), '#'
 		%hr/
 	/ end container
 .container
@@ -21,21 +21,21 @@
 	%section
 		%h3 公司愿景
 		.row
-			.span8
+			.col-md-8
 				%p 胜世云计算是一家致力于为中国互联网企业客户提供最为专业的基础云计算资源、管理和服务的高科技公司，公司专注于IAAS（基础架构云计算）的产品研发与运营服务。公司是上海云计算基地重点企业。
 				%p 我们的目标是打造一个国内最为专业的基础云计算服务平台，通过云计算服务为企业最大化的创造价值，使得中小企业、创业团队都能够获取与腾讯、阿里、盛大等大型互联网公司一样的IT基础架构能力，最大程度的降低企业发展所需的IT基础架构技术、成本门槛。
 				%p 我们的团队汇集了来自腾讯、盛大云等国内云计算专业公司的顶尖技术人才，我们具有丰富的云计算研发和运营经验，我们深刻了解用户需求，具有非常强烈的用户服务意识。
-			.span4
+			.col-md-4
 				%p.well.well-large.lead 做最专业的基础云服务，为客户提升核心业务家价值，降低总体拥有成本
 	%hr/
 	/ TESTIMONIALS
 	%h3 客户感言
-	#testimonials.carousel.slide
+	#testimonials.carousel.slide{"data-ride" => "carousel"}
 		%ol.carousel-indicators
 			%li.active{"data-slide-to" => "0", "data-target" => "#testimonials"}
 			%li{"data-slide-to" => "1", "data-target" => "#testimonials"}
 			%li{"data-slide-to" => "2", "data-target" => "#testimonials"}
-		.carousel-inner
+		.carousel-inner{"role" => "listbox"}
 			.item.active
 				%blockquote
 					%p 基础架构搭建的工作，如果让我们自己去实现，那从选择硬件和机房到安装配置软件，至少需要招聘2个专业人员，花1个月时间搞定，而借助基础云计算服务，现在只需要几个小时的时间。 

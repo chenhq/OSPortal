@@ -5,6 +5,7 @@
   %h2.form-signin-heading registration now
   .login-wrap
     %p Enter your personal details below
+    %br
     .user-login-info
       = f.email_field :email, :autofocus => "", :placeholder => "Email", :class => "form-control"
       = f.password_field :password, :placeholder => "Password", :class => "form-control"
