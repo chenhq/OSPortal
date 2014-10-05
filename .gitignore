@@ -18,5 +18,4 @@
 /config/application.yml
 .idea
 
-public/assets/
-Gemfile.lock
+#public/assets/
